@@ -16,9 +16,6 @@ Advanced, payload-driven scanner built for deep surface discovery, evidence-base
 [![Engine](https://img.shields.io/badge/Engine-Real%20Request%20Based-059669?style=for-the-badge)](#-core-strengths)
 [![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Termux-7c3aed?style=for-the-badge)](#-installation)
 
-**Owner:** https://github.com/zyraaatod/  
-**Repository:** https://github.com/zyraaatod/AuroseScanner.git
-
 </div>
 
 ---
@@ -139,6 +136,13 @@ AuroseScanner/
 ├─ run.sh
 └─ requirements.txt
 ```
+## 🖥️ Statistik Proyek
+
+<div align="center">
+
+[![Star History Chart](https://api.star-history.com/svg?repos=zyraaatod/AuroseScanner&type=Date&theme=dark)](https://star-history.com/#zyraaatod/AuroseScanner&Date)
+
+</div>
 
 ---
 
