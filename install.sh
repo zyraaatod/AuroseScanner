@@ -1,2 +1,4 @@
 #!/bin/bash
-echo "AUROUS-OS Scanner already installed. Run ./run.sh https://target.com"
+clear
+pip install -r requirements.txt
+./run.sh
