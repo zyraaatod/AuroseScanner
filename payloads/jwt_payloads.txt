@@ -1,0 +1,80 @@
+eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJhZG1pbiI6dHJ1ZX0.
+Bearer invalid.jwt.token
+none
+alg=none
+kid=../../../../dev/null
+test
+baseline
+AUROSE_PROBE
+../../../../etc/passwd
+..\..\..\..\windows\win.ini
+' OR '1'='1
+" OR "1"="1
+<script>alert(1)</script>
+${7*7}
+{{7*7}}
+`id`
+127.0.0.1
+http://127.0.0.1
+https://example.com
+Bearer%20invalid.jwt.token
+alg%3Dnone
+kid%3D..%2F..%2F..%2F..%2Fdev%2Fnull
+..%2F..%2F..%2F..%2Fetc%2Fpasswd
+..%5C..%5C..%5C..%5Cwindows%5Cwin.ini
+%27%20OR%20%271%27%3D%271
+%22%20OR%20%221%22%3D%221
+%3Cscript%3Ealert%281%29%3C%2Fscript%3E
+%24%7B7%2A7%7D
+%7B%7B7%2A7%7D%7D
+%60id%60
+http%3A%2F%2F127.0.0.1
+https%3A%2F%2Fexample.com
+EYJHBGCIOIJUB25LIIWIDHLWIJOISLDUIN0.EYJHZG1PBII6DHJ1ZX0.
+BEARER INVALID.JWT.TOKEN
+NONE
+ALG=NONE
+KID=../../../../DEV/NULL
+TEST
+BASELINE
+../../../../ETC/PASSWD
+..\..\..\..\WINDOWS\WIN.INI
+<SCRIPT>ALERT(1)</SCRIPT>
+`ID`
+HTTP://127.0.0.1
+HTTPS://EXAMPLE.COM
+BEARER%20INVALID.JWT.TOKEN
+ALG%3DNONE
+KID%3D..%2F..%2F..%2F..%2FDEV%2FNULL
+..%2F..%2F..%2F..%2FETC%2FPASSWD
+..%5C..%5C..%5C..%5CWINDOWS%5CWIN.INI
+%3CSCRIPT%3EALERT%281%29%3C%2FSCRIPT%3E
+%60ID%60
+HTTP%3A%2F%2F127.0.0.1
+HTTPS%3A%2F%2FEXAMPLE.COM
+kid%3D../../../../dev/null
+' OR '1'%3D'1
+" OR "1"%3D"1
+KID%3D../../../../DEV/NULL
+eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJhZG1pbiI6dHJ1ZX0.?v=0
+eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJhZG1pbiI6dHJ1ZX0.&v=0
+eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJhZG1pbiI6dHJ1ZX0._0
+jwt_0
+/jwt/0
+eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJhZG1pbiI6dHJ1ZX0.%0a0
+Bearer invalid.jwt.token?v=1
+Bearer invalid.jwt.token&v=1
+Bearer%20invalid.jwt.token_1
+jwt_1
+/jwt/1
+Bearer invalid.jwt.token%0a1
+none?v=2
+none&v=2
+none_2
+jwt_2
+/jwt/2
+none%0a2
+alg=none?v=3
+alg=none&v=3
+alg%3Dnone_3
+jwt_3

