@@ -1,6 +1,11 @@
 <div align="center">
 
-# AUROSESCANNER
+<div align="center">
+  
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=Aurose%20Scanner&fontSize=60&fontColor=fff&animation=twinkling&desc=Tools%20Scanning%20Website&descSize=20&descAlignY=70"/>
+
+</div>
+
 ### Real-Engine Web Vulnerability Scanner
 
 Advanced, payload-driven scanner built for deep surface discovery, evidence-based findings, and professional reporting.
