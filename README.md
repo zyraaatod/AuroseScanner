@@ -20,7 +20,6 @@ Advanced, payload-driven scanner built for deep surface discovery, evidence-base
 
 ---
 
-testting comitt anjayy
 
 ## Why AuroseScanner?
 
