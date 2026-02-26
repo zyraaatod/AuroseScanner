@@ -1,13 +1,7 @@
 import json
+import shutil
+import sys
 from datetime import datetime
-
-try:
-    from tabulate import tabulate
-except ImportError:
-    def tabulate(rows, headers=None, tablefmt=None):
-        head = " | ".join(headers) if headers else ""
-        body = "\n".join(" | ".join(str(c) for c in r) for r in rows)
-        return f"{head}\n{body}" if head else body
 
 try:
     from colorama import Fore, Style
@@ -22,6 +16,25 @@ except ImportError:
 class ReportGenerator:
     def __init__(self):
         self.report_dir = "reports"
+        self.term_width = max(76, min(120, shutil.get_terminal_size((100, 24)).columns))
+        self.inner_width = self.term_width - 4
+        encoding = (getattr(sys.stdout, "encoding", "") or "").lower()
+        self.use_unicode = "utf" in encoding
+        self.ui = (
+            {"h": "─", "v": "│", "tl": "┌", "tr": "┐", "bl": "└", "br": "┘", "dot": "•"}
+            if self.use_unicode
+            else {"h": "-", "v": "|", "tl": "+", "tr": "+", "bl": "+", "br": "+", "dot": "-"}
+        )
+
+    def _border(self, top=True):
+        left = self.ui["tl"] if top else self.ui["bl"]
+        right = self.ui["tr"] if top else self.ui["br"]
+        print(f"{Fore.CYAN}{left}{self.ui['h'] * (self.term_width - 2)}{right}{Style.RESET_ALL}")
+
+    def _line(self, text, color=Fore.WHITE):
+        if len(text) > self.inner_width:
+            text = text[: self.inner_width - 1] + "..."
+        print(f"{color}{self.ui['v']} {text:<{self.inner_width}} {self.ui['v']}{Style.RESET_ALL}")
 
     def generate(self, target, vulns, start, end):
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -47,14 +60,11 @@ class ReportGenerator:
         for v in vulns:
             sev[v["severity"]] = sev.get(v["severity"], 0) + 1
 
-        print(f"\n{Fore.CYAN}+{'-'*60}+{Style.RESET_ALL}")
-        print(f"{Fore.CYAN}|{Fore.WHITE} VULNERABILITY SUMMARY {' '*38}{Fore.CYAN}|{Style.RESET_ALL}")
-        print(f"{Fore.CYAN}+{'-'*60}+{Style.RESET_ALL}")
-        tbl = [
-            [f"{Fore.RED}CRITICAL{Style.RESET_ALL}", sev["CRITICAL"]],
-            [f"{Fore.YELLOW}HIGH{Style.RESET_ALL}", sev["HIGH"]],
-            [f"{Fore.BLUE}MEDIUM{Style.RESET_ALL}", sev["MEDIUM"]],
-            [f"{Fore.GREEN}LOW{Style.RESET_ALL}", sev["LOW"]],
-        ]
-        print(tabulate(tbl, headers=["Severity", "Count"], tablefmt="grid"))
-        print(f"{Fore.CYAN}+{'-'*60}+{Style.RESET_ALL}")
+        print()
+        self._border(top=True)
+        self._line("VULNERABILITY SUMMARY", Fore.CYAN)
+        self._line(
+            f"total={len(vulns)}  {self.ui['dot']} critical={sev['CRITICAL']}  {self.ui['dot']} high={sev['HIGH']}  {self.ui['dot']} medium={sev['MEDIUM']}  {self.ui['dot']} low={sev['LOW']}",
+            Fore.WHITE,
+        )
+        self._border(top=False)

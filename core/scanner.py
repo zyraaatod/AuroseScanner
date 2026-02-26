@@ -2,16 +2,12 @@
 import argparse
 import os
 import re
+import shutil
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from urllib.parse import parse_qs, quote_plus, urljoin, urlparse
-
-try:
-    import pyfiglet
-except ImportError:
-    pyfiglet = None
 
 try:
     from colorama import Fore, Style, init as colorama_init
@@ -22,14 +18,6 @@ except ImportError:
         RESET = RESET_ALL = ""
 
     Fore = Style = _NoColor()
-
-try:
-    from tabulate import tabulate
-except ImportError:
-    def tabulate(rows, headers=None, tablefmt=None):
-        head = " | ".join(headers) if headers else ""
-        body = "\n".join(" | ".join(str(c) for c in r) for r in rows)
-        return f"{head}\n{body}" if head else body
 
 try:
     from tqdm import tqdm
@@ -73,6 +61,46 @@ class AuroseScanner:
         self.discovered_paths = {"/"}
         self.discovered_params = {}
         self.phase_specs = self._build_phase_specs()
+        self.total_phases = len(self.phase_specs)
+        self.term_width = max(76, min(120, shutil.get_terminal_size((100, 24)).columns))
+        self.inner_width = self.term_width - 4
+        self.use_color = bool(getattr(sys.stdout, "isatty", lambda: False)()) and not os.environ.get("NO_COLOR")
+        encoding = (getattr(sys.stdout, "encoding", "") or "").lower()
+        self.use_unicode = "utf" in encoding and os.environ.get("TERM", "") != "dumb"
+        self.total_findings = 0
+        self.ui = (
+            {
+                "h": "─",
+                "v": "│",
+                "tl": "┌",
+                "tr": "┐",
+                "bl": "└",
+                "br": "┘",
+                "ok": "✓",
+                "warn": "▲",
+                "scan": "◉",
+                "bolt": "⚡",
+                "dot": "•",
+                "bar_full": "█",
+                "bar_empty": "░",
+            }
+            if self.use_unicode
+            else {
+                "h": "-",
+                "v": "|",
+                "tl": "+",
+                "tr": "+",
+                "bl": "+",
+                "br": "+",
+                "ok": "OK",
+                "warn": "!",
+                "scan": "*",
+                "bolt": ">",
+                "dot": "-",
+                "bar_full": "#",
+                "bar_empty": ".",
+            }
+        )
 
     def _build_phase_specs(self):
         return [
@@ -128,35 +156,70 @@ class AuroseScanner:
             PhaseSpec(50, "Business Logic Indicator", "business", "POST", "business", "HIGH", "amount", ("/checkout", "/api/checkout", "/pay")),
         ]
 
+    def _fmt(self, text, color):
+        if self.use_color:
+            return f"{color}{text}{Style.RESET_ALL}"
+        return text
+
+    def _clear_screen(self):
+        if getattr(sys.stdout, "isatty", lambda: False)() and os.environ.get("TERM"):
+            print("\033[2J\033[H", end="")
+
+    def _box_border(self, color=Fore.CYAN, top=True):
+        left = self.ui["tl"] if top else self.ui["bl"]
+        right = self.ui["tr"] if top else self.ui["br"]
+        print(self._fmt(f"{left}{self.ui['h'] * (self.term_width - 2)}{right}", color))
+
+    def _box_line(self, text="", color=Fore.CYAN):
+        text = text or ""
+        if len(text) > self.inner_width:
+            text = text[: self.inner_width - 1] + "..."
+        print(self._fmt(f"{self.ui['v']} {text:<{self.inner_width}} {self.ui['v']}", color))
+
+    def _progress_bar(self, ratio, width=26):
+        ratio = max(0.0, min(1.0, ratio))
+        fill = int(width * ratio)
+        return f"{self.ui['bar_full'] * fill}{self.ui['bar_empty'] * (width - fill)}"
+
     def banner(self):
-        os.system("cls" if os.name == "nt" else "clear")
-        title = pyfiglet.figlet_format("AUROUS-OS", font="slant") if pyfiglet else "AUROUS-OS"
-        print(f"{Fore.RED}{title}{Style.RESET_ALL}")
-        print(f"{Fore.CYAN}+{'-'*96}+{Style.RESET_ALL}")
-        print(f"{Fore.CYAN}|{' SUPER DETAIL REAL ENGINE + HIDDEN SURFACE DISCOVERY ':<96}|{Style.RESET_ALL}")
-        print(f"{Fore.CYAN}|{' 50 METHODS | MULTI-TARGET | PAYLOAD MUTATION | BASELINE DIFFERENTIAL DETECTION ':<96}|{Style.RESET_ALL}")
-        print(f"{Fore.CYAN}+{'-'*96}+{Style.RESET_ALL}")
-        info = [
-            ["Version", "5.0.0-advanced"],
-            ["Methods", "50"],
-            ["Threads", str(self.threads)],
-            ["Max payload/phase", str(self.max_payloads if self.max_payloads > 0 else "ALL")],
-            ["Hidden path candidates", str(self.hidden_limit)],
-        ]
-        print(tabulate(info, tablefmt="plain"))
-        print(f"{Fore.CYAN}+{'-'*96}+{Style.RESET_ALL}")
+        self._clear_screen()
+        title = f"{self.ui['bolt']} AUROSE SCANNER"
+        subtitle = "Real-Engine Vulnerability Assessment CLI"
+        chips = f"[50 phases]  [{self.threads} threads]  [payload-driven]  [linux + termux]"
+
+        self._box_border(Fore.CYAN, top=True)
+        self._box_line(title, Fore.RED)
+        self._box_line(subtitle, Fore.CYAN)
+        self._box_line(chips, Fore.WHITE)
+        self._box_border(Fore.CYAN, top=False)
 
     def header(self, num, name, targets, payloads):
-        print(f"\n{Fore.MAGENTA}+{'-'*88}+{Style.RESET_ALL}")
-        print(f"{Fore.MAGENTA}| PHASE {num:02d}/50: {name.upper():<71}|{Style.RESET_ALL}")
-        print(f"{Fore.MAGENTA}+{'-'*88}+{Style.RESET_ALL}")
-        print(f"{Fore.MAGENTA}| Targets: {str(targets):<10} Payload variants: {str(payloads):<10}{'':<47}|{Style.RESET_ALL}")
-        print(f"{Fore.MAGENTA}+{'-'*88}+{Style.RESET_ALL}")
+        print()
+        ratio = num / self.total_phases
+        jobs = targets * payloads
+        phase_label = f"PHASE {num:02d}/{self.total_phases:02d}  {name.upper()}"
+        progress = f"{self._progress_bar(ratio)} {int(ratio * 100):>3d}%"
+        meta = f"{self.ui['dot']} targets={targets}  {self.ui['dot']} payloads={payloads}  {self.ui['dot']} jobs~{jobs}"
+        self._box_border(Fore.MAGENTA, top=True)
+        self._box_line(phase_label, Fore.MAGENTA)
+        self._box_line(progress, Fore.BLUE)
+        self._box_line(meta, Fore.WHITE)
+        self._box_border(Fore.MAGENTA, top=False)
 
-    def footer(self, count):
-        print(f"{Fore.MAGENTA}+{'-'*88}+{Style.RESET_ALL}")
-        print(f"{Fore.MAGENTA}| Findings: {str(count):<78}|{Style.RESET_ALL}")
-        print(f"{Fore.MAGENTA}+{'-'*88}+{Style.RESET_ALL}")
+    def footer(self, count, elapsed=0.0, skipped=False):
+        if skipped:
+            status = f"{self.ui['warn']} skipped (no matching target)"
+            color = Fore.YELLOW
+        elif count == 0:
+            status = f"{self.ui['ok']} clean"
+            color = Fore.GREEN
+        else:
+            status = f"{self.ui['warn']} findings: {count}"
+            color = Fore.YELLOW
+        summary = f"{status}  {self.ui['dot']} elapsed={elapsed:.2f}s  {self.ui['dot']} total_findings={self.total_findings}"
+        self._box_border(Fore.MAGENTA, top=True)
+        self._box_line(summary, color)
+        self._box_border(Fore.MAGENTA, top=False)
 
     def _target_domain(self):
         return urlparse(self.target).netloc.lower()
@@ -501,11 +564,12 @@ class AuroseScanner:
         )
 
     def run_phase(self, spec):
+        phase_start = time.perf_counter()
         targets = self._select_targets(spec)
         payloads = self._payloads_for(spec.key)
         self.header(spec.id, spec.name, len(targets), len(payloads))
         if not targets:
-            self.footer(0)
+            self.footer(0, 0.0, skipped=True)
             return
 
         baselines = {t: self._baseline(spec, t) for t in targets}
@@ -533,22 +597,39 @@ class AuroseScanner:
                 seen.add(dedup)
                 self._record(spec, probe, payload, det)
                 findings += 1
-        self.footer(findings)
+        self.total_findings += findings
+        self.footer(findings, time.perf_counter() - phase_start)
 
     def run(self):
         self.utils.ensure_folders()
         self.banner()
         self.start = time.time()
-        print(f"{Fore.CYAN}[i] Discovering hidden attack surface...{Style.RESET_ALL}")
+        self._box_border(Fore.CYAN, top=True)
+        self._box_line(f"{self.ui['scan']} target: {self.target}", Fore.WHITE)
+        self._box_line(
+            f"{self.ui['dot']} max_payloads={self.max_payloads if self.max_payloads > 0 else 'ALL'}  {self.ui['dot']} hidden_limit={self.hidden_limit}",
+            Fore.WHITE,
+        )
+        self._box_border(Fore.CYAN, top=False)
+        print(self._fmt(f"{self.ui['scan']} discovering hidden attack surface...", Fore.CYAN))
         self.discover_surface()
-        print(f"{Fore.CYAN}[i] Discovered paths: {len(self.discovered_paths)} | Parameterized endpoints: {len(self.discovered_params)}{Style.RESET_ALL}")
+        print(
+            self._fmt(
+                f"{self.ui['ok']} discovered paths={len(self.discovered_paths)} | parameterized endpoints={len(self.discovered_params)}",
+                Fore.CYAN,
+            )
+        )
         for spec in self.phase_specs:
             self.run_phase(spec)
             time.sleep(0.02)
         self.end = time.time()
         report_file = self.reporter.generate(self.target, self.results, self.start, self.end)
         self.reporter.summary(self.results)
-        print(f"\n{Fore.GREEN}[OK] Report: {report_file}{Style.RESET_ALL}")
+        total_elapsed = self.end - self.start
+        self._box_border(Fore.GREEN, top=True)
+        self._box_line(f"{self.ui['ok']} scan completed in {total_elapsed:.2f}s", Fore.GREEN)
+        self._box_line(f"{self.ui['dot']} findings={self.total_findings}  {self.ui['dot']} report={report_file}", Fore.GREEN)
+        self._box_border(Fore.GREEN, top=False)
 
 
 def main():
