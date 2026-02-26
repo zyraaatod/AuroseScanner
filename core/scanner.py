@@ -1,9 +1,11 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 import argparse
 import os
+import random
 import re
 import shutil
 import sys
+import textwrap
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
@@ -28,7 +30,7 @@ except ImportError:
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from core.payload_manager import PayloadManager
 from core.report_generator import ReportGenerator
-from core.request_handler import RequestHandler
+from core.request_handler import RequestHandler, ResponseMeta
 from core.utils import Utils
 
 
@@ -46,11 +48,29 @@ class PhaseSpec:
 
 
 class AuroseScanner:
-    def __init__(self, max_payloads=40, threads=8, hidden_limit=120):
+    def __init__(
+        self,
+        max_payloads=40,
+        threads=8,
+        hidden_limit=120,
+        include_paths=None,
+        exclude_paths=None,
+        max_requests=0,
+        max_runtime=0,
+        delay_jitter=0.0,
+    ):
         self.target = ""
         self.max_payloads = max_payloads
         self.threads = max(1, threads)
         self.hidden_limit = max(20, hidden_limit)
+        self.include_paths = [x.strip().lower() for x in (include_paths or []) if x and x.strip()]
+        self.exclude_paths = [x.strip().lower() for x in (exclude_paths or []) if x and x.strip()]
+        self.max_requests = max(0, int(max_requests or 0))
+        self.max_runtime = max(0, int(max_runtime or 0))
+        self.delay_jitter = max(0.0, float(delay_jitter or 0.0))
+        self.request_count = 0
+        self.scan_aborted = False
+        self.scan_abort_reason = ""
         self.results = []
         self.start = None
         self.end = None
@@ -62,7 +82,7 @@ class AuroseScanner:
         self.discovered_params = {}
         self.phase_specs = self._build_phase_specs()
         self.total_phases = len(self.phase_specs)
-        self.term_width = max(76, min(120, shutil.get_terminal_size((100, 24)).columns))
+        self.term_width = max(58, min(140, shutil.get_terminal_size((100, 24)).columns))
         self.inner_width = self.term_width - 4
         self.use_color = bool(getattr(sys.stdout, "isatty", lambda: False)()) and not os.environ.get("NO_COLOR")
         encoding = (getattr(sys.stdout, "encoding", "") or "").lower()
@@ -70,19 +90,19 @@ class AuroseScanner:
         self.total_findings = 0
         self.ui = (
             {
-                "h": "─",
-                "v": "│",
-                "tl": "┌",
-                "tr": "┐",
-                "bl": "└",
-                "br": "┘",
-                "ok": "✓",
-                "warn": "▲",
-                "scan": "◉",
-                "bolt": "⚡",
-                "dot": "•",
-                "bar_full": "█",
-                "bar_empty": "░",
+                "h": "\u2500",
+                "v": "\u2502",
+                "tl": "\u256d",
+                "tr": "\u256e",
+                "bl": "\u2570",
+                "br": "\u256f",
+                "ok": "\u2713",
+                "warn": "\u26a0",
+                "scan": "\u25c9",
+                "bolt": "\u26a1",
+                "dot": "\u2022",
+                "bar_full": "\u2588",
+                "bar_empty": "\u2591",
             }
             if self.use_unicode
             else {
@@ -101,6 +121,12 @@ class AuroseScanner:
                 "bar_empty": ".",
             }
         )
+        self.c_border = Fore.GREEN
+        self.c_title = Fore.GREEN
+        self.c_meta = Fore.YELLOW
+        self.c_info = Fore.CYAN
+        self.c_warn = Fore.RED
+        self._wrap_request_layer()
 
     def _build_phase_specs(self):
         return [
@@ -156,6 +182,45 @@ class AuroseScanner:
             PhaseSpec(50, "Business Logic Indicator", "business", "POST", "business", "HIGH", "amount", ("/checkout", "/api/checkout", "/pay")),
         ]
 
+    def _wrap_request_layer(self):
+        base_request = self.req.request
+
+        def wrapped_request(method, url, **kwargs):
+            if self.scan_aborted:
+                return ResponseMeta(
+                    ok=False,
+                    status_code=0,
+                    url=url,
+                    headers={},
+                    body="",
+                    elapsed=0.0,
+                    error=self.scan_abort_reason or "Pemindaian dihentikan.",
+                )
+            if self.max_runtime > 0 and self.start:
+                if (time.time() - self.start) >= self.max_runtime:
+                    self.scan_aborted = True
+                    self.scan_abort_reason = "Batas waktu pemindaian tercapai."
+                    return ResponseMeta(False, 0, url, {}, "", 0.0, self.scan_abort_reason)
+            if self.max_requests > 0 and self.request_count >= self.max_requests:
+                self.scan_aborted = True
+                self.scan_abort_reason = "Batas total request tercapai."
+                return ResponseMeta(False, 0, url, {}, "", 0.0, self.scan_abort_reason)
+
+            path_l = (urlparse(url).path or "/").lower()
+            if self.include_paths and not any(x in path_l for x in self.include_paths):
+                return ResponseMeta(False, 0, url, {}, "", 0.0, "Di luar cakupan include.")
+            if self.exclude_paths and any(x in path_l for x in self.exclude_paths):
+                return ResponseMeta(False, 0, url, {}, "", 0.0, "Termasuk pola exclude.")
+
+            if self.delay_jitter > 0:
+                time.sleep(random.uniform(0.0, self.delay_jitter))
+            self.request_count += 1
+            return base_request(method, url, **kwargs)
+
+        self.req.request = wrapped_request
+        self.req.get = lambda url, **kwargs: wrapped_request("GET", url, **kwargs)
+        self.req.post = lambda url, **kwargs: wrapped_request("POST", url, **kwargs)
+
     def _fmt(self, text, color):
         if self.use_color:
             return f"{color}{text}{Style.RESET_ALL}"
@@ -172,9 +237,27 @@ class AuroseScanner:
 
     def _box_line(self, text="", color=Fore.CYAN):
         text = text or ""
-        if len(text) > self.inner_width:
-            text = text[: self.inner_width - 1] + "..."
-        print(self._fmt(f"{self.ui['v']} {text:<{self.inner_width}} {self.ui['v']}", color))
+        wrapped = textwrap.wrap(text, width=self.inner_width) or [""]
+        for line in wrapped:
+            print(self._fmt(f"{self.ui['v']} {line:<{self.inner_width}} {self.ui['v']}", color))
+
+    def _inner_block(self, title, rows, color=Fore.GREEN):
+        inner_w = self.inner_width
+        top = f"{self.ui['tl']}{self.ui['h'] * (inner_w - 2)}{self.ui['tr']}"
+        sep = f"{self.ui['v']}{self.ui['h'] * (inner_w - 2)}{self.ui['v']}"
+        bot = f"{self.ui['bl']}{self.ui['h'] * (inner_w - 2)}{self.ui['br']}"
+        title_line = f"{self.ui['v']} [ {title.upper()} ]"
+        title_line = f"{title_line}{' ' * max(0, inner_w - len(title_line) - 1)}{self.ui['v']}"
+
+        self._box_line(top, self.c_border)
+        self._box_line(title_line, color)
+        self._box_line(sep, self.c_border)
+        for r in rows:
+            line = textwrap.shorten(r, width=inner_w - 4, placeholder="...")
+            body = f"{self.ui['v']} {line}"
+            body = f"{body}{' ' * max(0, inner_w - len(body) - 1)}{self.ui['v']}"
+            self._box_line(body, Fore.WHITE)
+        self._box_line(bot, self.c_border)
 
     def _progress_bar(self, ratio, width=26):
         ratio = max(0.0, min(1.0, ratio))
@@ -184,45 +267,72 @@ class AuroseScanner:
     def banner(self):
         self._clear_screen()
         title = f"{self.ui['bolt']} AUROSE SCANNER"
-        subtitle = "Real-Engine Vulnerability Assessment CLI"
-        chips = f"[50 phases]  [{self.threads} threads]  [payload-driven]  [linux + termux]"
+        subtitle = "MODE TERMINAL RETRO | ANALISIS KERENTANAN BERBASIS REQUEST NYATA"
+        chips = f"[50 fase]  [{self.threads} thread]  [berbasis payload]  [linux+termux]"
 
-        self._box_border(Fore.CYAN, top=True)
-        self._box_line(title, Fore.RED)
-        self._box_line(subtitle, Fore.CYAN)
-        self._box_line(chips, Fore.WHITE)
-        self._box_border(Fore.CYAN, top=False)
+        self._box_border(self.c_border, top=True)
+        self._box_line(title, self.c_title)
+        self._box_line(subtitle, self.c_meta)
+        self._box_line(chips, self.c_info)
+        self._box_line("Pilih mode aman: --max-requests / --max-runtime / --include / --exclude", Fore.WHITE)
+        self._box_border(self.c_border, top=False)
 
     def header(self, num, name, targets, payloads):
         print()
         ratio = num / self.total_phases
         jobs = targets * payloads
-        phase_label = f"PHASE {num:02d}/{self.total_phases:02d}  {name.upper()}"
-        progress = f"{self._progress_bar(ratio)} {int(ratio * 100):>3d}%"
-        meta = f"{self.ui['dot']} targets={targets}  {self.ui['dot']} payloads={payloads}  {self.ui['dot']} jobs~{jobs}"
-        self._box_border(Fore.MAGENTA, top=True)
-        self._box_line(phase_label, Fore.MAGENTA)
-        self._box_line(progress, Fore.BLUE)
+        phase_label = f"FASE {num:02d}/{self.total_phases:02d}  {self._nama_fase_indonesia(name).upper()}"
+        progress = f"[{self._progress_bar(ratio)}] {int(ratio * 100):>3d}%"
+        meta = f"{self.ui['dot']} target={targets}  {self.ui['dot']} payload={payloads}  {self.ui['dot']} pekerjaan~{jobs}"
+        self._box_border(self.c_border, top=True)
+        self._box_line(phase_label, self.c_title)
+        self._box_line(progress, self.c_info)
         self._box_line(meta, Fore.WHITE)
-        self._box_border(Fore.MAGENTA, top=False)
+        self._inner_block(
+            "STAT FASE",
+            [
+                f"Nama       : {self._nama_fase_indonesia(name)}",
+                f"Progress   : {int(ratio * 100)}% ({num}/{self.total_phases})",
+                f"Target     : {targets}",
+                f"Payload    : {payloads}",
+                f"Pekerjaan  : {jobs}",
+            ],
+            self.c_meta,
+        )
+        self._box_border(self.c_border, top=False)
 
     def footer(self, count, elapsed=0.0, skipped=False):
         if skipped:
-            status = f"{self.ui['warn']} skipped (no matching target)"
-            color = Fore.YELLOW
+            status = f"{self.ui['warn']} dilewati (tidak ada target cocok)"
+            color = self.c_warn
         elif count == 0:
-            status = f"{self.ui['ok']} clean"
-            color = Fore.GREEN
+            status = f"{self.ui['ok']} bersih"
+            color = self.c_title
         else:
-            status = f"{self.ui['warn']} findings: {count}"
-            color = Fore.YELLOW
-        summary = f"{status}  {self.ui['dot']} elapsed={elapsed:.2f}s  {self.ui['dot']} total_findings={self.total_findings}"
-        self._box_border(Fore.MAGENTA, top=True)
-        self._box_line(summary, color)
-        self._box_border(Fore.MAGENTA, top=False)
+            status = f"{self.ui['warn']} temuan: {count}"
+            color = self.c_warn
+        summary = f"{status}  {self.ui['dot']} durasi={elapsed:.2f}s  {self.ui['dot']} ditemukan={self.total_findings}"
+        self._box_border(self.c_border, top=True)
+        self._inner_block(
+            "HASIL FASE",
+            [
+                summary,
+                f"Request total berjalan : {self.request_count}",
+                f"Status scan            : {'AKTIF' if not self.scan_aborted else 'DIHENTIKAN'}",
+            ],
+            color,
+        )
+        self._box_border(self.c_border, top=False)
 
     def _target_domain(self):
         return urlparse(self.target).netloc.lower()
+
+    def _is_target_url(self, url):
+        try:
+            host = (urlparse(url).netloc or "").lower()
+        except Exception:
+            return False
+        return host == self._target_domain()
 
     def _join_url(self, path):
         if not path:
@@ -310,6 +420,132 @@ class AuroseScanner:
             res = self.req.get(self._join_url(p))
             if res.ok and res.body:
                 self._extract_paths_and_params(res.body)
+
+    def _file_audit_candidates(self):
+        common = {
+            "/.env",
+            "/.env.local",
+            "/.git/config",
+            "/config.php",
+            "/wp-config.php.bak",
+            "/database.sql",
+            "/db.sql",
+            "/backup.zip",
+            "/dump.sql",
+            "/.DS_Store",
+            "/.htaccess",
+            "/phpinfo.php",
+            "/server-status",
+            "/swagger.json",
+            "/openapi.json",
+            "/actuator/env",
+            "/actuator/heapdump",
+            "/actuator/configprops",
+        }
+        for key in ("sensitive", "backup", "api", "dbexpose", "debug"):
+            for p in self.payloads.get(key, limit=120):
+                if not p:
+                    continue
+                path = p.strip()
+                if not path or path.startswith(("http://", "https://")):
+                    continue
+                common.add(path if path.startswith("/") else f"/{path}")
+
+        # prioritize file-like paths and known sensitive endpoints
+        file_like = []
+        extensions = (".env", ".ini", ".conf", ".json", ".xml", ".yaml", ".yml", ".sql", ".bak", ".zip", ".tar", ".gz", ".log")
+        for p in sorted(common.union(self.discovered_paths)):
+            l = p.lower()
+            if (
+                any(ext in l for ext in extensions)
+                or any(x in l for x in [".git", "backup", "dump", "config", "secret", "token", "key", "debug", "swagger", "openapi"])
+            ):
+                file_like.append(p)
+        return file_like[: max(80, self.hidden_limit * 2)]
+
+    def _leak_signatures(self, body):
+        if not body:
+            return []
+        patterns = [
+            ("PRIVATE_KEY", r"-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----"),
+            ("AWS_ACCESS_KEY", r"AKIA[0-9A-Z]{16}"),
+            ("GCP_API_KEY", r"AIza[0-9A-Za-z\\-_]{35}"),
+            ("GENERIC_API_KEY", r"(?i)(api[_-]?key|secret|token)[\"'\\s:=]{1,6}[A-Za-z0-9_\\-]{12,}"),
+            ("DB_PASSWORD", r"(?i)(db_password|database_password|mysql_password|postgres_password|password)[\"'\\s:=]{1,6}[^\\s\"']{4,}"),
+            ("JWT_TOKEN", r"eyJ[A-Za-z0-9_-]{10,}\\.[A-Za-z0-9._-]{10,}\\.[A-Za-z0-9._-]{10,}"),
+            ("CLOUD_CREDENTIAL", r"(?i)(aws_secret_access_key|xox[baprs]-[0-9A-Za-z-]{10,}|ghp_[0-9A-Za-z]{20,})"),
+        ]
+        hits = []
+        for name, pattern in patterns:
+            if re.search(pattern, body):
+                hits.append(name)
+        return hits
+
+    def run_file_leakage_audit(self):
+        candidates = self._file_audit_candidates()
+        if not candidates:
+            return
+        print(self._fmt(f"{self.ui['scan']} audit file terbuka dan pola kebocoran data...", self.c_info))
+        findings = 0
+        seen = set()
+        for path in candidates:
+            probe = self.req.get(self._join_url(path), allow_redirects=False)
+            if not probe.ok or probe.status_code in {404, 429}:
+                continue
+            if not self._is_target_url(probe.url):
+                continue
+            access_state, status_label, status_explanation = self._status_details(probe.status_code)
+            body_l = (probe.body or "").lower()
+            url_l = probe.url.lower()
+
+            # exposed file indicators
+            file_exposed = (
+                probe.status_code in {200, 206}
+                and any(x in url_l for x in [".env", ".sql", ".bak", ".zip", ".tar", ".gz", ".log", ".git/config", "heapdump"])
+            )
+            signatures = self._leak_signatures(probe.body or "")
+            if "index of /" in body_l and ("parent directory" in body_l or "last modified" in body_l):
+                signatures.append("DIRECTORY_INDEX")
+            if any(x in body_l for x in ["swagger", "openapi", "\"paths\":", "\"openapi\""]):
+                signatures.append("API_SCHEMA_EXPOSURE")
+
+            if not file_exposed and not signatures:
+                continue
+
+            evidence_parts = []
+            if file_exposed:
+                evidence_parts.append("public sensitive/backup file path accessible")
+            if signatures:
+                evidence_parts.append(f"leak signatures: {', '.join(sorted(set(signatures))[:4])}")
+            evidence = "; ".join(evidence_parts)
+            dedup = (probe.url, evidence)
+            if dedup in seen:
+                continue
+            seen.add(dedup)
+
+            confidence = 90 if file_exposed else 80
+            self.results.append(
+                {
+                    "phase": "FILEAUDIT",
+                    "phase_id": 0,
+                    "name": "Audit File Terbuka & Kebocoran Data",
+                    "type": "Kerentanan KEBOCORAN_DATA",
+                    "url": probe.url,
+                    "domain_target": self._target_domain(),
+                    "severity": "TINGGI" if file_exposed else "SEDANG",
+                    "payload": path[:260],
+                    "status_code": probe.status_code,
+                    "status_label": status_label,
+                    "access_state": access_state,
+                    "status_explanation": status_explanation,
+                    "elapsed": probe.elapsed,
+                    "confidence": confidence,
+                    "evidence": evidence,
+                }
+            )
+            findings += 1
+        self.total_findings += findings
+        print(self._fmt(f"{self.ui['ok']} temuan audit file={findings}", self.c_info))
 
     def _payloads_for(self, key):
         loaded = self.payloads.get(key) or ["test", "' OR '1'='1", "<script>alert(1)</script>", "../../../../etc/passwd", "${7*7}"]
@@ -547,21 +783,160 @@ class AuroseScanner:
         return None
 
     def _record(self, spec, probe, payload, det):
+        if not self._is_target_url(probe.url):
+            return
+        access_state, status_label, status_explanation = self._status_details(probe.status_code)
         self.results.append(
             {
                 "phase": spec.key.upper(),
                 "phase_id": spec.id,
-                "name": spec.name,
-                "type": det["type"],
+                "name": self._nama_fase_indonesia(spec.name),
+                "type": self._tipe_indonesia(det["type"]),
                 "url": probe.url,
-                "severity": spec.severity,
+                "domain_target": self._target_domain(),
+                "severity": self._severity_indonesia(spec.severity),
                 "payload": payload[:260],
                 "status_code": probe.status_code,
+                "status_label": status_label,
+                "access_state": access_state,
+                "status_explanation": status_explanation,
                 "elapsed": probe.elapsed,
                 "confidence": det["confidence"],
-                "evidence": det["evidence"],
+                "evidence": self._teks_indonesia(det["evidence"]),
             }
         )
+
+    def _nama_fase_indonesia(self, name):
+        kamus = {
+            "Cross-Site Scripting": "Cross-Site Scripting",
+            "SQL Injection": "Injeksi SQL",
+            "Local File Inclusion": "Inklusi File Lokal",
+            "Server-Side Request Forgery": "Pemalsuan Request Sisi Server",
+            "XML External Entity": "Entitas Eksternal XML",
+            "Server-Side Template Injection": "Injeksi Template Sisi Server",
+            "Command Injection": "Injeksi Perintah",
+            "Open Redirect": "Redirect Terbuka",
+            "CSRF Weakness": "Kelemahan CSRF",
+            "IDOR": "IDOR",
+            "JWT Weakness": "Kelemahan JWT",
+            "NoSQL Injection": "Injeksi NoSQL",
+            "Header Injection": "Injeksi Header",
+            "CORS Misconfiguration": "Salah Konfigurasi CORS",
+            "Race Condition Indicator": "Indikator Race Condition",
+            "HTTP Smuggling Indicator": "Indikator HTTP Smuggling",
+            "Cache Poisoning": "Cache Poisoning",
+            "Prototype Pollution": "Prototype Pollution",
+            "GraphQL Exposure": "Eksposur GraphQL",
+            "WebSocket Exposure": "Eksposur WebSocket",
+            "API Leakage": "Kebocoran API",
+            "Cloud Misconfiguration": "Salah Konfigurasi Cloud",
+            "WordPress Exposure": "Eksposur WordPress",
+            "Laravel Exposure": "Eksposur Laravel",
+            "Deserialization": "Deserialisasi Berbahaya",
+            "DNS Leakage": "Kebocoran DNS",
+            "SSL/TLS Weakness": "Kelemahan SSL/TLS",
+            "Sensitive Data Exposure": "Eksposur Data Sensitif",
+            "Default Credentials": "Kredensial Bawaan",
+            "Information Disclosure": "Pengungkapan Informasi",
+            "HTTP Parameter Pollution": "Polusi Parameter HTTP",
+            "LDAP Injection": "Injeksi LDAP",
+            "XPath Injection": "Injeksi XPath",
+            "Mail Header Injection": "Injeksi Header Email",
+            "CRLF Injection": "Injeksi CRLF",
+            "HTTP Response Splitting": "Pemisahan Respons HTTP",
+            "Session Fixation": "Session Fixation",
+            "Clickjacking": "Clickjacking",
+            "Server Misconfiguration": "Salah Konfigurasi Server",
+            "Database Exposure": "Eksposur Database",
+            "Backup Files": "File Backup Terbuka",
+            "Directory Listing": "Listing Direktori",
+            "Debug Mode": "Mode Debug Terbuka",
+            "CSP Weakness": "Kelemahan CSP",
+            "Subdomain Takeover Indicator": "Indikator Pengambilalihan Subdomain",
+            "Email Harvesting": "Pengambilan Email",
+            "Fingerprint Leakage": "Kebocoran Fingerprint",
+            "WAF Detection": "Deteksi WAF",
+            "Rate Limiting Weakness": "Kelemahan Pembatasan Laju",
+            "Business Logic Indicator": "Indikator Logika Bisnis",
+            "File Exposure & Data Leakage Audit": "Audit File Terbuka & Kebocoran Data",
+        }
+        return kamus.get(name, name)
+
+    def _tipe_indonesia(self, tipe):
+        return tipe.replace("Vulnerability", "Kerentanan")
+
+    def _severity_indonesia(self, sev):
+        return {"CRITICAL": "KRITIS", "HIGH": "TINGGI", "MEDIUM": "SEDANG", "LOW": "RENDAH"}.get(sev, sev)
+
+    def _teks_indonesia(self, teks):
+        ganti = {
+            "payload reflected in response": "payload terefleksi di respons",
+            "js sink pattern present": "terdapat pola sink JavaScript",
+            "timing anomaly vs baseline": "anomali waktu dibanding baseline",
+            "file disclosure signature": "indikasi kebocoran file",
+            "internal metadata signature": "indikasi metadata internal",
+            "xml parser entity behavior": "perilaku parser XML terkait entity",
+            "template expression output": "output ekspresi template terdeteksi",
+            "command execution signature": "indikasi eksekusi perintah",
+            "form without anti-csrf token indicators": "form tanpa indikator token anti-CSRF",
+            "header value reflected": "nilai header terefleksi",
+            "server parser anomaly after payload": "anomali parser server setelah payload",
+            "response length drift vs baseline": "perubahan panjang respons vs baseline",
+            "graphql endpoint behavior exposed": "perilaku endpoint GraphQL terekspos",
+            "api documentation/secret leakage": "kebocoran dokumentasi API/rahasia",
+            "cloud artifact exposure": "artefak cloud terekspos",
+            "sensitive secret signature": "indikasi data rahasia sensitif",
+            "verbose internal error": "pesan error internal terlalu detail",
+            "missing anti-clickjacking headers": "header anti-clickjacking tidak ada",
+            "missing csp header": "header CSP tidak ada",
+            "weak csp directive": "direktif CSP lemah",
+            "directory listing enabled": "listing direktori aktif",
+            "technology banner disclosure": "banner teknologi terekspos",
+            "public email leakage": "kebocoran email publik",
+            "fingerprint headers": "header fingerprint",
+            "burst requests not throttled": "burst request tidak dibatasi",
+            "public sensitive/backup file path accessible": "jalur file sensitif/backup bisa diakses publik",
+            "leak signatures": "indikasi kebocoran",
+        }
+        out = teks or ""
+        for k, v in ganti.items():
+            out = out.replace(k, v)
+        return out
+
+    def _status_details(self, status_code):
+        mapping = {
+            0: ("tidak_terjangkau", "ERROR_JARINGAN", "Tidak ada respons HTTP. Koneksi gagal, timeout, atau masalah DNS/jaringan."),
+            200: ("dapat_diakses", "OK", "Request berhasil. Endpoint bisa diakses dan mengembalikan konten."),
+            201: ("dapat_diakses", "DIBUAT", "Request berhasil dan membuat resource."),
+            202: ("dapat_diakses", "DITERIMA", "Request diterima untuk diproses (umumnya async)."),
+            204: ("dapat_diakses", "TANPA_KONTEN", "Request berhasil tanpa body respons."),
+            301: ("dialihkan", "DIPINDAH_PERMANEN", "Resource dipindah permanen ke lokasi lain."),
+            302: ("dialihkan", "DITEMUKAN", "Dialihkan sementara ke lokasi lain."),
+            307: ("dialihkan", "REDIRECT_SEMENTARA", "Redirect sementara dengan method tetap."),
+            308: ("dialihkan", "REDIRECT_PERMANEN", "Redirect permanen dengan method tetap."),
+            400: ("error_request", "REQUEST_TIDAK_VALID", "Server menolak request yang tidak valid."),
+            401: ("terlindungi", "PERLU_OTENTIKASI", "Membutuhkan autentikasi."),
+            403: ("ditolak", "DILARANG", "Endpoint ada tetapi akses ditolak."),
+            404: ("tidak_ditemukan", "TIDAK_DITEMUKAN", "Endpoint/path tidak ditemukan."),
+            405: ("terlindungi", "METHOD_TIDAK_DIIZINKAN", "Endpoint ada tetapi method HTTP tidak diizinkan."),
+            408: ("error_request", "WAKTU_REQUEST_HABIS", "Server timeout menunggu request."),
+            429: ("dibatasi", "TERLALU_BANYAK_REQUEST", "Rate limit aktif."),
+            500: ("error_server", "ERROR_SERVER_INTERNAL", "Terjadi kegagalan umum di sisi server."),
+            502: ("error_server", "BAD_GATEWAY", "Gateway/proxy menerima respons upstream tidak valid."),
+            503: ("error_server", "LAYANAN_TIDAK_TERSEDIA", "Layanan sementara tidak tersedia/overload."),
+            504: ("error_server", "GATEWAY_TIMEOUT", "Gateway/proxy timeout menunggu upstream."),
+        }
+        if status_code in mapping:
+            return mapping[status_code]
+        if 200 <= status_code < 300:
+            return ("dapat_diakses", "BERHASIL", "Request berhasil.")
+        if 300 <= status_code < 400:
+            return ("dialihkan", "REDIRECT", "Request dialihkan ke lokasi lain.")
+        if 400 <= status_code < 500:
+            return ("error_klien", "ERROR_KLIEN", "Masalah pada request sisi klien atau pembatasan akses.")
+        if 500 <= status_code < 600:
+            return ("error_server", "ERROR_SERVER", "Kegagalan di sisi server.")
+        return ("tidak_diketahui", "TIDAK_DIKETAHUI", "Status code belum dipetakan.")
 
     def run_phase(self, spec):
         phase_start = time.perf_counter()
@@ -587,7 +962,7 @@ class AuroseScanner:
 
         with ThreadPoolExecutor(max_workers=self.threads) as ex:
             futures = [ex.submit(worker, t, p) for t, p in jobs]
-            for fut in tqdm(as_completed(futures), total=len(futures), desc=f"P{spec.id:02d} {spec.key.upper()}", leave=False):
+            for fut in tqdm(as_completed(futures), total=len(futures), desc=f"F{spec.id:02d} {spec.key.upper()}", leave=False):
                 result = fut.result()
                 if not result:
                     continue
@@ -604,42 +979,67 @@ class AuroseScanner:
         self.utils.ensure_folders()
         self.banner()
         self.start = time.time()
-        self._box_border(Fore.CYAN, top=True)
-        self._box_line(f"{self.ui['scan']} target: {self.target}", Fore.WHITE)
+        self._box_border(self.c_border, top=True)
+        self._box_line(f"{self.ui['scan']} sasaran: {self.target}", Fore.WHITE)
         self._box_line(
-            f"{self.ui['dot']} max_payloads={self.max_payloads if self.max_payloads > 0 else 'ALL'}  {self.ui['dot']} hidden_limit={self.hidden_limit}",
+            f"{self.ui['dot']} maks_payload={self.max_payloads if self.max_payloads > 0 else 'SEMUA'}  {self.ui['dot']} batas_hidden={self.hidden_limit}",
             Fore.WHITE,
         )
-        self._box_border(Fore.CYAN, top=False)
-        print(self._fmt(f"{self.ui['scan']} discovering hidden attack surface...", Fore.CYAN))
+        self._box_line(
+            f"{self.ui['dot']} maks_request={self.max_requests if self.max_requests > 0 else 'tak terbatas'}  {self.ui['dot']} maks_waktu={self.max_runtime if self.max_runtime > 0 else 'tak terbatas'} dtk",
+            Fore.WHITE,
+        )
+        self._box_border(self.c_border, top=False)
+        print(self._fmt(f"{self.ui['scan']} menemukan permukaan serangan tersembunyi...", self.c_info))
         self.discover_surface()
         print(
             self._fmt(
-                f"{self.ui['ok']} discovered paths={len(self.discovered_paths)} | parameterized endpoints={len(self.discovered_params)}",
-                Fore.CYAN,
+                f"{self.ui['ok']} path ditemukan={len(self.discovered_paths)} | endpoint ber-parameter={len(self.discovered_params)}",
+                self.c_info,
             )
         )
+        self.run_file_leakage_audit()
         for spec in self.phase_specs:
+            if self.scan_aborted:
+                break
             self.run_phase(spec)
             time.sleep(0.02)
         self.end = time.time()
         report_file = self.reporter.generate(self.target, self.results, self.start, self.end)
         self.reporter.summary(self.results)
         total_elapsed = self.end - self.start
-        self._box_border(Fore.GREEN, top=True)
-        self._box_line(f"{self.ui['ok']} scan completed in {total_elapsed:.2f}s", Fore.GREEN)
-        self._box_line(f"{self.ui['dot']} findings={self.total_findings}  {self.ui['dot']} report={report_file}", Fore.GREEN)
-        self._box_border(Fore.GREEN, top=False)
+        self._box_border(self.c_border, top=True)
+        self._box_line(f"{self.ui['ok']} pemindaian selesai dalam {total_elapsed:.2f} detik", self.c_title)
+        self._box_line(f"{self.ui['dot']} temuan={self.total_findings}  {self.ui['dot']} request={self.request_count}  {self.ui['dot']} laporan={report_file}", self.c_title)
+        if self.scan_aborted:
+            self._box_line(f"{self.ui['warn']} dihentikan otomatis: {self.scan_abort_reason}", self.c_warn)
+        self._box_border(self.c_border, top=False)
 
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("target", help="Target URL")
-    parser.add_argument("--max-payloads", type=int, default=40, help="Max payloads per phase. 0 = all")
-    parser.add_argument("--threads", type=int, default=8, help="Worker threads per phase")
-    parser.add_argument("--hidden-limit", type=int, default=120, help="Hidden path candidates for discovery")
+    parser = argparse.ArgumentParser(description="Pemindai kerentanan web berbasis payload.")
+    parser.add_argument("target", help="URL target")
+    parser.add_argument("--max-payloads", type=int, default=40, help="Maks payload per fase. 0 = semua")
+    parser.add_argument("--threads", type=int, default=8, help="Jumlah thread pekerja per fase")
+    parser.add_argument("--hidden-limit", type=int, default=120, help="Batas kandidat path tersembunyi")
+    parser.add_argument("--include", default="", help="Filter path yang diizinkan (pisahkan dengan koma)")
+    parser.add_argument("--exclude", default="", help="Filter path yang dikecualikan (pisahkan dengan koma)")
+    parser.add_argument("--max-requests", type=int, default=0, help="Batas total request (0 = tak terbatas)")
+    parser.add_argument("--max-runtime", type=int, default=0, help="Batas durasi scan dalam detik (0 = tak terbatas)")
+    parser.add_argument("--delay-jitter", type=float, default=0.0, help="Delay acak tambahan per request (detik)")
     args = parser.parse_args()
-    scanner = AuroseScanner(max_payloads=args.max_payloads, threads=args.threads, hidden_limit=args.hidden_limit)
+    include_paths = [x.strip() for x in args.include.split(",") if x.strip()]
+    exclude_paths = [x.strip() for x in args.exclude.split(",") if x.strip()]
+    scanner = AuroseScanner(
+        max_payloads=args.max_payloads,
+        threads=args.threads,
+        hidden_limit=args.hidden_limit,
+        include_paths=include_paths,
+        exclude_paths=exclude_paths,
+        max_requests=args.max_requests,
+        max_runtime=args.max_runtime,
+        delay_jitter=args.delay_jitter,
+    )
     scanner.target = scanner.utils.validate_url(args.target)
     scanner.run()
 
