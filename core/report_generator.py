@@ -115,11 +115,11 @@ class ReportGenerator:
         self._border(top=True)
         self._line("RINGKASAN KERENTANAN [RISK-FIRST]", Fore.GREEN)
         self._line(
-            f"[TOTAL] {len(vulns)}  {self.ui['dot']} [KRITIS] {sev['KRITIS']}  {self.ui['dot']} [TINGGI] {sev['TINGGI']}  {self.ui['dot']} [SEDANG] {sev['SEDANG']}  {self.ui['dot']} [RENDAH] {sev['RENDAH']}",
+            f"Total {len(vulns)}  {self.ui['dot']} Kritis {sev['KRITIS']}  {self.ui['dot']} Tinggi {sev['TINGGI']}  {self.ui['dot']} Sedang {sev['SEDANG']}  {self.ui['dot']} Rendah {sev['RENDAH']}",
             Fore.WHITE,
         )
         self._line(
-            f"[AKSES] {access['dapat_diakses']}  {self.ui['dot']} [REDIRECT] {access['dialihkan']}  {self.ui['dot']} [TERLINDUNGI] {access['terlindungi'] + access['ditolak']}  {self.ui['dot']} [404] {access['tidak_ditemukan']}  {self.ui['dot']} [ERROR_SERVER] {access['error_server']}",
+            f"Dapat diakses {access['dapat_diakses']}  {self.ui['dot']} Dialihkan {access['dialihkan']}  {self.ui['dot']} Terlindungi {access['terlindungi'] + access['ditolak']}  {self.ui['dot']} Tidak ditemukan {access['tidak_ditemukan']}  {self.ui['dot']} Error server {access['error_server']}",
             Fore.WHITE,
         )
         tops = sorted(vulns, key=lambda x: ({"KRITIS": 4, "TINGGI": 3, "SEDANG": 2, "RENDAH": 1}.get(x.get("severity", ""), 0), x.get("confidence", 0)), reverse=True)[:3]

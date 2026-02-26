@@ -58,6 +58,9 @@ class AuroseScanner:
         max_requests=0,
         max_runtime=0,
         delay_jitter=0.0,
+        live_header=True,
+        verify_findings=True,
+        ui_profile="minimal",
     ):
         self.target = ""
         self.max_payloads = max_payloads
@@ -68,9 +71,19 @@ class AuroseScanner:
         self.max_requests = max(0, int(max_requests or 0))
         self.max_runtime = max(0, int(max_runtime or 0))
         self.delay_jitter = max(0.0, float(delay_jitter or 0.0))
+        self.is_tty = bool(getattr(sys.stdout, "isatty", lambda: False)())
+        self.live_header = bool(live_header) and self.is_tty
+        self.verify_findings = bool(verify_findings)
+        self.ui_profile = (ui_profile or "minimal").strip().lower()
+        if self.ui_profile not in {"minimal", "retro", "compact"}:
+            self.ui_profile = "minimal"
         self.request_count = 0
         self.scan_aborted = False
         self.scan_abort_reason = ""
+        self.last_phase_status = "Belum ada fase dijalankan."
+        self.current_phase = ""
+        self.current_phase_progress = ""
+        self._last_live_render = 0.0
         self.results = []
         self.start = None
         self.end = None
@@ -84,7 +97,7 @@ class AuroseScanner:
         self.total_phases = len(self.phase_specs)
         self.term_width = max(58, min(140, shutil.get_terminal_size((100, 24)).columns))
         self.inner_width = self.term_width - 4
-        self.use_color = bool(getattr(sys.stdout, "isatty", lambda: False)()) and not os.environ.get("NO_COLOR")
+        self.use_color = self.is_tty and not os.environ.get("NO_COLOR")
         encoding = (getattr(sys.stdout, "encoding", "") or "").lower()
         self.use_unicode = "utf" in encoding and os.environ.get("TERM", "") != "dumb"
         self.total_findings = 0
@@ -241,40 +254,66 @@ class AuroseScanner:
         for line in wrapped:
             print(self._fmt(f"{self.ui['v']} {line:<{self.inner_width}} {self.ui['v']}", color))
 
-    def _inner_block(self, title, rows, color=Fore.GREEN):
-        inner_w = self.inner_width
-        top = f"{self.ui['tl']}{self.ui['h'] * (inner_w - 2)}{self.ui['tr']}"
-        sep = f"{self.ui['v']}{self.ui['h'] * (inner_w - 2)}{self.ui['v']}"
-        bot = f"{self.ui['bl']}{self.ui['h'] * (inner_w - 2)}{self.ui['br']}"
-        self._box_line(top, self.c_border)
-        label = f"[{title.upper()}]"
-        self._box_line(f"{self.ui['v']} {label:<{inner_w - 4}} {self.ui['v']}", color)
-        self._box_line(sep, self.c_border)
-        for r in rows:
-            line = textwrap.shorten(r, width=inner_w - 4, placeholder="...")
-            self._box_line(f"{self.ui['v']} {line:<{inner_w - 4}} {self.ui['v']}", Fore.WHITE)
-        self._box_line(bot, self.c_border)
-
     def _badge(self, text):
         return f"[{text}]"
+
+    def _fmt_num(self, value):
+        try:
+            n = int(value)
+        except Exception:
+            return str(value)
+        if n >= 1_000_000:
+            return f"{n / 1_000_000:.1f}M"
+        if n >= 1_000:
+            return f"{n / 1_000:.1f}k"
+        return str(n)
 
     def _progress_bar(self, ratio, width=26):
         ratio = max(0.0, min(1.0, ratio))
         fill = int(width * ratio)
         return f"{self.ui['bar_full'] * fill}{self.ui['bar_empty'] * (width - fill)}"
 
-    def banner(self):
-        self._clear_screen()
+    def _top_panel(self, subtitle_status="SIAP MEMINDAI"):
         title = f"{self.ui['bolt']} AUROSE SCANNER"
-        subtitle = "UI RETRO MODERN  |  ANALISIS KERENTANAN BERBASIS REQUEST NYATA"
+        subtitle = "ANALISIS KERENTANAN BERBASIS REQUEST NYATA"
         chips = f"{self._badge('50 FASE')}  {self._badge(f'{self.threads} THREAD')}  {self._badge('LINUX/TERMUX')}"
+        domain = (urlparse(self.target).netloc or self.target or "-")
 
         self._box_border(self.c_border, top=True)
         self._box_line(title, self.c_title)
-        self._box_line(subtitle, self.c_meta)
-        self._box_line(chips, self.c_info)
-        self._box_line("Pilih mode aman: --max-requests / --max-runtime / --include / --exclude", Fore.WHITE)
+        if self.ui_profile in {"retro", "compact"}:
+            self._box_line(subtitle, self.c_meta)
+        if self.ui_profile == "retro":
+            self._box_line(chips, self.c_info)
         self._box_border(self.c_border, top=False)
+        self._box_border(self.c_border, top=True)
+        self._box_line(f"{self.ui['scan']} STATUS: {subtitle_status}", self.c_meta)
+        self._box_line(
+            f"{self.ui['dot']} Target: {domain}  {self.ui['dot']} Request: {self._fmt_num(self.request_count)}  {self.ui['dot']} Ditemukan: {self._fmt_num(self.total_findings)}",
+            Fore.WHITE,
+        )
+        if self.current_phase:
+            self._box_line(
+                f"{self.ui['dot']} Fase aktif: {self.current_phase}  {self.ui['dot']} Progres: {self.current_phase_progress or '-'}",
+                Fore.WHITE,
+            )
+        elif self.ui_profile != "minimal":
+            self._box_line(f"{self.ui['dot']} Fase terakhir: {self.last_phase_status}", Fore.WHITE)
+        self._box_border(self.c_border, top=False)
+
+    def banner(self):
+        self._clear_screen()
+        self._top_panel("INISIALISASI")
+
+    def _render_live_header(self, phase_text):
+        if not self.live_header:
+            return
+        now = time.time()
+        if now - self._last_live_render < 0.35 and "SELESAI" not in phase_text:
+            return
+        self._last_live_render = now
+        self._clear_screen()
+        self._top_panel(phase_text)
 
     def header(self, num, name, targets, payloads):
         print()
@@ -282,21 +321,14 @@ class AuroseScanner:
         jobs = targets * payloads
         phase_label = f"FASE {num:02d}/{self.total_phases:02d}  {self._nama_fase_indonesia(name).upper()}"
         progress = f"[{self._progress_bar(ratio)}] {int(ratio * 100):>3d}%"
-        meta = f"{self._badge('TARGET')} {targets}   {self._badge('PAYLOAD')} {payloads}   {self._badge('PEKERJAAN')} ~{jobs}"
+        meta = f"{self.ui['dot']} Target {targets}   {self.ui['dot']} Payload {payloads}   {self.ui['dot']} Perkiraan pekerjaan {jobs}"
         self._box_border(self.c_border, top=True)
         self._box_line(phase_label, self.c_title)
         self._box_line(progress, self.c_info)
         self._box_line(meta, self.c_meta)
-        self._inner_block(
-            "RINGKASAN FASE",
-            [
-                f"Nama       : {self._nama_fase_indonesia(name)}",
-                f"Progress   : {int(ratio * 100)}% ({num}/{self.total_phases})",
-                f"Target     : {targets}",
-                f"Payload    : {payloads}",
-                f"Pekerjaan  : {jobs}",
-            ],
-            self.c_meta,
+        self._box_line(
+            f"{self.ui['dot']} Nama: {self._nama_fase_indonesia(name)}  {self.ui['dot']} Progres: {int(ratio * 100)}% ({num}/{self.total_phases})",
+            Fore.WHITE,
         )
         self._box_border(self.c_border, top=False)
 
@@ -310,17 +342,10 @@ class AuroseScanner:
         else:
             status = f"{self.ui['warn']} TEMUAN {count}"
             color = self.c_warn
-        summary = f"{status}  {self.ui['dot']} durasi={elapsed:.2f}s  {self.ui['dot']} ditemukan={self.total_findings}"
+        summary = f"{status}  {self.ui['dot']} Durasi {elapsed:.2f} dtk  {self.ui['dot']} Ditemukan {self._fmt_num(self.total_findings)}  {self.ui['dot']} Request {self._fmt_num(self.request_count)}"
+        self.last_phase_status = f"{status} | {elapsed:.2f}s"
         self._box_border(self.c_border, top=True)
-        self._inner_block(
-            "STATUS FASE",
-            [
-                summary,
-                f"Request total : {self.request_count}",
-                f"Status scan   : {'AKTIF' if not self.scan_aborted else 'DIHENTIKAN'}",
-            ],
-            color,
-        )
+        self._box_line(summary, color)
         self._box_border(self.c_border, top=False)
 
     def _target_domain(self):
@@ -494,6 +519,7 @@ class AuroseScanner:
             if not self._is_target_url(probe.url):
                 continue
             access_state, status_label, status_explanation = self._status_details(probe.status_code)
+            access_label = self._access_label(access_state)
             body_l = (probe.body or "").lower()
             url_l = probe.url.lower()
 
@@ -536,6 +562,7 @@ class AuroseScanner:
                     "status_code": probe.status_code,
                     "status_label": status_label,
                     "access_state": access_state,
+                    "access_label": access_label,
                     "status_explanation": status_explanation,
                     "elapsed": probe.elapsed,
                     "confidence": confidence,
@@ -606,6 +633,17 @@ class AuroseScanner:
         params = {spec.param: "baseline"} if spec.param != "noop" else None
         return self.req.request("GET", url, params=params, allow_redirects=False)
 
+    def _trim_targets_by_budget(self, targets, payload_count):
+        if self.max_requests <= 0:
+            return targets
+        remain = self.max_requests - self.request_count
+        if remain <= 0:
+            return []
+        # baseline (1x) + payload probes (Nx) per target
+        per_target_cost = max(1, 1 + max(1, payload_count))
+        max_targets = max(1, remain // per_target_cost)
+        return targets[:max_targets]
+
     def _build_request(self, spec, target_path, payload):
         headers = {}
         url = self._join_url(target_path)
@@ -629,6 +667,15 @@ class AuroseScanner:
         else:
             params = {spec.param: payload} if spec.param != "noop" else None
         return self.req.request("GET", url, params=params, headers=headers, allow_redirects=False)
+
+    def _verify_finding(self, spec, target_path, payload, baseline, expected_type):
+        if not self.verify_findings:
+            return True
+        check = self._build_request(spec, target_path, payload)
+        det2 = self._score(spec.detect, baseline, check, payload)
+        if not det2:
+            return False
+        return det2.get("type") == expected_type
 
     def _score(self, detector, baseline, probe, payload):
         if not probe.ok:
@@ -785,6 +832,7 @@ class AuroseScanner:
         if not self._is_target_url(probe.url):
             return
         access_state, status_label, status_explanation = self._status_details(probe.status_code)
+        access_label = self._access_label(access_state)
         self.results.append(
             {
                 "phase": spec.key.upper(),
@@ -798,6 +846,7 @@ class AuroseScanner:
                 "status_code": probe.status_code,
                 "status_label": status_label,
                 "access_state": access_state,
+                "access_label": access_label,
                 "status_explanation": status_explanation,
                 "elapsed": probe.elapsed,
                 "confidence": det["confidence"],
@@ -902,28 +951,44 @@ class AuroseScanner:
             out = out.replace(k, v)
         return out
 
+    def _access_label(self, access_state):
+        mapping = {
+            "dapat_diakses": "Dapat Diakses",
+            "dialihkan": "Dialihkan",
+            "terlindungi": "Terlindungi",
+            "ditolak": "Ditolak",
+            "tidak_ditemukan": "Tidak Ditemukan",
+            "dibatasi": "Dibatasi",
+            "error_request": "Error Request",
+            "error_klien": "Error Klien",
+            "error_server": "Error Server",
+            "tidak_terjangkau": "Tidak Terjangkau",
+            "tidak_diketahui": "Tidak Diketahui",
+        }
+        return mapping.get(access_state, "Tidak Diketahui")
+
     def _status_details(self, status_code):
         mapping = {
-            0: ("tidak_terjangkau", "ERROR_JARINGAN", "Tidak ada respons HTTP. Koneksi gagal, timeout, atau masalah DNS/jaringan."),
+            0: ("tidak_terjangkau", "ERROR JARINGAN", "Tidak ada respons HTTP. Koneksi gagal, timeout, atau masalah DNS/jaringan."),
             200: ("dapat_diakses", "OK", "Request berhasil. Endpoint bisa diakses dan mengembalikan konten."),
             201: ("dapat_diakses", "DIBUAT", "Request berhasil dan membuat resource."),
             202: ("dapat_diakses", "DITERIMA", "Request diterima untuk diproses (umumnya async)."),
-            204: ("dapat_diakses", "TANPA_KONTEN", "Request berhasil tanpa body respons."),
-            301: ("dialihkan", "DIPINDAH_PERMANEN", "Resource dipindah permanen ke lokasi lain."),
+            204: ("dapat_diakses", "TANPA KONTEN", "Request berhasil tanpa body respons."),
+            301: ("dialihkan", "DIPINDAH PERMANEN", "Resource dipindah permanen ke lokasi lain."),
             302: ("dialihkan", "DITEMUKAN", "Dialihkan sementara ke lokasi lain."),
-            307: ("dialihkan", "REDIRECT_SEMENTARA", "Redirect sementara dengan method tetap."),
-            308: ("dialihkan", "REDIRECT_PERMANEN", "Redirect permanen dengan method tetap."),
-            400: ("error_request", "REQUEST_TIDAK_VALID", "Server menolak request yang tidak valid."),
-            401: ("terlindungi", "PERLU_OTENTIKASI", "Membutuhkan autentikasi."),
+            307: ("dialihkan", "REDIRECT SEMENTARA", "Redirect sementara dengan method tetap."),
+            308: ("dialihkan", "REDIRECT PERMANEN", "Redirect permanen dengan method tetap."),
+            400: ("error_request", "REQUEST TIDAK VALID", "Server menolak request yang tidak valid."),
+            401: ("terlindungi", "PERLU OTENTIKASI", "Membutuhkan autentikasi."),
             403: ("ditolak", "DILARANG", "Endpoint ada tetapi akses ditolak."),
-            404: ("tidak_ditemukan", "TIDAK_DITEMUKAN", "Endpoint/path tidak ditemukan."),
-            405: ("terlindungi", "METHOD_TIDAK_DIIZINKAN", "Endpoint ada tetapi method HTTP tidak diizinkan."),
-            408: ("error_request", "WAKTU_REQUEST_HABIS", "Server timeout menunggu request."),
-            429: ("dibatasi", "TERLALU_BANYAK_REQUEST", "Rate limit aktif."),
-            500: ("error_server", "ERROR_SERVER_INTERNAL", "Terjadi kegagalan umum di sisi server."),
-            502: ("error_server", "BAD_GATEWAY", "Gateway/proxy menerima respons upstream tidak valid."),
-            503: ("error_server", "LAYANAN_TIDAK_TERSEDIA", "Layanan sementara tidak tersedia/overload."),
-            504: ("error_server", "GATEWAY_TIMEOUT", "Gateway/proxy timeout menunggu upstream."),
+            404: ("tidak_ditemukan", "TIDAK DITEMUKAN", "Endpoint/path tidak ditemukan."),
+            405: ("terlindungi", "METHOD TIDAK DIIZINKAN", "Endpoint ada tetapi method HTTP tidak diizinkan."),
+            408: ("error_request", "WAKTU REQUEST HABIS", "Server timeout menunggu request."),
+            429: ("dibatasi", "TERLALU BANYAK REQUEST", "Rate limit aktif."),
+            500: ("error_server", "ERROR SERVER INTERNAL", "Terjadi kegagalan umum di sisi server."),
+            502: ("error_server", "BAD GATEWAY", "Gateway/proxy menerima respons upstream tidak valid."),
+            503: ("error_server", "LAYANAN TIDAK TERSEDIA", "Layanan sementara tidak tersedia/overload."),
+            504: ("error_server", "GATEWAY TIMEOUT", "Gateway/proxy timeout menunggu upstream."),
         }
         if status_code in mapping:
             return mapping[status_code]
@@ -932,15 +997,19 @@ class AuroseScanner:
         if 300 <= status_code < 400:
             return ("dialihkan", "REDIRECT", "Request dialihkan ke lokasi lain.")
         if 400 <= status_code < 500:
-            return ("error_klien", "ERROR_KLIEN", "Masalah pada request sisi klien atau pembatasan akses.")
+            return ("error_klien", "ERROR KLIEN", "Masalah pada request sisi klien atau pembatasan akses.")
         if 500 <= status_code < 600:
-            return ("error_server", "ERROR_SERVER", "Kegagalan di sisi server.")
-        return ("tidak_diketahui", "TIDAK_DIKETAHUI", "Status code belum dipetakan.")
+            return ("error_server", "ERROR SERVER", "Kegagalan di sisi server.")
+        return ("tidak_diketahui", "TIDAK DIKETAHUI", "Status code belum dipetakan.")
 
     def run_phase(self, spec):
         phase_start = time.perf_counter()
         targets = self._select_targets(spec)
         payloads = self._payloads_for(spec.key)
+        targets = self._trim_targets_by_budget(targets, len(payloads))
+        self.current_phase = f"{spec.id:02d}/{self.total_phases:02d} {self._nama_fase_indonesia(spec.name)}"
+        self.current_phase_progress = "0%"
+        self._render_live_header(f"MENJALANKAN FASE {spec.id:02d}/{self.total_phases:02d}")
         self.header(spec.id, spec.name, len(targets), len(payloads))
         if not targets:
             self.footer(0, 0.0, skipped=True)
@@ -956,13 +1025,20 @@ class AuroseScanner:
             det = self._score(spec.detect, baselines.get(target_path), probe, payload)
             if not det:
                 return None
+            if not self._verify_finding(spec, target_path, payload, baselines.get(target_path), det["type"]):
+                return None
             dedup = (spec.id, probe.url, det["type"], det["evidence"])
             return probe, payload, det, dedup
 
         with ThreadPoolExecutor(max_workers=self.threads) as ex:
             futures = [ex.submit(worker, t, p) for t, p in jobs]
-            for fut in tqdm(as_completed(futures), total=len(futures), desc=f"F{spec.id:02d} {spec.key.upper()}", leave=False):
+            done = 0
+            total_jobs = len(futures)
+            for fut in tqdm(as_completed(futures), total=total_jobs, desc=f"F{spec.id:02d} {spec.key.upper()}", leave=False):
                 result = fut.result()
+                done += 1
+                self.current_phase_progress = f"{int((done / max(1, total_jobs)) * 100)}%"
+                self._render_live_header(f"MENJALANKAN FASE {spec.id:02d}/{self.total_phases:02d}")
                 if not result:
                     continue
                 probe, payload, det, dedup = result
@@ -972,6 +1048,8 @@ class AuroseScanner:
                 self._record(spec, probe, payload, det)
                 findings += 1
         self.total_findings += findings
+        self.current_phase_progress = "SELESAI"
+        self._render_live_header(f"SELESAI FASE {spec.id:02d}/{self.total_phases:02d}")
         self.footer(findings, time.perf_counter() - phase_start)
 
     def run(self):
@@ -981,11 +1059,11 @@ class AuroseScanner:
         self._box_border(self.c_border, top=True)
         self._box_line(f"{self.ui['scan']} sasaran: {self.target}", Fore.WHITE)
         self._box_line(
-            f"{self.ui['dot']} maks_payload={self.max_payloads if self.max_payloads > 0 else 'SEMUA'}  {self.ui['dot']} batas_hidden={self.hidden_limit}",
+            f"{self.ui['dot']} Maks payload: {self.max_payloads if self.max_payloads > 0 else 'SEMUA'}  {self.ui['dot']} Batas hidden path: {self.hidden_limit}",
             Fore.WHITE,
         )
         self._box_line(
-            f"{self.ui['dot']} maks_request={self.max_requests if self.max_requests > 0 else 'tak terbatas'}  {self.ui['dot']} maks_waktu={self.max_runtime if self.max_runtime > 0 else 'tak terbatas'} dtk",
+            f"{self.ui['dot']} Maks request: {self.max_requests if self.max_requests > 0 else 'tak terbatas'}  {self.ui['dot']} Maks waktu: {self.max_runtime if self.max_runtime > 0 else 'tak terbatas'} dtk",
             Fore.WHITE,
         )
         self._box_border(self.c_border, top=False)
@@ -993,7 +1071,7 @@ class AuroseScanner:
         self.discover_surface()
         print(
             self._fmt(
-                f"{self.ui['ok']} path ditemukan={len(self.discovered_paths)} | endpoint ber-parameter={len(self.discovered_params)}",
+                f"{self.ui['ok']} path ditemukan: {len(self.discovered_paths)}  {self.ui['dot']} endpoint ber-parameter: {len(self.discovered_params)}",
                 self.c_info,
             )
         )
@@ -1009,7 +1087,7 @@ class AuroseScanner:
         total_elapsed = self.end - self.start
         self._box_border(self.c_border, top=True)
         self._box_line(f"{self.ui['ok']} pemindaian selesai dalam {total_elapsed:.2f} detik", self.c_title)
-        self._box_line(f"{self.ui['dot']} temuan={self.total_findings}  {self.ui['dot']} request={self.request_count}  {self.ui['dot']} laporan={report_file}", self.c_title)
+        self._box_line(f"{self.ui['dot']} Temuan: {self.total_findings}  {self.ui['dot']} Request: {self.request_count}  {self.ui['dot']} Laporan: {report_file}", self.c_title)
         if self.scan_aborted:
             self._box_line(f"{self.ui['warn']} dihentikan otomatis: {self.scan_abort_reason}", self.c_warn)
         self._box_border(self.c_border, top=False)
@@ -1026,6 +1104,13 @@ def main():
     parser.add_argument("--max-requests", type=int, default=0, help="Batas total request (0 = tak terbatas)")
     parser.add_argument("--max-runtime", type=int, default=0, help="Batas durasi scan dalam detik (0 = tak terbatas)")
     parser.add_argument("--delay-jitter", type=float, default=0.0, help="Delay acak tambahan per request (detik)")
+    parser.add_argument("--live-header", dest="live_header", action="store_true", help="Aktifkan header live/pinned saat scan")
+    parser.add_argument("--no-live-header", dest="live_header", action="store_false", help="Matikan header live/pinned")
+    parser.add_argument("--ui-profile", choices=["minimal", "compact", "retro"], default="minimal", help="Gaya tampilan terminal")
+    parser.add_argument("--verify-findings", dest="verify_findings", action="store_true", help="Verifikasi ulang temuan untuk kurangi false positive")
+    parser.add_argument("--no-verify-findings", dest="verify_findings", action="store_false", help="Matikan verifikasi ulang temuan")
+    parser.set_defaults(live_header=True)
+    parser.set_defaults(verify_findings=True)
     args = parser.parse_args()
     include_paths = [x.strip() for x in args.include.split(",") if x.strip()]
     exclude_paths = [x.strip() for x in args.exclude.split(",") if x.strip()]
@@ -1038,6 +1123,9 @@ def main():
         max_requests=args.max_requests,
         max_runtime=args.max_runtime,
         delay_jitter=args.delay_jitter,
+        live_header=args.live_header,
+        verify_findings=args.verify_findings,
+        ui_profile=args.ui_profile,
     )
     scanner.target = scanner.utils.validate_url(args.target)
     scanner.run()

@@ -102,7 +102,13 @@ python core/scanner.py https://target.com
 ### Deep Scan (Recommended)
 
 ```bash
-python core/scanner.py https://target.com --max-payloads 0 --threads 12 --hidden-limit 300
+python core/scanner.py https://target.com --max-payloads 0 --threads 12 --hidden-limit 300 --ui-profile retro
+```
+
+### Aman dan Terkontrol
+
+```bash
+python core/scanner.py https://target.com --max-requests 3000 --max-runtime 900 --include api,auth --exclude logout,static
 ```
 
 ### CLI Options
@@ -112,6 +118,13 @@ python core/scanner.py https://target.com --max-payloads 0 --threads 12 --hidden
 | `--max-payloads` | Maximum payloads per phase (`0` = all payloads) |
 | `--threads`      | Worker threads for concurrent probe execution   |
 | `--hidden-limit` | Hidden path candidates used during discovery    |
+| `--max-requests` | Batas total request (`0` = tanpa batas)         |
+| `--max-runtime`  | Batas waktu scan dalam detik (`0` = tanpa batas) |
+| `--include`      | Hanya path yang cocok dengan kata ini (koma)    |
+| `--exclude`      | Kecualikan path yang cocok dengan kata ini (koma) |
+| `--live-header` / `--no-live-header` | Aktif/nonaktif header live terminal |
+| `--ui-profile`   | Gaya UI terminal: `minimal`, `compact`, `retro` |
+| `--verify-findings` / `--no-verify-findings` | Verifikasi ulang temuan untuk menekan false positive |
 
 ---
 
@@ -120,7 +133,8 @@ python core/scanner.py https://target.com --max-payloads 0 --threads 12 --hidden
 Each run generates:
 
 - Terminal summary by phase
-- JSON report in `reports/scan_YYYYMMDD_HHMMSS.json`
+- JSON report per domain target, contoh: `reports/target.com.json`
+- Jika scan domain yang sama berulang, hasil lama dan baru ditumpuk dalam file yang sama (`riwayat_scan`)
 
 Each finding includes:
 
@@ -131,6 +145,17 @@ Each finding includes:
 - `evidence`
 
 This structure is built for quick analyst triage and easy integration into pipelines.
+
+### Arti `status_code` pada hasil
+
+- `200`/`201`/`202`/`204`: endpoint bisa diakses (berhasil)
+- `301`/`302`/`307`/`308`: endpoint mengalihkan request (redirect)
+- `401`: butuh autentikasi
+- `403`: akses ditolak
+- `404`: endpoint/path tidak ditemukan
+- `429`: request dibatasi (rate limit)
+- `500`/`502`/`503`/`504`: error di sisi server/gateway
+- `0`: tidak ada respons HTTP (jaringan, DNS, timeout, koneksi gagal)
 
 ---
 
