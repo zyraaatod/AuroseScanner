@@ -116,8 +116,10 @@ python core/scanner.py https://target.com
 ### Deep Scan (Recommended)
 
 ```bash
-python core/scanner.py https://target.com --max-payloads 0 --threads 12 --hidden-limit 300 --ui-profile retro
+python core/scanner.py https://target.com --max-payloads 400 --threads 12 --hidden-limit 300 --ui-profile retro
 ```
+
+Catatan: database payload sekarang sangat besar dan kompleks. Gunakan `--max-payloads` bertahap agar runtime tetap terkontrol.
 
 ### Aman dan Terkontrol
 
