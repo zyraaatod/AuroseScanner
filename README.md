@@ -69,7 +69,7 @@ python core/scanner.py https://target.com
 python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install --upgrade --upgrade-strategy eager -r requirements.txt
 ```
 
 ### Termux
@@ -80,13 +80,27 @@ pkg install -y python git
 git clone https://github.com/zyraaatod/AuroseScanner.git
 cd AuroseScanner
 pip install --upgrade pip
-pip install -r requirements.txt
+pip install --upgrade --upgrade-strategy eager -r requirements.txt
 ```
 
 If `requirements.txt` fails on lower-end Termux environments:
 
 ```bash
 pip install requests tqdm colorama tabulate pyfiglet
+```
+
+Jika muncul warning:
+`RequestsDependencyWarning: urllib3 ... doesn't match a supported version`
+
+jalankan sinkronisasi ini di virtual environment:
+
+```bash
+pip uninstall -y requests urllib3 chardet charset_normalizer
+pip install --upgrade --force-reinstall \
+  "requests>=2.32.0,<3.0.0" \
+  "urllib3>=2.2.0,<3.0.0" \
+  "charset_normalizer>=3.3.0,<4.0.0" \
+  "chardet>=5.2.0,<6.0.0"
 ```
 
 ---
