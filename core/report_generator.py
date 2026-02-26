@@ -113,13 +113,21 @@ class ReportGenerator:
 
         print()
         self._border(top=True)
-        self._line("RINGKASAN KERENTANAN", Fore.GREEN)
+        self._line("RINGKASAN KERENTANAN [RISK-FIRST]", Fore.GREEN)
         self._line(
-            f"total={len(vulns)}  {self.ui['dot']} kritis={sev['KRITIS']}  {self.ui['dot']} tinggi={sev['TINGGI']}  {self.ui['dot']} sedang={sev['SEDANG']}  {self.ui['dot']} rendah={sev['RENDAH']}",
+            f"[TOTAL] {len(vulns)}  {self.ui['dot']} [KRITIS] {sev['KRITIS']}  {self.ui['dot']} [TINGGI] {sev['TINGGI']}  {self.ui['dot']} [SEDANG] {sev['SEDANG']}  {self.ui['dot']} [RENDAH] {sev['RENDAH']}",
             Fore.WHITE,
         )
         self._line(
-            f"dapat_diakses={access['dapat_diakses']}  {self.ui['dot']} dialihkan={access['dialihkan']}  {self.ui['dot']} terlindungi={access['terlindungi'] + access['ditolak']}  {self.ui['dot']} tidak_ditemukan={access['tidak_ditemukan']}  {self.ui['dot']} error_server={access['error_server']}",
+            f"[AKSES] {access['dapat_diakses']}  {self.ui['dot']} [REDIRECT] {access['dialihkan']}  {self.ui['dot']} [TERLINDUNGI] {access['terlindungi'] + access['ditolak']}  {self.ui['dot']} [404] {access['tidak_ditemukan']}  {self.ui['dot']} [ERROR_SERVER] {access['error_server']}",
             Fore.WHITE,
         )
+        tops = sorted(vulns, key=lambda x: ({"KRITIS": 4, "TINGGI": 3, "SEDANG": 2, "RENDAH": 1}.get(x.get("severity", ""), 0), x.get("confidence", 0)), reverse=True)[:3]
+        if tops:
+            self._line("PRIORITAS TEMUAN:", Fore.YELLOW)
+            for i, v in enumerate(tops, start=1):
+                self._line(
+                    f"{i}. [{v.get('severity','?')}] [{v.get('confidence',0)}%] {v.get('name','-')} -> {v.get('url','-')}",
+                    Fore.WHITE,
+                )
         self._border(top=False)

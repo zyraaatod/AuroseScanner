@@ -246,18 +246,17 @@ class AuroseScanner:
         top = f"{self.ui['tl']}{self.ui['h'] * (inner_w - 2)}{self.ui['tr']}"
         sep = f"{self.ui['v']}{self.ui['h'] * (inner_w - 2)}{self.ui['v']}"
         bot = f"{self.ui['bl']}{self.ui['h'] * (inner_w - 2)}{self.ui['br']}"
-        title_line = f"{self.ui['v']} [ {title.upper()} ]"
-        title_line = f"{title_line}{' ' * max(0, inner_w - len(title_line) - 1)}{self.ui['v']}"
-
         self._box_line(top, self.c_border)
-        self._box_line(title_line, color)
+        label = f"[{title.upper()}]"
+        self._box_line(f"{self.ui['v']} {label:<{inner_w - 4}} {self.ui['v']}", color)
         self._box_line(sep, self.c_border)
         for r in rows:
             line = textwrap.shorten(r, width=inner_w - 4, placeholder="...")
-            body = f"{self.ui['v']} {line}"
-            body = f"{body}{' ' * max(0, inner_w - len(body) - 1)}{self.ui['v']}"
-            self._box_line(body, Fore.WHITE)
+            self._box_line(f"{self.ui['v']} {line:<{inner_w - 4}} {self.ui['v']}", Fore.WHITE)
         self._box_line(bot, self.c_border)
+
+    def _badge(self, text):
+        return f"[{text}]"
 
     def _progress_bar(self, ratio, width=26):
         ratio = max(0.0, min(1.0, ratio))
@@ -267,8 +266,8 @@ class AuroseScanner:
     def banner(self):
         self._clear_screen()
         title = f"{self.ui['bolt']} AUROSE SCANNER"
-        subtitle = "MODE TERMINAL RETRO | ANALISIS KERENTANAN BERBASIS REQUEST NYATA"
-        chips = f"[50 fase]  [{self.threads} thread]  [berbasis payload]  [linux+termux]"
+        subtitle = "UI RETRO MODERN  |  ANALISIS KERENTANAN BERBASIS REQUEST NYATA"
+        chips = f"{self._badge('50 FASE')}  {self._badge(f'{self.threads} THREAD')}  {self._badge('LINUX/TERMUX')}"
 
         self._box_border(self.c_border, top=True)
         self._box_line(title, self.c_title)
@@ -283,13 +282,13 @@ class AuroseScanner:
         jobs = targets * payloads
         phase_label = f"FASE {num:02d}/{self.total_phases:02d}  {self._nama_fase_indonesia(name).upper()}"
         progress = f"[{self._progress_bar(ratio)}] {int(ratio * 100):>3d}%"
-        meta = f"{self.ui['dot']} target={targets}  {self.ui['dot']} payload={payloads}  {self.ui['dot']} pekerjaan~{jobs}"
+        meta = f"{self._badge('TARGET')} {targets}   {self._badge('PAYLOAD')} {payloads}   {self._badge('PEKERJAAN')} ~{jobs}"
         self._box_border(self.c_border, top=True)
         self._box_line(phase_label, self.c_title)
         self._box_line(progress, self.c_info)
-        self._box_line(meta, Fore.WHITE)
+        self._box_line(meta, self.c_meta)
         self._inner_block(
-            "STAT FASE",
+            "RINGKASAN FASE",
             [
                 f"Nama       : {self._nama_fase_indonesia(name)}",
                 f"Progress   : {int(ratio * 100)}% ({num}/{self.total_phases})",
@@ -303,22 +302,22 @@ class AuroseScanner:
 
     def footer(self, count, elapsed=0.0, skipped=False):
         if skipped:
-            status = f"{self.ui['warn']} dilewati (tidak ada target cocok)"
+            status = f"{self.ui['warn']} DILEWATI"
             color = self.c_warn
         elif count == 0:
-            status = f"{self.ui['ok']} bersih"
+            status = f"{self.ui['ok']} BERSIH"
             color = self.c_title
         else:
-            status = f"{self.ui['warn']} temuan: {count}"
+            status = f"{self.ui['warn']} TEMUAN {count}"
             color = self.c_warn
         summary = f"{status}  {self.ui['dot']} durasi={elapsed:.2f}s  {self.ui['dot']} ditemukan={self.total_findings}"
         self._box_border(self.c_border, top=True)
         self._inner_block(
-            "HASIL FASE",
+            "STATUS FASE",
             [
                 summary,
-                f"Request total berjalan : {self.request_count}",
-                f"Status scan            : {'AKTIF' if not self.scan_aborted else 'DIHENTIKAN'}",
+                f"Request total : {self.request_count}",
+                f"Status scan   : {'AKTIF' if not self.scan_aborted else 'DIHENTIKAN'}",
             ],
             color,
         )
